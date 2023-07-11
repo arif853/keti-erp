@@ -8,7 +8,7 @@
 
         <link rel="shortcut icon" href="{{asset('main/images/favicon_1.ico')}}">
 
-        <title>Moltran - Responsive Admin Dashboard Template</title>
+        <title>Keti ERP- Complete solution for you business</title>
 
         <!-- Base Css Files -->
         <link href="{{asset('main/css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -28,15 +28,7 @@
         <link href="{{asset('main/css/helper.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('main/css/style.css')}}" rel="stylesheet" type="text/css" />
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
         {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
@@ -50,7 +42,7 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>Moltran </span></a>
+                <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>KETI </span></a>
             </div>
         </div>
         <!-- Button mobile view to collapse sidebar menu -->
@@ -141,7 +133,7 @@
                 </div>
                 <div class="user-info">
                     <div class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">John Doe <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile<div class="ripple-wrapper"></div></a></li>
                             <li>
@@ -204,7 +196,7 @@
 
 
         <footer class="footer text-right">
-            2015 © Moltran.
+            2023 © KETI.
         </footer>
 
     </div>
