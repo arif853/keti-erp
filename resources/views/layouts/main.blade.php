@@ -158,11 +158,29 @@
                     </li>
 
                     <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Mail </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Accounts </span><span class="pull-right"><i class="md md-add"></i></span></a>
                         <ul class="list-unstyled">
                             <li><a href="inbox.html">Inbox</a></li>
                             <li><a href="email-compose.html">Compose Mail</a></li>
                             <li><a href="email-read.html">View Mail</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Ledger Book </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="inbox.html">Inbox</a></li>
+                            <li><a href="email-compose.html">Compose Mail</a></li>
+                            <li><a href="email-read.html">View Mail</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Inventory Master </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="inbox.html">Item Master</a></li>
+                            <li><a href="email-compose.html">Company Master</a></li>
+                            <li><a href="email-read.html">Catagory Master</a></li>
                         </ul>
                     </li>
                     <li>
