@@ -22,11 +22,14 @@
         {{-- <link href="{{asset('main/css/animate.css')}}" rel="stylesheet" /> --}}
 
         <!-- Waves-effect -->
-        {{-- <link href="{{asset('main/css/waves-effect.css')}}" rel="stylesheet"> --}}
+        <link href="{{asset('main/css/waves-effect.css')}}" rel="stylesheet">
 
         <!-- Custom Files -->
         <link href="{{asset('main/css/helper.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('main/css/style.css')}}" rel="stylesheet" type="text/css" />
+
+        <!-- sweet alerts -->
+        <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
 
         {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -42,7 +45,7 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>KETI </span></a>
+                <a href="index.html" class="logo"><i class="zmdi zmdi-landscape"></i> <span>KETI </span></a>
             </div>
         </div>
         <!-- Button mobile view to collapse sidebar menu -->
@@ -154,11 +157,18 @@
             <div id="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="index.html" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
+                        <a href="{{'/dashboard'}}" class="waves-effect active"><i class="zmdi zmdi-home"></i><span> Dashboard </span></a>
                     </li>
-
                     <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Accounts </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <a href="#" class="waves-effect"><i class="zmdi zmdi-money-box"></i><span> Sales </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="inbox.html">Inbox</a></li>
+                            <li><a href="email-compose.html">Compose Mail</a></li>
+                            <li><a href="email-read.html">View Mail</a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub">
+                        <a href="#" class="waves-effect"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                         <ul class="list-unstyled">
                             <li><a href="inbox.html">Inbox</a></li>
                             <li><a href="email-compose.html">Compose Mail</a></li>
@@ -167,7 +177,7 @@
                     </li>
 
                     <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Ledger Book </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <a href="#" class="waves-effect"><i class="zmdi zmdi-collection-bookmark"></i><span> Ledger Book </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                         <ul class="list-unstyled">
                             <li><a href="inbox.html">Inbox</a></li>
                             <li><a href="email-compose.html">Compose Mail</a></li>
@@ -176,7 +186,7 @@
                     </li>
 
                     <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="md md-mail"></i><span> Inventory Master </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                        <a href="#" class="waves-effect"><i class="zmdi zmdi-dns"></i></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                         <ul class="list-unstyled">
                             <li><a href="inbox.html">Item Master</a></li>
                             <li><a href="email-compose.html">Company Master</a></li>
@@ -184,7 +194,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="calendar.html" class="waves-effect"><i class="md md-event"></i><span> Calendar </span></a>
+                        <a href="calendar.html" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Users </span></a>
                     </li>
 
                 </ul>
@@ -222,117 +232,6 @@
     <!-- End Right content here -->
     <!-- ============================================================== -->
 
-
-    <!-- Right Sidebar -->
-    {{-- <div class="side-bar right-bar nicescroll">
-        <h4 class="text-center">Chat</h4>
-        <div class="contact-list nicescroll">
-            <ul class="list-group contacts-list">
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-1.jpg" alt="">
-                        </div>
-                        <span class="name">Chadengle</span>
-                        <i class="fa fa-circle online"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-2.jpg" alt="">
-                        </div>
-                        <span class="name">Tomaslau</span>
-                        <i class="fa fa-circle online"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-3.jpg" alt="">
-                        </div>
-                        <span class="name">Stillnotdavid</span>
-                        <i class="fa fa-circle online"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-4.jpg" alt="">
-                        </div>
-                        <span class="name">Kurafire</span>
-                        <i class="fa fa-circle online"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-5.jpg" alt="">
-                        </div>
-                        <span class="name">Shahedk</span>
-                        <i class="fa fa-circle away"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-6.jpg" alt="">
-                        </div>
-                        <span class="name">Adhamdannaway</span>
-                        <i class="fa fa-circle away"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-7.jpg" alt="">
-                        </div>
-                        <span class="name">Ok</span>
-                        <i class="fa fa-circle away"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-8.jpg" alt="">
-                        </div>
-                        <span class="name">Arashasghari</span>
-                        <i class="fa fa-circle offline"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-9.jpg" alt="">
-                        </div>
-                        <span class="name">Joshaustin</span>
-                        <i class="fa fa-circle offline"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="avatar">
-                            <img src="images/users/avatar-10.jpg" alt="">
-                        </div>
-                        <span class="name">Sortino</span>
-                        <i class="fa fa-circle offline"></i>
-                    </a>
-                    <span class="clearfix"></span>
-                </li>
-            </ul>
-        </div>
-    </div> --}}
-    <!-- /Right-bar -->
-
 </div>
 <!-- END wrapper -->
 
@@ -343,7 +242,11 @@
         <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('main/js/wave.js')}}"></script>
 
+        <!-- sweet alerts -->
+        <script src="assets/sweet-alert/sweet-alert.min.js"></script>
+        <script src="assets/sweet-alert/sweet-alert.init.js"></script>
 
         <!-- CUSTOM JS -->
         <script src="{{asset('main/js/jquery.app.js')}}"></script>
