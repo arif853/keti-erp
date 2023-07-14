@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Sales\QuotesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,10 @@ use App\Http\Controllers\Admin\AdminController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('admin.login');
+});
+Route::get('/login',function(){
+    return view('admin.login');
 });
 
 // Route::get('/dashboard', function () {
@@ -31,6 +35,10 @@ Route::get('/', function () {
 // });
 
 
-Route::get('/dashboard',[AdminController::class,'index']);
+Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
+Route::get('/salesquotes',[QuotesController::class, 'index'])->name('sales.quotes');
+
+// Route::get('/dashboard','AdminController@index')->middleware('auth');
+
 
 require __DIR__.'/auth.php';
