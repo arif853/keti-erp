@@ -1,12 +1,12 @@
 @extends('layouts.main')
-@section('contains')
+@section('contents')
 
     <div class="row">
     <div class="col-sm-12">
-    <h2 class="pull-left page-title">Sales Quotes !</h2>
+    <h2 class="pull-left page-title">Sales Order</h2>
     <ol class="breadcrumb pull-right">
         <li><a href="#">Sales</a></li>
-        <li class="active">Quotes</li>
+        <li class="active">Orders</li>
     </ol>
     </div>
     </div>
@@ -15,14 +15,14 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Sales Quotes Create</h3>
+                    <h3 class="panel-title">Sales Order Create</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12" >
-                            <a href="#" class="btn btn-success " data-toggle="modal" data-target="#con-close-modal">New Quote</a>
-                            <a href="#" class="btn btn-warning">Modify Quote</a>
-                            <a href="#" class="btn btn-danger">Delete Quote</a>
+                            <a href="#" class="btn btn-success " data-toggle="modal" data-target="#con-close-modal">New order</a>
+                            <a href="#" class="btn btn-warning">Modify order</a>
+                            <a href="#" class="btn btn-danger">Delete order</a>
                         </div>
                     </div>
                 </div>
@@ -31,10 +31,10 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Sales Quotes Summary</h3>
+                    <h3 class="panel-title">Sales Order Summary</h3>
                 </div>
                 <div class="mini-stat-quote clearfix bx-shadow">
-                    <span class="mini-stat-icon-2">Total Sales</span>
+                    <span class="mini-stat-icon-2">Total order</span>
                     <div class="mini-stat-info text-right text-muted">
                         <span class="counter">20544</span>
                         Unique Visitors
@@ -121,7 +121,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Sales Quotes Table</h3>
+                <h3 class="panel-title">Sales Order Table</h3>
             </div>
             <div class="panel-body">
                 <div class="row">

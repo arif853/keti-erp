@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('contains')
+@section('contents')
      <!-- Page-Title -->
      <div class="row">
         <div class="col-sm-12">
@@ -93,4 +93,18 @@
         </div>
     </div>
     <!-- End row-->
+
+    <div class="row">
+        <!-- BAR Chart -->
+        <div class="col-lg-12">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Bar Chart   </h3>
+                </div>
+                <div class="panel-body">
+                    <div id="morris-bar-example" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div> <!-- col -->
+    </div>
 @endsection

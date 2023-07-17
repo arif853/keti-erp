@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Sales;
+namespace App\Http\Controllers\Sales\Order;
 
 use App\Http\Controllers\Controller;
-use App\Models\qoutes;
+use App\Models\order;
 use Illuminate\Http\Request;
 
-class QuotesController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('sales.quotes');
+        return view('sales.order.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class QuotesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(qoutes $qoutes)
+    public function show(order $order)
     {
         //
     }
@@ -43,7 +43,7 @@ class QuotesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(qoutes $qoutes)
+    public function edit(order $order)
     {
         //
     }
@@ -51,7 +51,7 @@ class QuotesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, qoutes $qoutes)
+    public function update(Request $request, order $order)
     {
         //
     }
@@ -59,7 +59,7 @@ class QuotesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(qoutes $qoutes)
+    public function destroy(order $order)
     {
         //
     }

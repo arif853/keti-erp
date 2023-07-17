@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Sales\QuotesController;
+use App\Http\Controllers\Sales\Order\OrderController;
+use App\Http\Controllers\Sales\Quotes\QuotesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,10 @@ Route::get('/login',function(){
 
 
 Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
-Route::get('/salesquotes',[QuotesController::class, 'index'])->name('sales.quotes');
+
+// sales
+Route::get('/sales/salesquotes',[QuotesController::class, 'index'])->name('sales.salesquotes');
+Route::get('/sales/salesorder',[OrderController::class, 'index'])->name('sales.salesorder');
 
 // Route::get('/dashboard','AdminController@index')->middleware('auth');
 

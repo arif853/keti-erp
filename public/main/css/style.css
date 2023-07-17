@@ -163,6 +163,9 @@ a:focus {
   margin-top: 5px;
   margin-bottom: 15px;
 }
+.sub-mt{
+    margin-top: 8px;
+}
 
 
 
@@ -2676,6 +2679,11 @@ div.dataTables_info {
 .bg-img {
   background: url(../images/small/bg.jpg) center;
 }
+/* .bg-img-2 {
+    height: 780px;
+    width: 100%;
+    background: url(../images/logo_dark.png) center no-repeat;
+  } */
 .bg-overlay {
   position: absolute;
   height: 100%;
@@ -2687,6 +2695,17 @@ div.dataTables_info {
   -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px 6px 0px 0px;
 }
+/* .bg-overlay-2 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(43, 43, 43, 0.5);
+    top: 0px;
+    left: 0px;
+    border-radius: 6px 6px 0px 0px;
+    -moz-border-radius: 6px 6px 0px 0px;
+    -webkit-border-radius: 6px 6px 0px 0px;
+  } */
 /* 17.1 Profile */
 .bg-picture {
   position: relative;
@@ -3389,3 +3408,13 @@ div.dataTables_info {
     width: 1170px;
   }
 }
+
+
+#add i{
+    font-size: 14px;
+    transition: .4s;
+}
+#add:hover i{
+    font-size: 18px;
+}
+

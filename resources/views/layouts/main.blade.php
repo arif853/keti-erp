@@ -15,8 +15,8 @@
         <link href="{{asset('main/css/bootstrap.min.css')}}" rel="stylesheet" />
 
         <!-- Font Icons -->
-        <link href="{{asset('main/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
-        <link href="{{asset('main/ionicon/css/ionicons.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/ionicon/css/ionicons.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/css/material-design-iconic-font.min.css')}}" rel="stylesheet">
 
         <!-- animate css -->
@@ -31,6 +31,11 @@
 
         <!-- DataTables -->
         <link href="{{asset('main/assets/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+        <!--Morris Chart CSS -->
+        <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}">
+
+        <link href="{{asset('main/assets/timepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- sweet alerts -->
         <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
@@ -176,20 +181,20 @@
 
                                 </ul>
                             </div>
-                            <p class="text-muted m-0">Administrator</p>
+                            <p class="text-muted m-0">{{ Auth::user()->email }}</p>
                         </div>
                     </div>
                     <!--- Divider -->
                     <div id="sidebar-menu">
                         <ul>
                             <li>
-                                <a href="{{'/dashboard'}}" class="waves-effect active"><i class="zmdi zmdi-home"></i><span> Dashboard </span></a>
+                                <a href="{{'/dashboard'}}" class="waves-effect {{ (request()->is('dashboard')) ? 'active' : '' }}"><i class="zmdi zmdi-home"></i><span> Dashboard </span></a>
                             </li>
                             <li class="has_sub">
-                                <a href="#" class="waves-effect"><i class="zmdi zmdi-money-box"></i><span> Sales </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect "><i class="zmdi zmdi-money-box {{ (request()->is('sales/salesquotes')) ? 'active' : '' }}"></i><span> Sales </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{'/salesquotes'}}">Sales Quotes</a></li>
-                                    <li><a href="inbox.html">Sales Order</a></li>
+                                    <li><a href="{{'/sales/salesquotes'}}">Sales Quotes</a></li>
+                                    <li><a href="{{'/sales/salesorder'}}">Sales Order</a></li>
                                     <li><a href="inbox.html">Sales Invoice</a></li>
                                     <li><a href="inbox.html">Sales Bill</a></li>
                                 </ul>
@@ -238,12 +243,10 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="content-page">
-
-
                 <div class="content">
-                    <div class="container">
-
-                    @yield('contains')
+                    <div class="container bg-img-2">
+                        <div class="bg-overlay-2"></div>
+                        @yield('contents')
 
                     </div> <!-- container -->
 
@@ -281,20 +284,113 @@
         <script src="{{asset('main/assets/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
         <script src="{{asset('main/assets/jquery-blockui/jquery.blockUI.js')}}"></script>
 
+         <!--Morris Chart-->
+         <script src="{{asset('main/assets/morris/morris.min.js')}}"></script>
+         <script src="{{asset('main/assets/morris/raphael.min.js')}}"></script>
+         <script src="{{asset('main/assets/morris/morris.init.js')}}"></script>
+
         <!-- sweet alerts -->
         <script src="{{asset('main/assets/sweet-alert/sweet-alert.min.js')}}"></script>
         <script src="{{asset('main/assets/sweet-alert/sweet-alert.init.js')}}"></script>
 
         <!-- CUSTOM JS -->
         <script src="{{asset('main/js/jquery.app.js')}}"></script>
+        {{-- <script src="{{asset('main/js/dynamicinput.js')}}"></script> --}}
 
         <script src="{{asset('main/assets/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('main/assets/datatables/dataTables.bootstrap.js')}}"></script>
+        <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
+        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
 
         <script type="text/javascript">
+
+            var i = 0;
+
+            $('#add').click(function(){
+                ++i;
+
+                $('#goob').append(
+
+                    `<div class="row">
+                        <div class="col-md-1">
+                            <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
+                                    <option value="#">&nbsp;</option>
+                                    <option value="United States">United States</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Aland Islands">Aland Islands</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="American Samoa">American Samoa</option>
+                                    <option value="Andorra">Andorra</option>
+                                    <option value="Angola">Angola</option>
+                                    <option value="Anguilla">Anguilla</option>
+                                    <option value="Zimbabwe">Zimbabwe</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                        </div>
+                        <div class="col-md-1">
+                            <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                        </div>
+                        <div class="col-md-1">
+                            <input type="number" class="form-control" id="discount" placeholder="Discount" name="price" min="0" value="0">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-danger" id="remove-row">remove </button>
+                        </div>
+                    </div>`
+
+                );
+                //  console.log('Cliked');
+            });
+
+            $(document).on('click','#remove-row', function(){
+                $(this).parents('.row').remove();
+                // console.log('Clicked on remove')
+            });
+
+            jQuery(document).ready(function() {
+                    // Date Picker
+                jQuery('#datepicker').datepicker();
+                jQuery('#datepicker-inline').datepicker();
+
+                 // Select2
+                jQuery(".select2").select2({
+                    width: '100%'
+                })
+            });
+
             $(document).ready(function() {
                 $('#datatable').dataTable();
-            } );
+            } )
+
+            Morris.Bar({
+                element: 'morris-bar-example',
+                data: [
+                    { y: '2006', a: 100, b: 90, c: 51 },
+                    { y: '2007', a: 75,  b: 65, c: 20 },
+                    { y: '2008', a: 50,  b: 40, c: 51 },
+                    { y: '2009', a: 75,  b: 65, c: 40 },
+                    { y: '2010', a: 50,  b: 40, c: 14 },
+                    { y: '2011', a: 75,  b: 65, c: 55 },
+                    { y: '2012', a: 100, b: 90, c: 51 },
+                    { y: '2013', a: 95,  b: 26, c: 11 },
+                ],
+                xkey: 'y',
+                ykeys: ['a', 'b', 'c'],
+                labels: ['Series A', 'Series B','Series B']
+            });
+
         </script>
 
 	</body>
