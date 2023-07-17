@@ -1,18 +1,17 @@
-
 var i = 0;
 
 $('#add').click(function(){
-
     ++i;
+
     $('#goob').append(
 
-        `<div class="row" id="rm-rw">
+        `<div class="row">
             <div class="col-md-1">
-                <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" readonly>
+                <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <select class="select2" id="selectdata" data-placeholder="Choose a Country...">
+                    <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
                         <option value="#">&nbsp;</option>
                         <option value="United States">United States</option>
                         <option value="United Kingdom">United Kingdom</option>
@@ -29,19 +28,19 @@ $('#add').click(function(){
                 </div>
             </div>
             <div class="col-md-3">
-
                 <input type="text" class="form-control" id="description" placeholder="Description" name="description">
             </div>
-            <div class="col-md-2">
-
-                <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity">
-            </div>
-            <div class="col-md-2">
-
-                <input type="number" class="form-control" id="price" placeholder="Price" name="price">
+            <div class="col-md-1">
+                <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
             </div>
             <div class="col-md-1">
-                <button type="button" class="btn btn-danger" id="remove-row">remove </button>
+                <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0">
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
             </div>
         </div>`
 
@@ -50,6 +49,6 @@ $('#add').click(function(){
 });
 
 $(document).on('click','#remove-row', function(){
-    $(this).parents('#rm-rw').remove();
+    $(this).parents('.row').remove();
     // console.log('Clicked on remove')
 });

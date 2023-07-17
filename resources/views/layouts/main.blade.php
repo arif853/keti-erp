@@ -295,70 +295,28 @@
 
         <!-- CUSTOM JS -->
         <script src="{{asset('main/js/jquery.app.js')}}"></script>
-        {{-- <script src="{{asset('main/js/dynamicinput.js')}}"></script> --}}
+        <script src="{{asset('main/js/dynamicinput.js')}}"></script>
 
         <script src="{{asset('main/assets/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('main/assets/datatables/dataTables.bootstrap.js')}}"></script>
         <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
 
+         <!-- Counter-up -->
+         <script src="{{asset('main/assets/counterup/waypoints.min.js')}}" type="text/javascript"></script>
+         <script src="{{asset('main/assets/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
+         <!-- Dashboard -->
+        {{-- <script src="{{asset('main/js/jquery.dashboard.js')}}"></script> --}}
+
         <script type="text/javascript">
 
-            var i = 0;
-
-            $('#add').click(function(){
-                ++i;
-
-                $('#goob').append(
-
-                    `<div class="row">
-                        <div class="col-md-1">
-                            <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
-                                    <option value="#">&nbsp;</option>
-                                    <option value="United States">United States</option>
-                                    <option value="United Kingdom">United Kingdom</option>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Aland Islands">Aland Islands</option>
-                                    <option value="Albania">Albania</option>
-                                    <option value="Algeria">Algeria</option>
-                                    <option value="American Samoa">American Samoa</option>
-                                    <option value="Andorra">Andorra</option>
-                                    <option value="Angola">Angola</option>
-                                    <option value="Anguilla">Anguilla</option>
-                                    <option value="Zimbabwe">Zimbabwe</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                        </div>
-                        <div class="col-md-1">
-                            <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-                        </div>
-                        <div class="col-md-1">
-                            <input type="number" class="form-control" id="discount" placeholder="Discount" name="price" min="0" value="0">
-                        </div>
-                        <div class="col-md-2">
-                            <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                        </div>
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-danger" id="remove-row">remove </button>
-                        </div>
-                    </div>`
-
-                );
-                //  console.log('Cliked');
+            //CounterUp
+            jQuery(document).ready(function($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
             });
-
-            $(document).on('click','#remove-row', function(){
-                $(this).parents('.row').remove();
-                // console.log('Clicked on remove')
-            });
-
             jQuery(document).ready(function() {
                     // Date Picker
                 jQuery('#datepicker').datepicker();
@@ -377,18 +335,18 @@
             Morris.Bar({
                 element: 'morris-bar-example',
                 data: [
-                    { y: '2006', a: 100, b: 90, c: 51 },
-                    { y: '2007', a: 75,  b: 65, c: 20 },
-                    { y: '2008', a: 50,  b: 40, c: 51 },
-                    { y: '2009', a: 75,  b: 65, c: 40 },
-                    { y: '2010', a: 50,  b: 40, c: 14 },
-                    { y: '2011', a: 75,  b: 65, c: 55 },
-                    { y: '2012', a: 100, b: 90, c: 51 },
-                    { y: '2013', a: 95,  b: 26, c: 11 },
+                    { y: '21/10/2022', a: 100, b: 90, c: 51 },
+                    { y: '22/10/2022', a: 75,  b: 65, c: 20 },
+                    { y: '23/10/2022', a: 50,  b: 40, c: 51 },
+                    { y: '24/10/2022', a: 75,  b: 65, c: 40 },
+                    { y: '25/10/2022', a: 50,  b: 40, c: 14 },
+                    { y: '26/10/2022', a: 75,  b: 65, c: 55 },
+                    { y: '27/10/2022', a: 100, b: 90, c: 51 },
+                    { y: '28/10/2022', a: 95,  b: 26, c: 11 },
                 ],
                 xkey: 'y',
                 ykeys: ['a', 'b', 'c'],
-                labels: ['Series A', 'Series B','Series B']
+                labels: ['Profit', 'Loss','Neutral']
             });
 
         </script>

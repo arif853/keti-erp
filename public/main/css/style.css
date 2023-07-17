@@ -3409,10 +3409,20 @@ div.dataTables_info {
   }
 }
 #add i{
-    font-size: 14px;
-    transition: .4s;
+    font-size: 16px;
+    transition: .2s;
+    color: #33b86c;
 }
 #add:hover i{
-    font-size: 18px;
+    /* font-size: 18px; */
+    color: #fff;
 }
-
+#remove-row i{
+    font-size: 14px;
+    transition: .2s;
+    color: #ffffff;
+}
+#remove-row:hover i{
+    font-size: 18px;
+    color: #000;
+}
