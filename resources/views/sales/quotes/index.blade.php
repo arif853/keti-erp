@@ -20,7 +20,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12" >
-                            <a href="#" class="btn btn-success " data-toggle="modal" data-target="#custom-width-modal">New Quote</a>
+                            <a href="#" class="btn btn-success " id="quote_modal">New Quote</a>
                             <a href="#" class="btn btn-warning">Modify Quote</a>
                             <a href="#" class="btn btn-danger">Delete Quote</a>
                         </div>
@@ -45,7 +45,7 @@
     </div>
     <!-- End Row -->
 
-    <div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+    <div id="quote-modal-form" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog" style="width:65%;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -54,7 +54,6 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{route('admin.dashboard')}}" method="POST" >
-                        @csrf
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="input-group" >
@@ -204,11 +203,6 @@
                         </div>
                     </form>
                 </div>
-
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-
-                </div> --}}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -245,7 +239,7 @@
                                         <td>
                                             <a href="#" class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
                                             <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
-                                            <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
+                                            <a href="{{('/sales/salesquotes/invoice')}}" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
 
                                         </td>
                                         {{-- <td>$320,800</td> --}}

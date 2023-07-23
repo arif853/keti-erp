@@ -38,9 +38,9 @@
         <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- sweet alerts -->
-        <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+        {{-- <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet"> --}}
 
-        <script src="{{asset('main/js/modernizr.min.js')}}"></script>
+        {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
 
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
@@ -145,7 +145,12 @@
                                     <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>
                                     <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
                                     <li><a href="javascript:void(0)"><i class="md md-lock"></i> Lock screen</a></li>
-                                    <li><a href="javascript:void(0)"><i class="md md-settings-power"></i> Logout</a></li>
+                                    <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <i class="md md-settings-power"></i> Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -171,11 +176,11 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><i class="zmdi zmdi-face"></i> Profile<div class="ripple-wrapper"></div></a></li>
                                     <li>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                                <i class="zmdi zmdi-power-off-setting"></i> {{__('Logout')}}
-                                            </a>
+                                        <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                            <i class="zmdi zmdi-power-off-setting"></i> {{__('Logout')}}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
                                         </form>
                                     </li>
 
@@ -195,25 +200,32 @@
                                 <ul class="list-unstyled">
                                     <li><a href="{{'/sales/salesquotes'}}">Sales Quotes</a></li>
                                     <li><a href="{{'/sales/salesorder'}}">Sales Order</a></li>
-                                    <li><a href="inbox.html">Sales Invoice</a></li>
-                                    <li><a href="inbox.html">Sales Bill</a></li>
+                                    <li><a href="#">Sales Invoice</a></li>
+                                    <li><a href="#">Sales Bill</a></li>
+                                    <li><a href="#">Sales Return</a></li>
+                                    <li><a href="#">Purchases</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="inbox.html">Inbox</a></li>
-                                    <li><a href="email-compose.html">Compose Mail</a></li>
-                                    <li><a href="email-read.html">View Mail</a></li>
+                                    <li><a href="#">Accounts Group</a></li>
+                                    <li><a href="#">Accounts Book</a></li>
+                                    <li><a href="#">Receipt</a></li>
+                                    <li><a href="#">Payment</a></li>
+                                    <li><a href="#">Debit Note</a></li>
+                                    <li><a href="#">Credit Note</a></li>
+                                    <li><a href="#">Journal</a></li>
+                                    <li><a href="#">Contra</a></li>
                                 </ul>
                             </li>
 
                             <li class="has_sub">
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-collection-bookmark"></i><span> Ledger Book </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="inbox.html">Inbox</a></li>
-                                    <li><a href="email-compose.html">Compose Mail</a></li>
-                                    <li><a href="email-read.html">View Mail</a></li>
+                                    <li><a href="{{('/ledger/customer')}}">Customer</a></li>
+                                    <li><a href="#">Supplier</a></li>
+                                    <li><a href="#">Inbox</a></li>
                                 </ul>
                             </li>
 
@@ -245,7 +257,8 @@
             <div class="content-page">
                 <div class="content">
                     <div class="container bg-img-2">
-                        <div class="bg-overlay-2"></div>
+                        {{-- <div class="bg-overlay-2"></div> --}}
+
                         @yield('contents')
 
                     </div> <!-- container -->
@@ -272,7 +285,8 @@
         <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('main/js/wave.js')}}"></script>
+        <script src="{{asset('main/js/waves.js')}}"></script>
+        <script src="{{asset('main/js/wow.min.js')}}"></script>
 
         <!-- Live Search  -->
         <script src="{{asset('main/assets/fastclick/fastclick.js')}}"></script>
@@ -285,13 +299,13 @@
         <script src="{{asset('main/assets/jquery-blockui/jquery.blockUI.js')}}"></script>
 
          <!--Morris Chart-->
-         <script src="{{asset('main/assets/morris/morris.min.js')}}"></script>
+         {{-- <script src="{{asset('main/assets/morris/morris.min.js')}}"></script>
          <script src="{{asset('main/assets/morris/raphael.min.js')}}"></script>
-         <script src="{{asset('main/assets/morris/morris.init.js')}}"></script>
+         <script src="{{asset('main/assets/morris/morris.init.js')}}"></script> --}}
 
         <!-- sweet alerts -->
-        <script src="{{asset('main/assets/sweet-alert/sweet-alert.min.js')}}"></script>
-        <script src="{{asset('main/assets/sweet-alert/sweet-alert.init.js')}}"></script>
+        {{-- <script src="{{asset('main/assets/sweet-alert/sweet-alert.min.js')}}"></script>
+        <script src="{{asset('main/assets/sweet-alert/sweet-alert.init.js')}}"></script> --}}
 
         <!-- CUSTOM JS -->
         <script src="{{asset('main/js/jquery.app.js')}}"></script>
@@ -299,6 +313,7 @@
 
         <script src="{{asset('main/assets/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('main/assets/datatables/dataTables.bootstrap.js')}}"></script>
+
         <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
 
@@ -306,7 +321,8 @@
          <script src="{{asset('main/assets/counterup/waypoints.min.js')}}" type="text/javascript"></script>
          <script src="{{asset('main/assets/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
          <!-- Dashboard -->
-        {{-- <script src="{{asset('main/js/jquery.dashboard.js')}}"></script> --}}
+        <script src="{{asset('main/js/quote/quote.js')}}"></script>
+        <script src="{{asset('main/js/customer/customer.js')}}"></script>
 
         <script type="text/javascript">
 
@@ -332,24 +348,23 @@
                 $('#datatable').dataTable();
             } )
 
-            Morris.Bar({
-                element: 'morris-bar-example',
-                data: [
-                    { y: '21/10/2022', a: 100, b: 90, c: 51 },
-                    { y: '22/10/2022', a: 75,  b: 65, c: 20 },
-                    { y: '23/10/2022', a: 50,  b: 40, c: 51 },
-                    { y: '24/10/2022', a: 75,  b: 65, c: 40 },
-                    { y: '25/10/2022', a: 50,  b: 40, c: 14 },
-                    { y: '26/10/2022', a: 75,  b: 65, c: 55 },
-                    { y: '27/10/2022', a: 100, b: 90, c: 51 },
-                    { y: '28/10/2022', a: 95,  b: 26, c: 11 },
-                ],
-                xkey: 'y',
-                ykeys: ['a', 'b', 'c'],
-                labels: ['Profit', 'Loss','Neutral']
-            });
+            // Morris.Bar({
+            //     element: 'morris-bar-example',
+            //     data: [
+            //         { y: '21/10/2022', a: 100, b: 90, c: 51 },
+            //         { y: '22/10/2022', a: 75,  b: 65, c: 20 },
+            //         { y: '23/10/2022', a: 50,  b: 40, c: 51 },
+            //         { y: '24/10/2022', a: 75,  b: 65, c: 40 },
+            //         { y: '25/10/2022', a: 50,  b: 40, c: 14 },
+            //         { y: '26/10/2022', a: 75,  b: 65, c: 55 },
+            //         { y: '27/10/2022', a: 100, b: 90, c: 51 },
+            //         { y: '28/10/2022', a: 95,  b: 26, c: 11 },
+            //     ],
+            //     xkey: 'y',
+            //     ykeys: ['a', 'b', 'c'],
+            //     labels: ['Profit', 'Loss','Neutral']
+            // });
 
         </script>
-
 	</body>
 </html>

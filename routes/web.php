@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
+use App\Http\Controllers\Ledger\Customer\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,7 @@ use App\Http\Controllers\Sales\Quotes\QuotesController;
 Route::get('/', function () {
     return view('admin.login');
 });
-Route::get('/login',function(){
-    return view('admin.login');
-});
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -35,6 +34,9 @@ Route::get('/login',function(){
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
+Route::get('/sales/salesquotes/invoice', function () {
+    return view('sales.quotes.invoice');
+});
 
 Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
 
@@ -42,7 +44,15 @@ Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->
 Route::get('/sales/salesquotes',[QuotesController::class, 'index'])->name('sales.salesquotes');
 Route::get('/sales/salesorder',[OrderController::class, 'index'])->name('sales.salesorder');
 
-// Route::get('/dashboard','AdminController@index')->middleware('auth');
+//Customer
+Route::get('/ledger/customer',[CustomerController::class, 'index'])->name('ledger.customer');
+Route::get('/ledger/customer/{customer}/edit',[CustomerController::class, 'edit'])->name('ledger.customer.edit');
+Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('ledger.customer.show');
+Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->name('ledger.customer.store');
+
+
+
+
 
 
 require __DIR__.'/auth.php';

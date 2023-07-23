@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12" >
                             <a href="#" class="btn btn-success " data-toggle="modal" data-target="#custom-width-modal">New order</a>
-                            <a href="#" class="btn btn-warning">Modify order</a>
+                            <a href="#" class="btn btn-warning">Pending order</a>
                             <a href="#" class="btn btn-danger">Delete order</a>
                         </div>
                     </div>
@@ -228,6 +228,7 @@
                                         <th>Customer Name</th>
                                         <th>Reference</th>
                                         <th>Date</th>
+                                        <th>Status</th>
                                         <th>Manage</th>
                                         {{-- <th>Salary</th> --}}
                                     </tr>
@@ -241,12 +242,15 @@
                                         <td>Edinburgh</td>
                                         <td>2011/04/25</td>
                                         <td>
+                                            <p class="m-t-10"> <span class="label label-danger">Pending</span></p>
+                                            {{-- <p class="m-t-10"> <span class="label label-success">Completed</span></p> --}}
+                                        </td>
+                                        <td>
                                             <a href="#" class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
                                             <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
                                             <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
 
                                         </td>
-                                        {{-- <td>$320,800</td> --}}
                                     </tr>
                                 </tbody>
                             </table>
