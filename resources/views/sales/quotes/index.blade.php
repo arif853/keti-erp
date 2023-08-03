@@ -84,18 +84,11 @@
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Customer Name</label>
                                     <select class="select2" id="selectdata" data-placeholder="Choose a Country...">
-                                        <option value="#">&nbsp;</option>
-                                        <option value="United States">United States</option>
-                                        <option value="United Kingdom">United Kingdom</option>
-                                        <option value="Afghanistan">Afghanistan</option>
-                                        <option value="Aland Islands">Aland Islands</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="American Samoa">American Samoa</option>
-                                        <option value="Andorra">Andorra</option>
-                                        <option value="Angola">Angola</option>
-                                        <option value="Anguilla">Anguilla</option>
-                                        <option value="Zimbabwe">Zimbabwe</option>
+                                        <option value="#">Select Customer....</option>
+                                        @foreach ($customer as $data)
+                                        <option value="{{$data->id}}">{{$data->business_name}}</option>
+                                        @endforeach
+
                                       </select>
                                 </div>
                             </div>
