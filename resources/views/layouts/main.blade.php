@@ -35,10 +35,10 @@
         <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}">
 
         <link href="{{asset('main/assets/timepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
-        <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('main/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- sweet alerts -->
-        {{-- <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet"> --}}
+        <link href="{{asset('main/css/sweetalert2.min.css')}}" rel="stylesheet">
 
         {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
 
@@ -304,8 +304,7 @@
          <script src="{{asset('main/assets/morris/morris.init.js')}}"></script> --}}
 
         <!-- sweet alerts -->
-        {{-- <script src="{{asset('main/assets/sweet-alert/sweet-alert.min.js')}}"></script>
-        <script src="{{asset('main/assets/sweet-alert/sweet-alert.init.js')}}"></script> --}}
+        <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
 
         <!-- CUSTOM JS -->
         <script src="{{asset('main/js/jquery.app.js')}}"></script>
@@ -315,14 +314,14 @@
         <script src="{{asset('main/assets/datatables/dataTables.bootstrap.js')}}"></script>
 
         <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
-        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('main/js/select2.min.js')}}" type="text/javascript"></script>
 
          <!-- Counter-up -->
          <script src="{{asset('main/assets/counterup/waypoints.min.js')}}" type="text/javascript"></script>
          <script src="{{asset('main/assets/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
          <!-- Dashboard -->
         <script src="{{asset('main/js/quote/quote.js')}}"></script>
-        <script src="{{asset('main/js/customer/customer.js')}}"></script>
+        <script src="{{asset('main/js/customer/addcustomer.js')}}"></script>
 
         <script type="text/javascript">
 

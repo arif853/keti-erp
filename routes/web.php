@@ -46,9 +46,10 @@ Route::get('/sales/salesorder',[OrderController::class, 'index'])->name('sales.s
 
 //Customer
 Route::get('/ledger/customer',[CustomerController::class, 'index'])->name('ledger.customer');
-Route::get('/ledger/customer/{customer}/edit',[CustomerController::class, 'edit'])->name('ledger.customer.edit');
+Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->name('ledger.customer.edit');
 Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('ledger.customer.show');
 Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->name('ledger.customer.store');
+Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->name('ledger.customer.destroy');
 
 
 

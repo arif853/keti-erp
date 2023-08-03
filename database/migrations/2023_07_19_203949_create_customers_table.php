@@ -13,22 +13,21 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('reference');
-            $table->string('credit_limit');
+            $table->string('reference')->nullable();
+            $table->string('credit_limit')->nullable();
             $table->string('business_name');
             $table->string('owner_name');
             $table->string('phone');
-            $table->string('phone2');
-            $table->string('email');
-            $table->string('bill_address');
+            $table->string('phone2')->nullable();
+            $table->string('email')->nullable();
             $table->string('del_address');
             $table->string('acc_group');
-            $table->string('open_balance');
-            $table->string('t_license');
-            $table->string('tin');
-            $table->string('man_name');
-            $table->string('man_phone');
-            $table->string('man_title');
+            $table->string('open_balance')->nullable();
+            $table->string('t_license')->nullable();
+            $table->string('tin')->nullable();
+            $table->string('man_name')->nullable();
+            $table->string('man_phone')->nullable();
+            $table->string('man_title')->nullable();
             $table->string('debit')->nullable();
             $table->string('credit')->nullable();
             $table->boolean('status')->default(false);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Sales\Quotes;
 
 use App\Http\Controllers\Controller;
 use App\Models\quote;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class QuotesController extends Controller
@@ -13,7 +14,8 @@ class QuotesController extends Controller
      */
     public function index()
     {
-        return view('sales.quotes.index');
+        $customer = Customer::all();
+        return view('sales.quotes.index',compact('customer'));
     }
 
     /**
