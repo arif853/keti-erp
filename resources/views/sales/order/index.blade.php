@@ -20,7 +20,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12" >
-                            <a href="#" class="btn btn-success " data-toggle="modal" data-target="#custom-width-modal">New order</a>
+                            <a href="#" class="btn btn-success " data-toggle="modal" data-target="#order_modal">New order</a>
                             <a href="#" class="btn btn-warning">Pending order</a>
                             <a href="#" class="btn btn-danger">Delete order</a>
                         </div>
@@ -45,7 +45,7 @@
     </div>
     <!-- End Row -->
 
-    <div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+    <div id="order_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog" style="width:65%;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -84,19 +84,12 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label" >Customer Name*</label>
-                                    <select class="select2" id="selectdata" data-placeholder="Choose a Country..." required>
-                                        <option value="#">&nbsp;</option>
-                                        <option value="United States">United States</option>
-                                        <option value="United Kingdom">United Kingdom</option>
-                                        <option value="Afghanistan">Afghanistan</option>
-                                        <option value="Aland Islands">Aland Islands</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="American Samoa">American Samoa</option>
-                                        <option value="Andorra">Andorra</option>
-                                        <option value="Angola">Angola</option>
-                                        <option value="Anguilla">Anguilla</option>
-                                        <option value="Zimbabwe">Zimbabwe</option>
+                                    <select class="select2" id="selectdata"  required>
+                                        <option value="#">Select Customer...</option>
+                                        @foreach ($customer as $data)
+                                        <option value="{{$data->id}}">{{$data->business_name}}</option>
+
+                                        @endforeach
                                       </select>
                                 </div>
                             </div>

@@ -51,6 +51,12 @@ Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('l
 Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->name('ledger.customer.store');
 Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->name('ledger.customer.destroy');
 
+// Accounts
+
+Route::get('/account/groups', function () {
+    return view('accounts.accountgroup.group');
+});
+
 
 
 

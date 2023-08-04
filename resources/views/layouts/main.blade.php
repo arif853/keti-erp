@@ -209,7 +209,7 @@
                             <li class="has_sub">
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Accounts Group</a></li>
+                                    <li><a href="{{'/account/groups'}}">Accounts Group</a></li>
                                     <li><a href="#">Accounts Book</a></li>
                                     <li><a href="#">Receipt</a></li>
                                     <li><a href="#">Payment</a></li>
@@ -318,14 +318,15 @@
          <script src="{{asset('main/assets/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
          <!-- sweet alerts -->
         <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
-        <!-- Dashboard -->
-        <script src="{{asset('main/js/quote/quote.js')}}"></script>
-        <script src="{{asset('main/js/customer/addcustomer.js')}}"></script>
 
+        @stack('customers')
+        @stack('quote')
+        @stack('order')
+        @stack('accountgroup')
         <script type="text/javascript">
 
             //CounterUp
-            jQuery(document).ready(function($) {
+            jQuery(document).ready(function() {
                 $('.counter').counterUp({
                     delay: 100,
                     time: 1200

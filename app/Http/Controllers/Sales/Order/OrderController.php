@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Sales\Order;
 
-use App\Http\Controllers\Controller;
 use App\Models\order;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -13,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('sales.order.index');
+        $customer = Customer::all();
+        return view('sales.order.index',compact('customer'));
     }
 
     /**
