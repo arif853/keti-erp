@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('account_groups', function (Blueprint $table) {
             $table->id();
+            $table->string('group_name');
+            $table->string('group_type');
             $table->timestamps();
         });
     }

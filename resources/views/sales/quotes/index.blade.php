@@ -253,21 +253,35 @@
     <script>
         $(document).ready(function(){
 
-        $.ajaxSetup({
-            header:{
-                'x-csrf-token' : $('meta[name="csrf-token"]').attr('content'),
-            }
-        });
-
-
-        // $('.select2').select2({
-        //     width : "100%",
-        // });
-        //Quotemodal
-        $("#quote_modal").on('click', function(){
-                $("#quote-modal-form").modal('show');
+            $.ajaxSetup({
+                header:{
+                    'x-csrf-token' : $('meta[name="csrf-token"]').attr('content'),
+                }
             });
 
+
+            // $('.select2').select2({
+            //     width : "100%",
+            // });
+            //Quotemodal
+            $("#quote_modal").on('click', function(){
+                    $("#quote-modal-form").modal('show');
+                });
+
+
+            var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = day + "-" + month + "-" + year;
+            document.getElementById("datepicker").value = today;
+
         });
+
     </script>
 @endpush

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
+use App\Http\Controllers\Accounts\AccountGroupController;
 use App\Http\Controllers\Ledger\Customer\CustomerController;
 
 /*
@@ -47,15 +48,17 @@ Route::get('/sales/salesorder',[OrderController::class, 'index'])->name('sales.s
 //Customer
 Route::get('/ledger/customer',[CustomerController::class, 'index'])->name('ledger.customer');
 Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->name('ledger.customer.edit');
+Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->name('ledger.customer.update');
 Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('ledger.customer.show');
 Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->name('ledger.customer.store');
 Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->name('ledger.customer.destroy');
 
-// Accounts
+//Supplier
 
-Route::get('/account/groups', function () {
-    return view('accounts.accountgroup.group');
-});
+
+// Accounts
+Route::get('/account/groups',[AccountGroupController::class, 'index'])->name('accounts.index');
+Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->name('accounts.group');
 
 
 

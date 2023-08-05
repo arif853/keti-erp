@@ -2,7 +2,7 @@ $(document).ready(function(){
     var i = 0;
 
     $('#add').click(function(){
-        ++i;
+        i++;
 
         $('#goob').append(
 

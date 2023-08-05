@@ -44,7 +44,7 @@
     <!-- End Row -->
 
     <div id="accounts_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" style="width:50%;">
+        <div class="modal-dialog" style="width:30%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -67,9 +67,9 @@
                                     <label for="selectdata" class="control-label">Group Type</label>
                                     <select class="select2" id="selectdata" data-placeholder="Choose a type...">
                                         <option value="#">Select Type....</option>
-                                        {{-- @foreach ($customer as $data)
-                                        <option value="{{$data->id}}">{{$data->business_name}}</option>
-                                        @endforeach --}}
+                                        @foreach ($groups as $data)
+                                        <option value="{{$data->id}}">{{$data->group_name}}</option>
+                                        @endforeach
 
                                     </select>
                                 </div>
@@ -150,13 +150,33 @@
     <script>
         $(document).ready(function(){
 
-        $(document).on('click','#account_modal',function(){
+            $(document).on('click','#account_modal',function(){
 
-            $('#account_group_form').trigger('reset');
-            // $("#cus_title").html('Add Customer');
-            $("#accounts_modal").modal('show');
+                $('#account_group_form').trigger('reset');
+                // $("#cus_title").html('Add Customer');
+                $("#accounts_modal").modal('show');
 
-        });
+            });
+            var table =  $('#datatable').DataTable( {
+                ajax: {
+                    url: '/account/groups/show',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    {"data":"id"},
+                    {"data":"group_name"},
+                    {"data":"group_type"},
+                    {
+                        "data": null,
+                        render: function(data, type, row) {
+                        //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
+                            return '<button id="edit_acc_group" value="'+row.id+'" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>'+
+                            '<button id="delete_group" value="'+row.id+'" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>';
+
+                        }
+                    },
+                ]
+            } );
 
         });
 

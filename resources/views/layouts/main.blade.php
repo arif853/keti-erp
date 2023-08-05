@@ -334,7 +334,11 @@
             });
             jQuery(document).ready(function() {
                     // Date Picker
-                jQuery('#datepicker').datepicker();
+                jQuery('#datepicker').datepicker({
+                    format: 'dd-mm-yyyy',
+                    startDate: '-7d',
+                    endDate: '1d',
+                });
                 jQuery('#datepicker-inline').datepicker();
 
                  // Select2

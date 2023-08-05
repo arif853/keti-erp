@@ -7,9 +7,9 @@
         <meta name="author" content="Coderthemes">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="shortcut icon" href="images/favicon_1.ico">
+        <link rel="shortcut icon" href="{{asset('main/images/favicon_1.ico')}}">
 
-        <title>Moltran - Responsive Admin Dashboard Template</title>
+        <title>Keti ERP- Complete solution for you business</title>
 
         <!-- Base Css Files -->
         <link href="{{asset('main/css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -22,15 +22,6 @@
         <!-- Custom Files -->
         <link href="{{asset('main/css/helper.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('main/css/style.css')}}" rel="stylesheet" type="text/css" />
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     </head>
     <body>
