@@ -209,8 +209,7 @@
                             <li class="has_sub">
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{'/account/groups'}}">Accounts Group</a></li>
-                                    <li><a href="#">Accounts Book</a></li>
+                                    <li><a href="{{'/account/groups'}}">Accounts Book</a></li>
                                     <li><a href="#">Receipt</a></li>
                                     <li><a href="#">Payment</a></li>
                                     <li><a href="#">Debit Note</a></li>
@@ -224,7 +223,7 @@
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-collection-bookmark"></i><span> Ledger Book </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{('/ledger/customer')}}">Customer</a></li>
-                                    <li><a href="#">Supplier</a></li>
+                                    <li><a href="{{route('ledger.supplier')}}">Supplier</a></li>
                                     <li><a href="#">Inbox</a></li>
                                 </ul>
                             </li>

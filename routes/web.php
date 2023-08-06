@@ -7,6 +7,7 @@ use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
 use App\Http\Controllers\Ledger\Customer\CustomerController;
+use App\Http\Controllers\Ledger\Supplier\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->name
 Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->name('ledger.customer.destroy');
 
 //Supplier
+Route::get('/ledger/supplier',[SupplierController::class, 'index'])->name('ledger.supplier');
 
 
 // Accounts
