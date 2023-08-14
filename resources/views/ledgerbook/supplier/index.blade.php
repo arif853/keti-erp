@@ -282,13 +282,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Business Name</th>
+                                        <th>Supplier Name</th>
                                         <th>Owner Name</th>
                                         {{-- <th>Debite</th>
                                             <th>Credit</th> --}}
-                                        <th> Manager Name</th>
-                                        <th> Manager phone</th>
-                                        <th> Opening Date</th>
+                                        <th>phone</th>
                                         <th>Manage</th>
                                     </tr>
                                 </thead>
@@ -304,7 +302,7 @@
 
 
 @endsection
-@push('customers')
+@push('supplier')
     <script>
         $(document).ready(function(){
 
@@ -362,30 +360,29 @@
             // });
 
             //DataTable Data view
-            // var table =  $('#datatable').DataTable( {
-            //     ajax: {
-            //         url: '/ledger/customer/show',
-            //         dataSrc: 'data'
-            //     },
-            //     columns: [
-            //         {"data":"id"},
-            //         {"data":"business_name"},
-            //         {"data":"owner_name"},
-            //         {"data":"man_name"},
-            //         {"data":"man_phone"},
-            //         {"data":"created_at"},
-            //         {
-            //             "data": null,
-            //             render: function(data, type, row) {
-            //             //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
-            //                 return '<button id="edit_customer" value="'+row.id+'" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>'+
-            //                 '<button id="delete_customer" value="'+row.id+'" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>'+
-            //                 '<button  id="view_customer" value="'+row.id+'" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></button>';
+            var table =  $('.mytable').DataTable( {
+                ajax: {
+                    url: '/ledger/supplier/show',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    {"data":"id"},
+                    {"data":"supplier_name"},
+                    {"data":"owner_name"},
+                    {"data":"phone"},
+                    {"data":"created_at"},
+                    {
+                        "data": null,
+                        render: function(data, type, row) {
+                        //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
+                            return '<button id="edit_supplier" value="'+row.id+'" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>'+
+                            '<button id="delete_supplier" value="'+row.id+'" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>'+
+                            '<button  id="view_supplier" value="'+row.id+'" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></button>';
 
-            //             }
-            //         },
-            //     ]
-            // } );
+                        }
+                    },
+                ]
+            } );
 
             //Add New Customer
             // $("#customer_form").submit(function(e){

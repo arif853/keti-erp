@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ledger\Supplier;
 
+use App\Models\Supplier;
 use App\Models\AccountGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,25 +30,14 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
 
-        // $customers = new Customer;
-        //     $customers->reference = $request->ref;
-        //     $customers->credit_limit= $request->credit_lim;
-        //     $customers->business_name= $request->business_name;
-        //     $customers->owner_name= $request->owner_name;
-        //     $customers->phone= $request->phone;
-        //     $customers->phone2= $request->phone2;
-        //     $customers->email= $request->email;
-        //     $customers->del_address= $request->address2;
-        //     $customers->acc_group= $request->acc_group;
-        //     $customers->open_balance= $request->open_balance;
-        //     $customers->t_license= $request->t_license;
-        //     $customers->tin= $request->tin_number;
-        //     $customers->man_name= $request->man_name;
-        //     $customers->man_phone= $request->man_phone;
-        //     $customers->man_title= $request->man_title;
-        //     $customers->save();
-
-        // Customer::create($customerData);
+        // $Supplier = new Supplier;
+        //     $Supplier->supplier_name= $request->supplier_name;
+        //     $Supplier->owner_name= $request->owner_name;
+        //     $Supplier->phone= $request->phone;
+        //     $Supplier->email= $request->email;
+        //     $Supplier->del_address= $request->address2;
+        //     $Supplier->acc_group= $request->acc_group;
+        //     $Supplier->save();
 
         // return response()->json(['status' => 200, 'message' => "New Customer Added Successfully!"]);
     }
@@ -57,8 +47,8 @@ class SupplierController extends Controller
      */
     public function show()
     {
-        // $customers = Customer::get();
-        // return response()->json(['status' => 200, 'data' => $customers]);
+        $Suppliers = Supplier::get();
+        return response()->json(['status' => 200, 'data' => $Suppliers]);
     }
 
     /**

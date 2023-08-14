@@ -19,10 +19,14 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12" >
-                            <a href="#" class="btn btn-success " id="quote_modal">New Quote</a>
-                            <a href="#" class="btn btn-warning">Modify Quote</a>
-                            <a href="#" class="btn btn-danger">Delete Quote</a>
+                        <div class="col-md-10 col-sm-10 col-xs-10" >
+                            <button  class="btn btn-success " id="quote_btn">New Quote</button>
+                            <button  class="btn btn-warning">Modify Quote</button>
+                            <button class="btn btn-danger">Delete Quote</button>
+
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 text-right">
+                            <a href="{{route('invoice.index')}}" class="btn btn-danger ">Back</a>
                         </div>
                     </div>
                 </div>
@@ -45,15 +49,15 @@
     </div>
     <!-- End Row -->
 
-    <div id="quote-modal-form" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+    <div id="quote_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog" style="width:65%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="custom-width-modalLabel">New Quote</h4>
+                    <h4 class="modal-title qut_title" id="custom-width-modalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('admin.dashboard')}}" method="POST" >
+                    <form action="{{route('admin.dashboard')}}" method="POST" id="quote_form">
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="input-group" >
@@ -68,8 +72,8 @@
                                 <input type="text" class="form-control" placeholder="Reference" id="reference">
                             </div>
                             <div class="col-md-2">
-                                <label for="quote-number" class="control-label">Quote No.</label>
-                                <input type="text" class="form-control" placeholder="QT123456" id="quote-number">
+                                <label for="quote_no" class="control-label">Quote No.</label>
+                                <input type="text" class="form-control" placeholder="QT123456" id="quote_no">
                             </div>
                         </div>
                         <br>
@@ -94,57 +98,82 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-md-1">
-                                <label for="product-id" class="control-label">ID</label>
-                                <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[1][name]" value="0" readonly>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="selectdata" class="control-label">Item</label>
-                                    <select class="form-control " id="selectdata" data-placeholder="Choose a Country...">
-                                        <option value="#">&nbsp;</option>
-                                        <option value="United States">United States</option>
-                                        <option value="United Kingdom">United Kingdom</option>
-                                        <option value="Afghanistan">Afghanistan</option>
-                                        <option value="Aland Islands">Aland Islands</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="American Samoa">American Samoa</option>
-                                        <option value="Andorra">Andorra</option>
-                                        <option value="Angola">Angola</option>
-                                        <option value="Anguilla">Anguilla</option>
-                                        <option value="Zimbabwe">Zimbabwe</option>
-                                        </select>
+                        <div class="newrow">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label for="product_id" class="control-label">ID</label>
+                                    <input type="text" class="form-control" id="product-id" placeholder="Id" name="product_id[1][name]" value="0" readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="selectdata" class="control-label">Item</label>
+                                        <select class="select2" id="selectdata" >
+                                            <option value="#">Select Products...</option>
+                                            <option value="United States">United States</option>
+                                            <option value="United Kingdom">United Kingdom</option>
+                                            <option value="Afghanistan">Afghanistan</option>
+                                            <option value="Aland Islands">Aland Islands</option>
+                                            <option value="Albania">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                            <option value="American Samoa">American Samoa</option>
+                                            <option value="Andorra">Andorra</option>
+                                            <option value="Angola">Angola</option>
+                                            <option value="Anguilla">Anguilla</option>
+                                            <option value="Zimbabwe">Zimbabwe</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="description" class="control-label">Description</label>
+                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="quantity" class="control-label">Qty</label>
+                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="price" class="control-label">Price</label>
+                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="btn" class="control-label">Add Row</label>
+                                    <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                                    </button>
+                                    {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <label for="description" class="control-label">Description</label>
-                                <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                            </div>
-                            <div class="col-md-1">
-                                <label for="quantity" class="control-label">Qty</label>
-                                <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-                            </div>
-                            <div class="col-md-1">
-                                <label for="discount" class="control-label">Discount(%)</label>
-                                <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="price" class="control-label">Price</label>
-                                <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                            </div>
-
-                            <div class="col-md-1">
-                                <label for="btn" class="control-label">Add Row</label>
-                                <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
-                                </button>
-                                {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
-                            </div>
-
                         </div>
-                        <div id="goob">
+
+                        <div id="goob" class="d-none">
                             <!-- Dynamicinput.js Use here -->
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <select class="select2" id="selectdata">
+                                            <option value="#">&nbsp;</option>
+                                            <option value="United States">United States</option>
+                                            <option value="United Kingdom">United Kingdom</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                   <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8"></div>
@@ -259,29 +288,143 @@
                 }
             });
 
+            //quotation modal and quotation no
+            $(document).on('click','#quote_btn', function(){
+                $('#quote_form').trigger('reset');
+                $(".qut_title").html('QUOTE');
+                $("#quote_modal").modal('show');
 
-            // $('.select2').select2({
-            //     width : "100%",
-            // });
-            //Quotemodal
-            $("#quote_modal").on('click', function(){
-                    $("#quote-modal-form").modal('show');
-                });
+                function quote_no(N){
+                var random_string = '';
+                var numbers = '0123456789';
 
-
+                for(var i , i = 0; i < N; i++ )
+                {
+                    random_string += numbers.charAt(Math.floor(Math.random() * numbers.length))
+                }
+                return random_string;
+            }
             var date = new Date();
-
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
             var year = date.getFullYear();
+            document.getElementById('quote_no').value = "QT" + year + "-" + quote_no(3);
 
-            if (month < 10) month = "0" + month;
-            if (day < 10) day = "0" + day;
+            });
 
-            var today = day + "-" + month + "-" + year;
-            document.getElementById("datepicker").value = today;
+            jQuery('#datepicker').datepicker({
+                format: 'dd-mm-yyyy',
+                startDate: '-3d',
+                endDate: '1d',
+            });
+
+            // var date = new Date();
+
+            // var day = date.getDate();
+            // var month = date.getMonth() + 1;
+            // var year = date.getFullYear();
+
+            // if (month < 10) month = "0" + month;
+            // if (day < 10) day = "0" + day;
+
+            // var today = day + "-" + month + "-" + year;
+            // document.getElementById("datepicker").value = today;
+
+            //add new row
+        var i = 0;
+
+        // $('#add').click(function(){
+        //     i++;
+
+        //     $('#goob').append(
+
+        //         `<div class="row">
+        //             <div class="col-md-1">
+        //                 <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>
+        //             </div>
+        //             <div class="col-md-3">
+        //                 <div class="form-group">
+        //                     <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
+        //                         <option value="#">&nbsp;</option>
+        //                         <option value="United States">United States</option>
+        //                         <option value="United Kingdom">United Kingdom</option>
+        //                         <option value="Afghanistan">Afghanistan</option>
+        //                         <option value="Aland Islands">Aland Islands</option>
+        //                         <option value="Albania">Albania</option>
+        //                         <option value="Algeria">Algeria</option>
+        //                         <option value="American Samoa">American Samoa</option>
+        //                         <option value="Andorra">Andorra</option>
+        //                         <option value="Angola">Angola</option>
+        //                         <option value="Anguilla">Anguilla</option>
+        //                         <option value="Zimbabwe">Zimbabwe</option>
+        //                     </select>
+        //                 </div>
+        //             </div>
+        //             <div class="col-md-3">
+        //                 <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+        //             </div>
+        //             <div class="col-md-2">
+        //                 <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+        //             </div>
+
+        //             <div class="col-md-2">
+        //                 <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+        //             </div>
+        //             <div class="col-md-1">
+        //                 <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+        //             </div>
+        //         </div>`
+
+        //     );
+        //     //  console.log('Cliked');
+        // });
+
+        $(document).on('click','#remove-row', function(){
+            $(this).parents('.row').remove();
+            // console.log('Clicked on remove')
+        });
+
+
+
+        document.getElementById('goob').style.display = "none"
+
+        $('#add').on('click',function(){
+            addrow();
+            // console.log('Cliked');
 
         });
+        function addrow(){
+            var row =  document.getElementById('goob').style.display = "";
+            // '<div class="row">'+
+            //         '<div class="col-md-1">'+
+            //             '<input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>'+
+            //         '</div>'+
+            //         '<div class="col-md-3">'+
+            //             '<div class="form-group">'+
+            //                 '<select class="select2" id="selectdata">'+
+            //                     '<option value="#">&nbsp;</option>'+
+            //                     '<option value="United States">United States</option>'+
+            //                     '<option value="United Kingdom">United Kingdom</option>'+
+            //                 '</select>'+
+            //             '</div>'+
+            //         '</div>'+
+            //         '<div class="col-md-3">'+
+            //            ' <input type="text" class="form-control" id="description" placeholder="Description" name="description">'+
+            //         '</div>'+
+            //         '<div class="col-md-2">'+
+            //             '<input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">'+
+            //         '</div>'+
+
+            //         '<div class="col-md-2">'+
+            //            ' <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">'+
+            //         '</div>'+
+            //         '<div class="col-md-1">'+
+            //             '<button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>'+
+            //         '</div>'+
+            //     '</div>';
+
+                $('.newrow').append(row);
+        }
+
+    });
 
     </script>
 @endpush

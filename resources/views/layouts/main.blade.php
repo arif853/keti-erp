@@ -19,6 +19,7 @@
         <link href="{{asset('main/assets/ionicon/css/ionicons.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/css/material-design-iconic-font.min.css')}}" rel="stylesheet">
 
+        <link rel="stylesheet" href="{{asset('main/assets/digitalclock/clock1.css')}}">
         <!-- animate css -->
         <link href="{{asset('main/css/animate.css')}}" rel="stylesheet" />
 
@@ -46,7 +47,7 @@
 
     </head>
 
-    <body class="fixed-left">
+    <body class="fixed-left" >
         <!-- Begin page -->
         <div id="wrapper">
 
@@ -76,69 +77,24 @@
                         </form>
 
                         <ul class="nav navbar-nav navbar-right pull-right">
-                            <li class="dropdown hidden-xs">
-                                <a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="zmdi zmdi-notifications-active"></i> <span class="badge badge-xs badge-danger">3</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-lg">
-                                    <li class="text-center notifi-title">Notification</li>
-                                    <li class="list-group">
-                                       <!-- list item-->
-                                       <a href="javascript:void(0);" class="list-group-item">
-                                          <div class="media">
-                                             <div class="pull-left">
-                                                <em class="fa fa-user-plus fa-2x text-info"></em>
-                                             </div>
-                                             <div class="media-body clearfix">
-                                                <div class="media-heading">New user registered</div>
-                                                <p class="m-0">
-                                                   <small>You have 10 unread messages</small>
-                                                </p>
-                                             </div>
-                                          </div>
-                                       </a>
-                                       <!-- list item-->
-                                        <a href="javascript:void(0);" class="list-group-item">
-                                          <div class="media">
-                                             <div class="pull-left">
-                                                <em class="fa fa-diamond fa-2x text-primary"></em>
-                                             </div>
-                                             <div class="media-body clearfix">
-                                                <div class="media-heading">New settings</div>
-                                                <p class="m-0">
-                                                   <small>There are new settings available</small>
-                                                </p>
-                                             </div>
-                                          </div>
-                                        </a>
-                                        <!-- list item-->
-                                        <a href="javascript:void(0);" class="list-group-item">
-                                          <div class="media">
-                                             <div class="pull-left">
-                                                <em class="fa fa-bell-o fa-2x text-danger"></em>
-                                             </div>
-                                             <div class="media-body clearfix">
-                                                <div class="media-heading">Updates</div>
-                                                <p class="m-0">
-                                                   <small>There are
-                                                      <span class="text-primary">2</span> new updates available</small>
-                                                </p>
-                                             </div>
-                                          </div>
-                                        </a>
-                                       <!-- last list item -->
-                                        <a href="javascript:void(0);" class="list-group-item">
-                                          <small>See all notifications</small>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li class="hidden-xs">
-                                <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="zmdi zmdi-crop-free"></i></a>
+                                <div class="datetime">
+                                    <div class="date">
+                                      <span id="day">Day</span>,
+                                      <span id="month">Month</span>
+                                      <span id="num">00</span>,
+                                      <span id="year">Year</span>
+                                    </div>
+                                    <div class="time">
+                                      <span id="hour">00</span>:
+                                      <span id="min">00</span>:
+                                      <span id="sec">00</span>
+                                      <span id="period">AM</span>
+                                    </div>
+                                  </div>
                             </li>
-                            <li class="hidden-xs">
-                                <a href="#" class="right-bar-toggle waves-effect waves-light"><i class="zmdi zmdi-comment-text-alt"></i></a>
-                            </li>
+
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="{{asset('main/images/avatar-1.jpg')}}" alt="user-img" class="img-circle"> </a>
                                 <ul class="dropdown-menu">
@@ -198,10 +154,7 @@
                             <li class="has_sub">
                                 <a href="#" class="waves-effect "><i class="zmdi zmdi-money-box {{ (request()->is('sales/salesquotes')) ? 'active' : '' }}"></i><span> Sales </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{'/sales/salesquotes'}}">Sales Quotes</a></li>
-                                    <li><a href="{{'/sales/salesorder'}}">Sales Order</a></li>
-                                    <li><a href="#">Sales Invoice</a></li>
-                                    <li><a href="#">Sales Bill</a></li>
+                                    <li><a href="{{route('invoice.index')}}">Sales Invoice</a></li>
                                     <li><a href="#">Sales Return</a></li>
                                     <li><a href="#">Purchases</a></li>
                                 </ul>
@@ -284,6 +237,7 @@
         <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
 
@@ -304,26 +258,31 @@
 
          <!-- CUSTOM JS -->
          <script src="{{asset('main/js/jquery.app.js')}}"></script>
-         <script src="{{asset('main/js/dynamicinput.js')}}"></script>
+         {{-- <script src="{{asset('main/js/dynamicinput.js')}}"></script> --}}
 
          <script src="{{asset('main/assets/datatables/jquery.dataTables.min.js')}}"></script>
          <script src="{{asset('main/assets/datatables/dataTables.bootstrap.js')}}"></script>
 
          <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
-         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
 
          <!-- Counter-up -->
          <script src="{{asset('main/assets/counterup/waypoints.min.js')}}" type="text/javascript"></script>
          <script src="{{asset('main/assets/counterup/jquery.counterup.min.js')}}" type="text/javascript"></script>
          <!-- sweet alerts -->
         <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
+        <script src="{{asset('main/assets/digitalclock/digital.js')}}"></script>
 
         @stack('customers')
+        @stack('supplier')
         @stack('quote')
         @stack('order')
+        @stack('invoice')
         @stack('accountgroup')
+
+
         <script type="text/javascript">
 
+            initClock();
             //CounterUp
             jQuery(document).ready(function() {
                 $('.counter').counterUp({
@@ -333,11 +292,7 @@
             });
             jQuery(document).ready(function() {
                     // Date Picker
-                jQuery('#datepicker').datepicker({
-                    format: 'dd-mm-yyyy',
-                    startDate: '-7d',
-                    endDate: '1d',
-                });
+
                 jQuery('#datepicker-inline').datepicker();
 
                  // Select2
@@ -367,6 +322,7 @@
             //     ykeys: ['a', 'b', 'c'],
             //     labels: ['Profit', 'Loss','Neutral']
             // });
+
 
         </script>
 	</body>

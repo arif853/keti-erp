@@ -1,12 +1,11 @@
 @extends('layouts.main')
 @section('contents')
-
     <div class="row">
         <div class="col-sm-12">
-            <h2 class="pull-left page-title">Sales Order</h2>
+            <h2 class="pull-left page-title p-title"></h2>
             <ol class="breadcrumb pull-right">
                 <li><a href="#">Sales</a></li>
-                <li class="active">Orders</li>
+                <li class="active">Invoice</li>
             </ol>
         </div>
     </div>
@@ -15,17 +14,16 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Sales Order Create</h3>
+                    <h3 class="panel-title">Sales</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-10 col-sm-10 col-xs-10" >
-                            <button id="order_btn" class="btn btn-success " >New order</button>
-                            <a href="#" class="btn btn-warning">Pending order</a>
-                            <a href="#" class="btn btn-danger">Delete order</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 text-right">
-                            <a href="{{route('invoice.index')}}" class="btn btn-danger ">Back</a>
+                        <div class="col-md-12 col-sm-12 col-xs-12" >
+                            <a href="{{route('sales.salesquotes')}}" class="btn btn-info btn-custom">Quotes</a>
+                            <a href="{{route('sales.salesorder')}}" class="btn btn-info btn-custom">Order</a>
+                            <button id="invoice_btn" class="btn btn-success btn-custom">Invoice</button>
+                            <a href="#" class="btn btn-success btn-custom">Bill</a>
+                            <a href="#" class="btn btn-info">Return</a>
                         </div>
                     </div>
                 </div>
@@ -48,21 +46,21 @@
     </div>
     <!-- End Row -->
 
-    <div id="order_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+    <div id="invoice_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog" style="width:65%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 class="modal-title text-center" id="custom-width-modalLabel">ORDER</h3>
+                    <h3 class="modal-title inv_title text-center" id="custom-width-modalLabel"></h3>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('admin.dashboard')}}" method="POST" id="order_form">
+                    <form id="invoice_form" >
                         @csrf
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="input-group" >
                                     <label for="datepicker" class="control-label">Date*</label>
-                                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker" required >
+                                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker">
                                     {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
                                 </div><!-- input-group -->
                             </div>
@@ -72,56 +70,88 @@
                                 <input type="text" class="form-control" placeholder="Reference" id="reference">
                             </div>
                             <div class="col-md-2">
-                                <label for="order_no" class="control-label">Order No.*</label>
-                                <input type="text" class="form-control" placeholder="OR012-345" id="order_no" required readonly>
+                                <label for="invoice_no" class="control-label">Invoice No.*</label>
+                                <input type="text" class="form-control" placeholder="INV012-345" id="invoice_no" required @readonly(true)>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-0">
                                 <div class="form-group">
-                                    <label for="customar_id" class="control-label">ID</label>
-                                    <input type="text" class="form-control" id="customar_id" placeholder="Id" name="customer-id">
+                                    {{-- <label for="customar_id" class="control-label">ID</label> --}}
+                                    <input type="hidden" class="form-control" id="customar_id" placeholder="Id" name="customer-id">
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label" >Customer Name*</label>
                                     <select class="select2" id="selectdata"  required>
-                                        <option value="#">Select Customer...</option>
+                                        <option value="#">Select Customer....</option>
+                                        {{-- <option value="#">Select Customer...</option>
                                         @foreach ($customer as $data)
                                         <option value="{{$data->id}}">{{$data->business_name}}</option>
 
-                                        @endforeach
-                                      </select>
+                                        @endforeach --}}
+                                    </select>
                                 </div>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2 " >
+                                <div class="d-none" id="vehicle">
+                                    <label for="vehicle_no" class="control-label">Vehicle No:</label>
+                                    <input type="text" class="form-control" id="vehicle_no"  name="vehicle_no" >
+                                </div>
+                                <div class="d-none" id="vehicle2">
+                                    <label for="ts_name" class="control-label">Trasport Name:</label>
+                                    <input type="text" class="form-control" id="ts_name"  name="ts_name" >
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="delivary_mode" class="control-label">Delivary Mode:</label>
+                                <select class="select2 t_st" id="selectdata" name="delivary_mode" required>
+                                    <option value="#">Select Mode...</option>
+                                    <option value="1">Courier Service</option>
+                                    <option value="2">Transport</option>
+                                    <option value="3">Local Transport</option>
+                                </select>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="oder_id">
+                            <div class="col-md-0">
                                 {{-- <label for="product-id" class="control-label">ID</label> --}}
-                                <input type="hidden" class="form-control" id="product_id" value="0" name="product_id[0][name]" >
+                                <input type="hidden" class="form-control" id="product-id" placeholder="Id" name="product-id[0][name]" >
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Item*</label>
-                                    <select class="select2" id="selectdata" data-placeholder="Item Names" required>
+                                    <select class="form-control " id="selectdata" data-placeholder="Item Names" required>
                                         <option value="#">&nbsp;</option>
                                         <option value="United States">United States</option>
-
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Aland Islands">Aland Islands</option>
+                                        <option value="Albania">Albania</option>
+                                        <option value="Algeria">Algeria</option>
+                                        <option value="American Samoa">American Samoa</option>
+                                        <option value="Andorra">Andorra</option>
+                                        <option value="Angola">Angola</option>
+                                        <option value="Anguilla">Anguilla</option>
+                                        <option value="Zimbabwe">Zimbabwe</option>
                                         </select>
                                 </div>
+
                             </div>
-                            {{-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <label for="description" class="control-label">Description</label>
                                 <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                            </div> --}}
+                            </div>
                             <div class="col-md-2">
                                 <label for="quantity" class="control-label">Qty*</label>
                                 <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label for="discount" class="control-label">Discount(%)</label>
                                 <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0" >
                             </div>
@@ -138,7 +168,7 @@
                             </div>
 
                         </div>
-                        <div id="order_row"></div>
+                        <div id="invoice_row"></div>
                         <div class="row">
                             <div class="col-md-8"></div>
                             <div class="col-md-4">
@@ -248,41 +278,63 @@
             </div>
         </div>
     </div> <!-- End Row -->
-
 @endsection
-@push('order')
-    <SCRipt>
+@push('invoice')
+
+    <script>
         $(document).ready(function(){
+            $('.p-title').html('Sales Invoice')
+
+            $(document).on('click','#invoice_btn', function(){
+                $('#invoice_form').trigger('reset');
+                $(".inv_title").html('INVOICE');
+                $("#invoice_modal").modal('show');
+
+                function invoice_no(invoiceN){
+                var random_string = '';
+                var numbers = '0123456789';
+
+                for(var i , i = 0; i < invoiceN; i++ )
+                {
+                    random_string += numbers.charAt(Math.floor(Math.random() * numbers.length))
+                }
+                return random_string;
+                }
+                var date = new Date();
+                var year = date.getFullYear();
+                document.getElementById('invoice_no').value = "INV" + year + "-" + invoice_no(3);
+
+            });
 
             jQuery('#datepicker').datepicker({
                     format: 'dd-mm-yyyy',
                     startDate: '-3d',
                     endDate: '1d',
+                    defaultViewDate: 'today'
                 });
-            // var date = new Date();
 
-            // var day = date.getDate();
-            // var month = date.getMonth() + 1;
-            // var year = date.getFullYear();
+            var date = new Date();
 
-            // if (month < 10) month = "0" + month;
-            // if (day < 10) day = "0" + day;
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
 
-            // var today = day + "-" + month + "-" + year;
-            // document.getElementById("datepicker").value = today;
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
 
+            var today = day + "-" + month + "-" + year;
+            document.getElementById("datepicker").value = today;
 
             var i = 0;
             $('#add').click(function(){
                 i++;
-
-                $('#order_row').append(
+                $('#invoice_row').append(
 
                     `<div class="row">
-                        <div class="order_id">
+                        <div class="col-md">
                             <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[`+i+`][name]" value="0" readonly>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
                                     <option value="#">&nbsp;</option>
@@ -290,11 +342,13 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="col-md-3">
+                                <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                            </div>
                         <div class="col-md-2">
                             <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0">
                         </div>
                         <div class="col-md-2">
@@ -306,7 +360,6 @@
                     </div>`
 
                 );
-                //  console.log('Cliked');
             });
 
             $(document).on('click','#remove-row', function(){
@@ -314,27 +367,21 @@
                 // console.log('Clicked on remove')
             });
 
-
-            $(document).on('click','#order_btn', function(){
-            $('#order_form').trigger('reset');
-            $(".inv_title").html('INVOICE');
-            $("#order_modal").modal('show');
-
-            function order_no(orderN){
-                var random_string = '';
-                var numbers = '0123456789';
-
-                for(var i , i = 0; i < orderN; i++ )
-                {
-                    random_string += numbers.charAt(Math.floor(Math.random() * numbers.length))
+            $(".t_st").change(function() {
+                if($(this).val() == 2){
+                    $("#vehicle").css('display', 'block');
                 }
-                return random_string;
-            }
-            var date = new Date();
-            var year = date.getFullYear();
-            document.getElementById('order_no').value = "ORD" + year + "-" + order_no(3);
-            });
+                else{
+                    $("#vehicle").css('display', 'none');
+                }
+                if ($(this).val() == 1) {
+                    $("#vehicle2").css('display', 'block');
+                } else {
+                    $("#vehicle2").css('display', 'none');
+                }
 
+            });
         });
-    </SCRipt>
+    </script>
+
 @endpush

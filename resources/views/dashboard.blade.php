@@ -2,15 +2,13 @@
 @section('contents')
      <!-- Page-Title -->
      <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-6 col-lg-6 col-sm-6">
             <h2 class="pull-left page-title">Welcome !</h2>
-            {{-- <ol class="breadcrumb pull-right">
-                <li><a href="#">Moltran</a></li>
-                <li class="active">Dashboard</li>
-            </ol> --}}
         </div>
     </div>
-
+    {{-- <div class="my-15">
+        <hr>
+    </div> --}}
     <!-- Start Widget -->
     <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-3">

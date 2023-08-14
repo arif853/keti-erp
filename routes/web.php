@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Sales\InvoiceController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
@@ -43,24 +44,29 @@ Route::get('/sales/salesquotes/invoice', function () {
 Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
 
 // sales
-Route::get('/sales/salesquotes',[QuotesController::class, 'index'])->name('sales.salesquotes');
-Route::get('/sales/salesorder',[OrderController::class, 'index'])->name('sales.salesorder');
+Route::get('/sales/salesquotes',[QuotesController::class, 'index'])->middleware('auth')->name('sales.salesquotes');
+Route::get('/sales/salesorder',[OrderController::class, 'index'])->middleware('auth')->name('sales.salesorder');
+
+
+//sales invoice
+Route::get('/sales/salesinvoice', [InvoiceController::class, 'index'])->middleware('auth')->name('invoice.index');
 
 //Customer
-Route::get('/ledger/customer',[CustomerController::class, 'index'])->name('ledger.customer');
-Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->name('ledger.customer.edit');
-Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->name('ledger.customer.update');
+Route::get('/ledger/customer',[CustomerController::class, 'index'])->middleware('auth')->name('ledger.customer');
+Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->middleware('auth')->name('ledger.customer.store');
+Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->middleware('auth')->name('ledger.customer.edit');
+Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->middleware('auth')->name('ledger.customer.update');
 Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('ledger.customer.show');
-Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->name('ledger.customer.store');
-Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->name('ledger.customer.destroy');
+Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->middleware('auth')->name('ledger.customer.destroy');
 
 //Supplier
-Route::get('/ledger/supplier',[SupplierController::class, 'index'])->name('ledger.supplier');
+Route::get('/ledger/supplier',[SupplierController::class, 'index'])->middleware('auth')->name('ledger.supplier');
+Route::get('/ledger/supplier/show',[SupplierController::class, 'show'])->middleware('auth')->name('ledger.supplier.show');
 
 
 // Accounts
-Route::get('/account/groups',[AccountGroupController::class, 'index'])->name('accounts.index');
-Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->name('accounts.group');
+Route::get('/account/groups',[AccountGroupController::class, 'index'])->middleware('auth')->name('accounts.index');
+Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->middleware('auth')->name('accounts.group');
 
 
 

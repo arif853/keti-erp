@@ -3429,3 +3429,12 @@ div.dataTables_info {
 .mx-10{
     margin: 0px 10px;
 }
+.my-15{
+    margin: 15px 0px;
+}
+.d-none{
+    display: none;
+}
+.d-block{
+    display: block;
+}
