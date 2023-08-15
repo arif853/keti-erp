@@ -69,9 +69,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 # keti-erp
 This is a on going erp system. We are trying to build it from scratch.
 
-Larvel Version - 10.0
-Bootstrap v4.6.2
-Jquery - 1.12.1
-font-awesome - 5.15.4
-sweetalert2 v11.7.20
+- Larvel Version - 10.0
+- Bootstrap v4.6.2
+- Jquery - 1.12.1
+- font-awesome - 5.15.4
+- sweetalert2 v11.7.20
 >>>>>>> 97fe5ff34bc843360f90f017a196cfb6eef151f1
