@@ -4,10 +4,12 @@
     <div class="row">
         <div class="col-sm-12">
             <h2 class="pull-left page-title">Sales Order</h2>
-            <ol class="breadcrumb pull-right">
-                <li><a href="#">Sales</a></li>
-                <li class="active">Orders</li>
-            </ol>
+            <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb pull-right">
+                  <li class="breadcrumb-item"><a href="#">Sales</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Order</li>
+                </ol>
+            </nav>
         </div>
     </div>
     {{-- Header Start --}}
@@ -24,7 +26,7 @@
                             <a href="#" class="btn btn-warning">Pending order</a>
                             <a href="#" class="btn btn-danger">Delete order</a>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 text-right">
+                        <div class="col-md-2 col-sm-2 col-xs-2 pull-right">
                             <a href="{{route('invoice.index')}}" class="btn btn-danger ">Back</a>
                         </div>
                     </div>
@@ -49,22 +51,21 @@
     <!-- End Row -->
 
     <div id="order_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" style="width:65%;">
+        <div class="modal-dialog modal-xl" style="width:60%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h3 class="modal-title text-center" id="custom-width-modalLabel">ORDER</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{route('admin.dashboard')}}" method="POST" id="order_form">
-                        @csrf
+                <form action="{{route('admin.dashboard')}}" method="POST" id="order_form">
+                    @csrf
+                    <div class="modal-body">
                         <div class="row">
                             <div class="col-md-2">
-                                <div class="input-group" >
-                                    <label for="datepicker" class="control-label">Date*</label>
-                                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker" required >
-                                    {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
-                                </div><!-- input-group -->
+
+                                <label for="datepicker" class="control-label">Date*</label>
+                                <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" required >
+
                             </div>
                             <div class="col-md-6"></div>
                             <div class="col-md-2">
@@ -78,10 +79,10 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-0">
                                 <div class="form-group">
-                                    <label for="customar_id" class="control-label">ID</label>
-                                    <input type="text" class="form-control" id="customar_id" placeholder="Id" name="customer-id">
+                                    {{-- <label for="customar_id" class="control-label">ID</label> --}}
+                                    <input type="hidden" class="form-control" id="customar_id" placeholder="Id" name="customer_id">
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -106,11 +107,10 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Item*</label>
-                                    <select class="select2" id="selectdata" data-placeholder="Item Names" required>
-                                        <option value="#">&nbsp;</option>
+                                    <select class="form-control" id="selectdata"  required>
+                                        <option value="#">Select Product...</option>
                                         <option value="United States">United States</option>
-
-                                        </select>
+                                    </select>
                                 </div>
                             </div>
                             {{-- <div class="col-md-3">
@@ -177,23 +177,16 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit</button>
-                                <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i>                                </button>
-                                <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit & print</button>
-                                <button type="button" class="btn btn-default btn-custom waves-effect" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
 
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    </div>
 
-                </div> --}}
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i>                                </button>
+                        <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit & print</button>
+                        <button type="button" class="btn btn-default btn-custom waves-effect" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -229,7 +222,7 @@
                                         <td>Edinburgh</td>
                                         <td>2011/04/25</td>
                                         <td>
-                                            <p class="m-t-10"> <span class="label label-danger">Pending</span></p>
+                                            <p class="m-t-10"> <span class="badge badge-success">active</span></p>
                                             {{-- <p class="m-t-10"> <span class="label label-success">Completed</span></p> --}}
                                         </td>
                                         <td>
@@ -255,7 +248,7 @@
         $(document).ready(function(){
 
             jQuery('#datepicker').datepicker({
-                    format: 'dd-mm-yyyy',
+                    format: 'yyyy-mm-dd',
                     startDate: '-3d',
                     endDate: '1d',
                 });

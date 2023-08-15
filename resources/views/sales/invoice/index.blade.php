@@ -3,10 +3,12 @@
     <div class="row">
         <div class="col-sm-12">
             <h2 class="pull-left page-title p-title"></h2>
-            <ol class="breadcrumb pull-right">
-                <li><a href="#">Sales</a></li>
-                <li class="active">Invoice</li>
-            </ol>
+            <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb pull-right">
+                  <li class="breadcrumb-item active"><a href="#">Sales</a></li>
+                  {{-- <li class="breadcrumb-item active" aria-current="page">invoice</li> --}}
+                </ol>
+            </nav>
         </div>
     </div>
     {{-- Header Start --}}
@@ -47,22 +49,19 @@
     <!-- End Row -->
 
     <div id="invoice_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" style="width:65%;">
+        <div class="modal-dialog modal-xl" >
             <div class="modal-content">
                 <div class="modal-header">
+                    <h3 class="modal-title inv_title" id="custom-width-modalLabel"></h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 class="modal-title inv_title text-center" id="custom-width-modalLabel"></h3>
                 </div>
                 <div class="modal-body">
                     <form id="invoice_form" >
                         @csrf
                         <div class="row">
                             <div class="col-md-2">
-                                <div class="input-group" >
-                                    <label for="datepicker" class="control-label">Date*</label>
-                                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker">
-                                    {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
-                                </div><!-- input-group -->
+                                <label for="datepicker" class="control-label">Date*</label>
+                                <input type="text" class="form-control" placeholder="dd-mm-yyyy" id="datepicker">
                             </div>
                             <div class="col-md-6"></div>
                             <div class="col-md-2">
@@ -98,12 +97,12 @@
                             </div>
                             <div class="col-md-2"></div>
                             <div class="col-md-2 " >
-                                <div class="d-none" id="vehicle">
-                                    <label for="vehicle_no" class="control-label">Vehicle No:</label>
+                                <div id="vehicle" style="display: none">
+                                    <label for="vehicle_no" class="control-label">Number:</label>
                                     <input type="text" class="form-control" id="vehicle_no"  name="vehicle_no" >
                                 </div>
-                                <div class="d-none" id="vehicle2">
-                                    <label for="ts_name" class="control-label">Trasport Name:</label>
+                                <div  id="vehicle2" style="display: none">
+                                    <label for="ts_name" class="control-label">Name:</label>
                                     <input type="text" class="form-control" id="ts_name"  name="ts_name" >
                                 </div>
                             </div>
@@ -307,10 +306,10 @@
             });
 
             jQuery('#datepicker').datepicker({
-                    format: 'dd-mm-yyyy',
+                    format: 'yyyy-mm-dd',
                     startDate: '-3d',
                     endDate: '1d',
-                    defaultViewDate: 'today'
+                    defaultViewDate: today
                 });
 
             var date = new Date();
@@ -331,7 +330,7 @@
                 $('#invoice_row').append(
 
                     `<div class="row">
-                        <div class="col-md">
+                        <div class="col-md-0">
                             <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[`+i+`][name]" value="0" readonly>
                         </div>
                         <div class="col-md-3">
@@ -368,19 +367,21 @@
             });
 
             $(".t_st").change(function() {
-                if($(this).val() == 2){
-                    $("#vehicle").css('display', 'block');
-                }
-                else{
-                    $("#vehicle").css('display', 'none');
-                }
-                if ($(this).val() == 1) {
-                    $("#vehicle2").css('display', 'block');
-                } else {
-                    $("#vehicle2").css('display', 'none');
-                }
+
+            if($(this).val() == 2){
+                $("#vehicle").css('display', 'block');
+            }
+            else{
+                $("#vehicle").css('display', 'none');
+            }
+            if ($(this).val() == 1) {
+                $("#vehicle2").css('display', 'block');
+            } else {
+                $("#vehicle2").css('display', 'none');
+            }
 
             });
+
         });
     </script>
 

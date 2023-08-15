@@ -47,16 +47,16 @@
 
     {{-- Edit Supplier Modal Start --}}
     <div id="edit_supplier" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" style="width:65%;">
+        <div class="modal-dialog modal-lg" style="width:50%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h3 class="modal-title text-center" id="edit_title">Edit Customer</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
 
+                <form  id="edit_customer_form"  >
+                    @csrf
                 <div class="modal-body">
-                    <form  id="edit_customer_form"  >
-                        @csrf
                         <input type="hidden" name="id" id="id">
                         <div class="row">
                             <div class="col-md-2">
@@ -172,7 +172,7 @@
                                 <button type="submit" id="update" class="btn btn-primary btn-custom waves-effect waves-light update" >Update Customer</button>
                                 {{-- <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i>                                </button>
                                 <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit & print</button> --}}
-                                <button type="button" class="btn btn-default btn-custom waves-effect" data-dismiss="modal" id="close">Close</button>
+                                <button type="button" class="btn btn-default " data-dismiss="modal" id="close">Close</button>
                             </div>
                         </div>
                     </form>
@@ -185,11 +185,11 @@
 
     {{-- Add Supplier Modal Start --}}
     <div id="Supplier_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" style="width:50%;">
+        <div class="modal-dialog modal-lg" style="width:50%;">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h3 class="modal-title " id="cus_title"></h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 class="modal-title text-center" id="cus_title"></h3>
                 </div>
 
                 <div class="modal-body">
@@ -227,7 +227,7 @@
                                 <input type="email" class="form-control" placeholder="example@email.com" id="email" name="email">
                             </div>
                         </div>
-                        <p style="margin-top: 15px"></p>
+                        <p style="margin-top: 10px"></p>
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="address2" class="control-label">Delivary Address*</label>
@@ -235,12 +235,12 @@
                                 <div id="saveform_errlist" class="address2"></div>
                             </div>
                         </div>
-                        <p style="margin-top: 15px"></p>
+                        <p style="margin-top: 10px"></p>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="acc_group" class="control-label">Account Group</label>
-                                    <select class="select2" id="acc_group" name="acc_group">
+                                    <label for="selectdata" class="control-label">Account Group</label>
+                                    <select class="select2" id="selectdata" name="acc_group">
                                         <option value="#">Select Group....</option>
                                         @foreach ($groups as $data)
                                         <option value="{{$data->id}}">{{$data->group_name}}</option>
@@ -257,7 +257,7 @@
                                 <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light submit" >Add</button>
                                 {{-- <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i>                                </button>
                                 <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit & print</button> --}}
-                                <button type="button" class="btn btn-default btn-custom waves-effect" data-dismiss="modal" id="close">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
                             </div>
                         </div>
                     </form>
@@ -360,29 +360,29 @@
             // });
 
             //DataTable Data view
-            var table =  $('.mytable').DataTable( {
-                ajax: {
-                    url: '/ledger/supplier/show',
-                    dataSrc: 'data'
-                },
-                columns: [
-                    {"data":"id"},
-                    {"data":"supplier_name"},
-                    {"data":"owner_name"},
-                    {"data":"phone"},
-                    {"data":"created_at"},
-                    {
-                        "data": null,
-                        render: function(data, type, row) {
-                        //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
-                            return '<button id="edit_supplier" value="'+row.id+'" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>'+
-                            '<button id="delete_supplier" value="'+row.id+'" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>'+
-                            '<button  id="view_supplier" value="'+row.id+'" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></button>';
+            // var table =  $('.mytable').DataTable( {
+            //     ajax: {
+            //         url: '/ledger/supplier/show',
+            //         dataSrc: 'data'
+            //     },
+            //     columns: [
+            //         {"data":"id"},
+            //         {"data":"supplier_name"},
+            //         {"data":"owner_name"},
+            //         {"data":"phone"},
+            //         {"data":"created_at"},
+            //         {
+            //             "data": null,
+            //             render: function(data, type, row) {
+            //             //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
+            //                 return '<button id="edit_supplier" value="'+row.id+'" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>'+
+            //                 '<button id="delete_supplier" value="'+row.id+'" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>'+
+            //                 '<button  id="view_supplier" value="'+row.id+'" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></button>';
 
-                        }
-                    },
-                ]
-            } );
+            //             }
+            //         },
+            //     ]
+            // } );
 
             //Add New Customer
             // $("#customer_form").submit(function(e){

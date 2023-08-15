@@ -15,7 +15,10 @@
         <link href="{{asset('main/css/bootstrap.min.css')}}" rel="stylesheet" />
 
         <!-- Font Icons -->
-        <link href="{{asset('main/assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/font-awesome/css/all.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/font-awesome/css/fontawesome.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/font-awesome/css/brands.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/font-awesome/css/solid.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/assets/ionicon/css/ionicons.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/css/material-design-iconic-font.min.css')}}" rel="stylesheet">
 
@@ -56,43 +59,40 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.html" class="logo"><i class="zmdi zmdi-landscape"></i> <span>KETI </span></a>
+                        <a href="#" class="logo"><i class="zmdi zmdi-landscape"></i> <span>KETI </span></a>
                     </div>
                 </div>
                <!-- Button mobile view to collapse sidebar menu -->
-               <div class="navbar navbar-default" role="navigation">
-                <div class="container">
-                    <div class="">
+                {{-- <div class="navbar navbar-default ">
                         <div class="pull-left">
                             <button class="button-menu-mobile open-left">
                                 <i class="fa fa-bars"></i>
                             </button>
                             <span class="clearfix"></span>
                         </div>
-                        <form class="navbar-form pull-left" role="search">
+                        <form class="navbar-form mr-auto " role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control search-bar" placeholder="Type here for search...">
                             </div>
                             <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
                         </form>
+                        <div class="datetime">
+                            <div class="date">
+                              <span id="day">Day</span>,
+                              <span id="month">Month</span>
+                              <span id="num">00</span>,
+                              <span id="year">Year</span>
+                            </div>
+                            <div class="time">
+                              <span id="hour">00</span>:
+                              <span id="min">00</span>:
+                              <span id="sec">00</span>
+                              <span id="period">AM</span>
+                            </div>
+                          </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
 
-                        <ul class="nav navbar-nav navbar-right pull-right">
-
-                            <li class="hidden-xs">
-                                <div class="datetime">
-                                    <div class="date">
-                                      <span id="day">Day</span>,
-                                      <span id="month">Month</span>
-                                      <span id="num">00</span>,
-                                      <span id="year">Year</span>
-                                    </div>
-                                    <div class="time">
-                                      <span id="hour">00</span>:
-                                      <span id="min">00</span>:
-                                      <span id="sec">00</span>
-                                      <span id="period">AM</span>
-                                    </div>
-                                  </div>
                             </li>
 
                             <li class="dropdown">
@@ -110,10 +110,58 @@
                                 </ul>
                             </li>
                         </ul>
+                </div> --}}
+                <nav class="navbar navbar-expand-lg  navbar-default">
+
+                    <div class="pull-left">
+                        <button class="button-menu-mobile open-left">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <span class="clearfix"></span>
                     </div>
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <form class="navbar-form mr-auto " role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control search-bar" placeholder="Type here for search...">
+                            </div>
+                            <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                        </form>
+                      </ul>
+                      <div class="datetime">
+                        <div class="date">
+                          <span id="day">Day</span>,
+                          <span id="month">Month</span>
+                          <span id="num">00</span>,
+                          <span id="year">Year</span>
+                        </div>
+                        <div class="time">
+                          <span id="hour">00</span>:
+                          <span id="min">00</span>:
+                          <span id="sec">00</span>
+                          <span id="period">AM</span>
+                        </div>
+                      </div>
+                      <div class="dropdown">
+                        <a class="nav-link dropdown-toggle profile" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <img src="{{asset('main/images/avatar-1.jpg')}}" alt="user-img" class="img-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-cus">
+                        <a href="javascript:void(0)" class="dropdown-item"><i class="fa fa-user-circle" aria-hidden="true"></i>
+                            Profile</a>
+                        <a href="javascript:void(0)" class="dropdown-item"><i class="fas fa-cog fa-spin"></i> Settings</a>
+                        <a href="javascript:void(0)" class="dropdown-item"><i class="fas fa-lock"></i> Lock screen</a>
+                        <a href="#" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                </nav>
             </div>
             <!-- Top Bar End -->
 
@@ -121,7 +169,7 @@
             <!-- ========== Left Sidebar Start ========== -->
 
             <div class="left side-menu">
-                <div class="sidebar-inner slimscrollleft">
+                <div class="sidebar-inner ">
                     <div class="user-details">
                         <div class="pull-left">
                             <img src="{{asset('main/images/users/avatar-1.jpg')}}" alt="" class="thumb-md img-circle">
@@ -208,8 +256,7 @@
             <!-- ============================================================== -->
             <div class="content-page">
                 <div class="content">
-                    <div class="container bg-img-2">
-                        {{-- <div class="bg-overlay-2"></div> --}}
+                    <div class="rows">
 
                         @yield('contents')
 
@@ -234,12 +281,17 @@
             var resizefunc = [];
         </script>
 
-        <!-- jQuery  -->
+               <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
+        <script src="{{asset('main/js/popper.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
+        <script src="{{asset('main/assets/font-awesome/js/all.min.js')}}"></script>
+        <script src="{{asset('main/assets/font-awesome/js/fontawesome.min.js')}}"></script>
+        <script src="{{asset('main/assets/font-awesome/js/brands.js')}}"></script>
+        <script src="{{asset('main/assets/font-awesome/js/solid.js')}}"></script>
 
         <!-- Live Search  -->
         <script src="{{asset('main/assets/fastclick/fastclick.js')}}"></script>
@@ -259,9 +311,9 @@
          <!-- CUSTOM JS -->
          <script src="{{asset('main/js/jquery.app.js')}}"></script>
          {{-- <script src="{{asset('main/js/dynamicinput.js')}}"></script> --}}
-
+        {{-- DataTable --}}
          <script src="{{asset('main/assets/datatables/jquery.dataTables.min.js')}}"></script>
-         <script src="{{asset('main/assets/datatables/dataTables.bootstrap.js')}}"></script>
+         {{-- <script src="{{asset('main/assets/datatables/dataTables.bootstrap.min.js')}}"></script> --}}
 
          <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
 

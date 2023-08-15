@@ -47,8 +47,8 @@
         <div class="modal-dialog" style="width:30%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="custom-width-modalLabel">Add Accounts Groups</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
                     <form action="#" method="POST" id="account_group_form">
@@ -77,8 +77,8 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4 text-right">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6 ">
                                 <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light" id="submit">Submit</button>
                             <button type="button" class="btn btn-default btn-custom waves-effect" data-dismiss="modal">Close</button>
                             </div>

@@ -4,10 +4,12 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="pull-left page-title">Sales Quotes !</h2>
-            <ol class="breadcrumb pull-right">
-                <li><a href="#">Sales</a></li>
-                <li class="active">Quotes</li>
-            </ol>
+            <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb pull-right">
+                  <li class="breadcrumb-item"><a href="#">Sales</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Quote</li>
+                </ol>
+            </nav>
         </div>
     </div>
     {{-- DataTable Start --}}
@@ -50,19 +52,19 @@
     <!-- End Row -->
 
     <div id="quote_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" style="width:65%;">
+        <div class="modal-dialog modal-xl" style="width:60%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title qut_title" id="custom-width-modalLabel"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
                     <form action="{{route('admin.dashboard')}}" method="POST" id="quote_form">
                         <div class="row">
                             <div class="col-md-2">
-                                <div class="input-group" >
+                                <div class="" >
                                     <label for="datepicker" class="control-label">Date</label>
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
+                                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker">
                                     {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
                                 </div><!-- input-group -->
                             </div>
@@ -73,18 +75,18 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="quote_no" class="control-label">Quote No.</label>
-                                <input type="text" class="form-control" placeholder="QT123456" id="quote_no">
+                                <input type="text" class="form-control" placeholder="QT123456" id="quote_no" @readonly(true)>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-0">
                                 <div class="form-group">
-                                    <label for="customar_id" class="control-label">ID</label>
-                                    <input type="text" class="form-control" id="customar_id" placeholder="Id" name="customer-id">
+                                    {{-- <label for="customar_id" class="control-label">ID</label> --}}
+                                    <input type="hidden" class="form-control" id="customar_id" placeholder="Id" name="customer_id">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Customer Name</label>
                                     <select class="select2" id="selectdata" data-placeholder="Choose a Country...">
@@ -98,82 +100,52 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="newrow">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label for="product_id" class="control-label">ID</label>
-                                    <input type="text" class="form-control" id="product-id" placeholder="Id" name="product_id[1][name]" value="0" readonly>
+                        <div class="row">
+                            <div class="col-md-0">
+                                {{-- <label for="product_id" class="control-label">ID</label> --}}
+                                <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0">
+                            </div>
+                            {{-- <input type="hidden" class="form-control" id="product_id"  name="product_id[1][name]"> --}}
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="selectdata" class="control-label">Item</label>
+                                    <select class="form-control" id="selectdata" >
+                                        <option value="#">Select Products...</option>
+                                        <option value="United States">United States</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Aland Islands">Aland Islands</option>
+                                        <option value="Albania">Albania</option>
+                                        <option value="Algeria">Algeria</option>
+                                        <option value="American Samoa">American Samoa</option>
+                                        <option value="Andorra">Andorra</option>
+                                        <option value="Angola">Angola</option>
+                                        <option value="Anguilla">Anguilla</option>
+                                        <option value="Zimbabwe">Zimbabwe</option>
+                                        </select>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="selectdata" class="control-label">Item</label>
-                                        <select class="select2" id="selectdata" >
-                                            <option value="#">Select Products...</option>
-                                            <option value="United States">United States</option>
-                                            <option value="United Kingdom">United Kingdom</option>
-                                            <option value="Afghanistan">Afghanistan</option>
-                                            <option value="Aland Islands">Aland Islands</option>
-                                            <option value="Albania">Albania</option>
-                                            <option value="Algeria">Algeria</option>
-                                            <option value="American Samoa">American Samoa</option>
-                                            <option value="Andorra">Andorra</option>
-                                            <option value="Angola">Angola</option>
-                                            <option value="Anguilla">Anguilla</option>
-                                            <option value="Zimbabwe">Zimbabwe</option>
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="description" class="control-label">Description</label>
-                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="quantity" class="control-label">Qty</label>
-                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="price" class="control-label">Price</label>
-                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                                </div>
-                                <div class="col-md-1">
-                                    <label for="btn" class="control-label">Add Row</label>
-                                    <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
-                                    </button>
-                                    {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
-                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="description" class="control-label">Description</label>
+                                <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="quantity" class="control-label">Qty</label>
+                                <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="price" class="control-label">Price</label>
+                                <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                            </div>
+                            <div class="col-md-1">
+                                <label for="btn" class="control-label">Add Row</label>
+                                <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                                </button>
+                                {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
                             </div>
                         </div>
-
-                        <div id="goob" class="d-none">
+                        <div id="newrow">
                             <!-- Dynamicinput.js Use here -->
-
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <select class="select2" id="selectdata">
-                                            <option value="#">&nbsp;</option>
-                                            <option value="United States">United States</option>
-                                            <option value="United Kingdom">United Kingdom</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                   <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8"></div>
@@ -296,7 +268,7 @@
 
                 function quote_no(N){
                 var random_string = '';
-                var numbers = '0123456789';
+                var numbers = '1234567890';
 
                 for(var i , i = 0; i < N; i++ )
                 {
@@ -311,118 +283,61 @@
             });
 
             jQuery('#datepicker').datepicker({
-                format: 'dd-mm-yyyy',
+                format: 'yyyy-mm-dd',
                 startDate: '-3d',
                 endDate: '1d',
             });
 
-            // var date = new Date();
-
-            // var day = date.getDate();
-            // var month = date.getMonth() + 1;
-            // var year = date.getFullYear();
-
-            // if (month < 10) month = "0" + month;
-            // if (day < 10) day = "0" + day;
-
-            // var today = day + "-" + month + "-" + year;
-            // document.getElementById("datepicker").value = today;
-
-            //add new row
+            //add new row in new div
         var i = 0;
 
-        // $('#add').click(function(){
-        //     i++;
+        $('#add').click(function(){
+            i++;
+            $('#newrow').append(
 
-        //     $('#goob').append(
+                `<div class="row">
+                    <input type="hidden" class="form-control" id="product_id"  name="product_id[`+i+`][name]">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class=" form-control" id="selectdata">
+                                <option value="#">Select Products...</option>
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Afghanistan">Afghanistan</option>
+                                <option value="Aland Islands">Aland Islands</option>
+                                <option value="Albania">Albania</option>
+                                <option value="Algeria">Algeria</option>
+                                <option value="American Samoa">American Samoa</option>
+                                <option value="Andorra">Andorra</option>
+                                <option value="Angola">Angola</option>
+                                <option value="Anguilla">Anguilla</option>
+                                <option value="Zimbabwe">Zimbabwe</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                    </div>
 
-        //         `<div class="row">
-        //             <div class="col-md-1">
-        //                 <input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>
-        //             </div>
-        //             <div class="col-md-3">
-        //                 <div class="form-group">
-        //                     <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
-        //                         <option value="#">&nbsp;</option>
-        //                         <option value="United States">United States</option>
-        //                         <option value="United Kingdom">United Kingdom</option>
-        //                         <option value="Afghanistan">Afghanistan</option>
-        //                         <option value="Aland Islands">Aland Islands</option>
-        //                         <option value="Albania">Albania</option>
-        //                         <option value="Algeria">Algeria</option>
-        //                         <option value="American Samoa">American Samoa</option>
-        //                         <option value="Andorra">Andorra</option>
-        //                         <option value="Angola">Angola</option>
-        //                         <option value="Anguilla">Anguilla</option>
-        //                         <option value="Zimbabwe">Zimbabwe</option>
-        //                     </select>
-        //                 </div>
-        //             </div>
-        //             <div class="col-md-3">
-        //                 <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-        //             </div>
-        //             <div class="col-md-2">
-        //                 <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-        //             </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+                    </div>
+                </div>`
 
-        //             <div class="col-md-2">
-        //                 <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-        //             </div>
-        //             <div class="col-md-1">
-        //                 <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
-        //             </div>
-        //         </div>`
-
-        //     );
-        //     //  console.log('Cliked');
-        // });
-
+            );
+            //  console.log('Cliked');
+        });
+        //remove Row
         $(document).on('click','#remove-row', function(){
             $(this).parents('.row').remove();
             // console.log('Clicked on remove')
         });
-
-
-
-        document.getElementById('goob').style.display = "none"
-
-        $('#add').on('click',function(){
-            addrow();
-            // console.log('Cliked');
-
-        });
-        function addrow(){
-            var row =  document.getElementById('goob').style.display = "";
-            // '<div class="row">'+
-            //         '<div class="col-md-1">'+
-            //             '<input type="text" class="form-control" id="product-id" placeholder="Id" name="product-id[`+i+`][name]" value="0" readonly>'+
-            //         '</div>'+
-            //         '<div class="col-md-3">'+
-            //             '<div class="form-group">'+
-            //                 '<select class="select2" id="selectdata">'+
-            //                     '<option value="#">&nbsp;</option>'+
-            //                     '<option value="United States">United States</option>'+
-            //                     '<option value="United Kingdom">United Kingdom</option>'+
-            //                 '</select>'+
-            //             '</div>'+
-            //         '</div>'+
-            //         '<div class="col-md-3">'+
-            //            ' <input type="text" class="form-control" id="description" placeholder="Description" name="description">'+
-            //         '</div>'+
-            //         '<div class="col-md-2">'+
-            //             '<input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">'+
-            //         '</div>'+
-
-            //         '<div class="col-md-2">'+
-            //            ' <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">'+
-            //         '</div>'+
-            //         '<div class="col-md-1">'+
-            //             '<button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>'+
-            //         '</div>'+
-            //     '</div>';
-
-                $('.newrow').append(row);
-        }
 
     });
 
