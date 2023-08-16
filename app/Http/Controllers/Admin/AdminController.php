@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Admin;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -13,7 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $customers = Customer::all();
+        $users = User::all();
+        return view('dashboard',compact('customers','users'));
     }
 
     /**

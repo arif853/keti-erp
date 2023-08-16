@@ -283,8 +283,8 @@
 
                <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
-        <script src="{{asset('main/js/popper.min.js')}}"></script>
-        <script src="{{asset('main/js/bootstrap.min.js')}}"></script>
+        {{-- <script src="{{asset('main/js/popper.min.js')}}"></script> --}}
+        <script src="{{asset('main/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
@@ -323,7 +323,7 @@
          <!-- sweet alerts -->
         <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
         <script src="{{asset('main/assets/digitalclock/digital.js')}}"></script>
-
+        @stack('dashboard')
         @stack('customers')
         @stack('supplier')
         @stack('quote')

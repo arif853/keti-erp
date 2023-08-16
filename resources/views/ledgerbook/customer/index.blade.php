@@ -458,6 +458,7 @@
             ajax: {
                 url: '/ledger/customer/show',
                 dataSrc: 'data'
+
             },
             columns: [{
                     "data": "id"
@@ -479,6 +480,7 @@
                 },
                 {
                     "data": null,
+
                     render: function (data, type, row) {
                         //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
                         return '<button id="edit_customer" value="' + row.id +

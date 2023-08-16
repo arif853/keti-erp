@@ -258,11 +258,14 @@
                                         <td>Edinburgh</td>
                                         <td>2011/04/25</td>
                                         <td>
-                                            <p class="m-t-10"> <span class="label label-danger">Pending</span></p>
-                                            {{-- <p class="m-t-10"> <span class="label label-success">Completed</span></p> --}}
+                                            <p class="m-t-10">
+                                                <span class="badge badge-success">paid</span>
+                                                <span class="badge badge-danger">Not delivered</span>
+                                            </p>
+
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
+                                            <a href="#" class="btn btn-success waves-effect waves-dark"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
                                             <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
                                             <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
 
