@@ -354,11 +354,9 @@
                                     <th>#</th>
                                     <th>Business Name</th>
                                     <th>Owner Name</th>
-                                    {{-- <th>Debite</th>
-                                            <th>Credit</th> --}}
                                     <th> Manager Name</th>
                                     <th> Manager phone</th>
-                                    <th> Opening Date</th>
+                                    <th> Last Transaction</th>
                                     <th>Manage</th>
                                 </tr>
                             </thead>
@@ -469,6 +467,7 @@
                 {
                     "data": "owner_name"
                 },
+
                 {
                     "data": "man_name"
                 },

@@ -28,7 +28,7 @@
 
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-2 text-right">
-                            <a href="{{route('invoice.index')}}" class="btn btn-danger ">Back</a>
+                            <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             <div class="col-md-2">
                                 <div class="" >
                                     <label for="datepicker" class="control-label">Date</label>
-                                    <input type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker">
+                                    <input type="text" class="form-control" placeholder="yyyy/mm/dd" id="datepicker">
                                     {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
                                 </div><!-- input-group -->
                             </div>
@@ -258,6 +258,14 @@
                 header:{
                     'x-csrf-token' : $('meta[name="csrf-token"]').attr('content'),
                 }
+            });
+            $('#datepicker').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                todayBtn: "linked",
+                format: "yyyy-mm-dd",
+                startDate: '-3d',
+                endDate: '1d',
             });
 
             //quotation modal and quotation no

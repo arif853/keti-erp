@@ -106,7 +106,6 @@
 @endsection
 @push('dashboard')
     <script>
-      var myCountdown = $('#p-bar').progressBarTimer({ autoStart: true, label : { show: true, type: 'percent' } });
-      myCountdown.start();
+
     </script>
 @endpush

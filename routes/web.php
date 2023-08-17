@@ -44,12 +44,12 @@ Route::get('/sales/salesquotes/invoice', function () {
 Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
 
 // sales
-Route::get('/sales/salesquotes',[QuotesController::class, 'index'])->middleware('auth')->name('sales.salesquotes');
-Route::get('/sales/salesorder',[OrderController::class, 'index'])->middleware('auth')->name('sales.salesorder');
+Route::get('/sales/quote',[QuotesController::class, 'index'])->middleware('auth')->name('sales.quote');
+Route::get('/sales/order',[OrderController::class, 'index'])->middleware('auth')->name('sales.order');
 
 
 //sales invoice
-Route::get('/sales/salesinvoice', [InvoiceController::class, 'index'])->middleware('auth')->name('invoice.index');
+Route::get('/sales', [InvoiceController::class, 'index'])->middleware('auth')->name('sales.index');
 
 //Customer
 Route::get('/ledger/customer',[CustomerController::class, 'index'])->middleware('auth')->name('ledger.customer');

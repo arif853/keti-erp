@@ -1218,7 +1218,7 @@ lesshat-selector {
   position: relative;
   z-index: 1;
   width: 240px;
-  background: #317eeb;
+  background: #eb8b31;
 }
 .logo h1 {
   margin: 0px auto;
@@ -1228,7 +1228,7 @@ lesshat-selector {
 .navbar-default {
   border: none;
   margin-bottom: 0px;
-  background-color: #317eeb;
+  background-color: #eb8b31;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 0px;
 }
@@ -1453,7 +1453,7 @@ body.fixed-left .side-menu.left {
   color: #75798B;
 }
 #sidebar-menu ul ul a:hover {
-  color: #317eeb;
+  color: #eb8b31;
 }
 #sidebar-menu ul ul ul a {
   padding-left: 80px;

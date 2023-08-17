@@ -21,8 +21,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12" >
-                            <a href="{{route('sales.salesquotes')}}" class="btn btn-info btn-custom">Quotes</a>
-                            <a href="{{route('sales.salesorder')}}" class="btn btn-info btn-custom">Order</a>
+                            <a href="{{route('sales.quote')}}" class="btn btn-info btn-custom">Quotes</a>
+                            <a href="{{route('sales.order')}}" class="btn btn-info btn-custom">Order</a>
                             <button id="invoice_btn" class="btn btn-success btn-custom">Invoice</button>
                             <a href="#" class="btn btn-success btn-custom">Bill</a>
                             <a href="#" class="btn btn-info">Return</a>
@@ -34,13 +34,13 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Sales Orders Summary</h3>
+                    <h3 class="panel-title">Sales Summary</h3>
                 </div>
                 <div class="mini-stat-quote clearfix bx-shadow">
-                    <span class="mini-stat-icon-2">Total orders</span>
+                    <span class="mini-stat-icon-2">Total invoice</span>
                     <div class="mini-stat-info text-right text-muted">
                         <span class="counter">20544</span>
-                        Unique Visitors
+                        Invoice
                     </div>
                 </div>
             </div>
@@ -61,7 +61,8 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <label for="datepicker" class="control-label">Date*</label>
-                                <input type="text" class="form-control" placeholder="dd-mm-yyyy" id="datepicker">
+                                <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker">
+
                             </div>
                             <div class="col-md-6"></div>
                             <div class="col-md-2">
@@ -308,24 +309,14 @@
 
             });
 
-            jQuery('#datepicker').datepicker({
-                    format: 'yyyy-mm-dd',
-                    startDate: '-3d',
-                    endDate: '1d',
-                    defaultViewDate: today
-                });
-
-            var date = new Date();
-
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-
-            if (month < 10) month = "0" + month;
-            if (day < 10) day = "0" + day;
-
-            var today = day + "-" + month + "-" + year;
-            document.getElementById("datepicker").value = today;
+            $('#datepicker').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                todayBtn: "linked",
+                format: "yyyy-mm-dd",
+                startDate: '-3d',
+                endDate: '1d',
+            });
 
             var i = 0;
             $('#add').click(function(){

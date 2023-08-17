@@ -27,7 +27,7 @@
                             <a href="#" class="btn btn-danger">Delete order</a>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-2 pull-right">
-                            <a href="{{route('invoice.index')}}" class="btn btn-danger ">Back</a>
+                            <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
                         </div>
                     </div>
                 </div>
@@ -247,11 +247,14 @@
     <SCRipt>
         $(document).ready(function(){
 
-            jQuery('#datepicker').datepicker({
-                    format: 'yyyy-mm-dd',
-                    startDate: '-3d',
-                    endDate: '1d',
-                });
+            $('#datepicker').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                todayBtn: "linked",
+                format: "yyyy-mm-dd",
+                startDate: '-3d',
+                endDate: '1d',
+            });
             // var date = new Date();
 
             // var day = date.getDate();

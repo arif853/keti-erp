@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,7 +40,7 @@
         <!--Morris Chart CSS -->
         <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}">
 
-        <link href="{{asset('main/assets/timepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('main/assets/timepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
 
 
@@ -59,7 +59,10 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="#" class="logo"><i class="zmdi zmdi-landscape"></i> <span>KETI </span></a>
+                        <a href="#" class="logo">
+                            <img src="{{asset('main/images/keti-tp.png')}}" alt="KETI-LOGO" style="width: 60px; height:30px">
+                            {{-- <span>KETI </span> --}}
+                        </a>
                     </div>
                 </div>
                <!-- Button mobile view to collapse sidebar menu -->
@@ -200,15 +203,16 @@
                                 <a href="{{'/dashboard'}}" class="waves-effect {{ (request()->is('dashboard')) ? 'active' : '' }}"><i class="zmdi zmdi-home"></i><span> Dashboard </span></a>
                             </li>
                             <li class="has_sub">
-                                <a href="#" class="waves-effect "><i class="zmdi zmdi-money-box {{ (request()->is('sales/salesquotes')) ? 'active' : '' }}"></i><span> Sales </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                {{-- {{ (request()->is('sales')) ? 'active' : '' }} --}}
+                                <a href="#" class="waves-effect "><i class="zmdi zmdi-swap"></i><span> Transactions </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{route('invoice.index')}}">Sales Invoice</a></li>
-                                    <li><a href="#">Sales Return</a></li>
-                                    <li><a href="#">Purchases</a></li>
+                                    <li><a href="{{route('sales.index')}}"><i class="fas fa-comments-dollar m-r-10"></i><span>Sales</span></a></li>
+                                    <li><a href="#"><i class="fas fa-shopping-basket m-r-10"></i>Purchases</a></li>
+                                    <li><a href="#"><i class="fas fa-cogs m-r-10"></i>Production</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a href="#" class="waves-effect"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect {{ (request()->is('account/groups')) ? 'active' : '' }}"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{'/account/groups'}}">Accounts Book</a></li>
                                     <li><a href="#">Receipt</a></li>
@@ -230,7 +234,7 @@
                             </li>
 
                             <li class="has_sub">
-                                <a href="#" class="waves-effect"><i class="zmdi zmdi-dns"></i></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect"><i class="fas fa-warehouse m-r-5"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="inbox.html">Item Master</a></li>
                                     <li><a href="email-compose.html">Company Master</a></li>
@@ -283,11 +287,11 @@
 
                <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
-        {{-- <script src="{{asset('main/js/popper.min.js')}}"></script> --}}
         <script src="{{asset('main/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
+
         <script src="{{asset('main/assets/font-awesome/js/all.min.js')}}"></script>
         <script src="{{asset('main/assets/font-awesome/js/fontawesome.min.js')}}"></script>
         <script src="{{asset('main/assets/font-awesome/js/brands.js')}}"></script>
@@ -310,12 +314,11 @@
 
          <!-- CUSTOM JS -->
          <script src="{{asset('main/js/jquery.app.js')}}"></script>
-         {{-- <script src="{{asset('main/js/dynamicinput.js')}}"></script> --}}
         {{-- DataTable --}}
          <script src="{{asset('main/assets/datatables/jquery.dataTables.min.js')}}"></script>
          {{-- <script src="{{asset('main/assets/datatables/dataTables.bootstrap.min.js')}}"></script> --}}
 
-         <script src="{{asset('main/assets/timepicker/bootstrap-datepicker.js')}}"></script>
+         <script src="{{asset('main/assets/timepicker/js/bootstrap-datepicker.min.js')}}"></script>
 
          <!-- Counter-up -->
          <script src="{{asset('main/assets/counterup/waypoints.min.js')}}" type="text/javascript"></script>
@@ -323,6 +326,7 @@
          <!-- sweet alerts -->
         <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
         <script src="{{asset('main/assets/digitalclock/digital.js')}}"></script>
+
         @stack('dashboard')
         @stack('customers')
         @stack('supplier')
@@ -345,7 +349,7 @@
             jQuery(document).ready(function() {
                     // Date Picker
 
-                jQuery('#datepicker-inline').datepicker();
+                // jQuery('#datepicker-inline').datepicker();
 
                  // Select2
                 jQuery(".select2").select2({
