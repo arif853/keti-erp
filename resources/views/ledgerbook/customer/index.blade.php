@@ -454,7 +454,7 @@
         //DataTable Data view
         var table = $('#datatable').DataTable({
             ajax: {
-                url: '/ledger/customer/tabledata',
+                url: '/ledger/customer/show',
                 dataSrc: 'data'
 
             },
