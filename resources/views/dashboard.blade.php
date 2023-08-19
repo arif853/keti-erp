@@ -21,10 +21,8 @@
                 <div class="tiles-progress">
                     <div class="m-t-20">
                         <h5 class="text-uppercase">Sales <span class="pull-right">60%</span></h5>
-                        <div class="progress progress-sm m-0">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                <span class="sr-only">60% Complete</span>
-                            </div>
+                        <div class="progress">
+                            <div class="progress-bar " style="width: 60%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
@@ -40,10 +38,8 @@
                 <div class="tiles-progress">
                     <div class="m-t-20">
                         <h5 class="text-uppercase">Orders <span class="pull-right">90%</span></h5>
-                        <div class="progress progress-sm m-0">
-                            <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-                                <span class="sr-only">90% Complete</span>
-                            </div>
+                        <div class="progress">
+                            <div class="progress-bar " style="width: 90%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
@@ -59,11 +55,9 @@
                 </div>
                 <div class="tiles-progress">
                     <div class="m-t-20">
-                        <h5 class="text-uppercase">Customers <span class="pull-right">60%</span></h5>
-                        <div class="progress progress-sm m-0">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                <span class="sr-only">60% Complete</span>
-                            </div>
+                        <h5 class="text-uppercase">Customers <span class="pull-right">10%</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar " style="width: 10%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>

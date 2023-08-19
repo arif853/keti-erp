@@ -56,6 +56,7 @@ Route::get('/ledger/customer',[CustomerController::class, 'index'])->middleware(
 Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->middleware('auth')->name('ledger.customer.store');
 Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->middleware('auth')->name('ledger.customer.edit');
 Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->middleware('auth')->name('ledger.customer.update');
+Route::get('/ledger/customer/tabledata',[CustomerController::class, 'show'])->name('ledger.customer.tabledata');
 Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('ledger.customer.show');
 Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->middleware('auth')->name('ledger.customer.destroy');
 

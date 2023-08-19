@@ -60,7 +60,7 @@
                 <div class="topbar-left">
                     <div class="text-center">
                         <a href="#" class="logo">
-                            <img src="{{asset('main/images/keti-tp.png')}}" alt="KETI-LOGO" style="width: 60px; height:30px">
+                            <img src="{{asset('main/images/keti-tp.png')}}" alt="KETI-LOGO" style="width: 50px; height:50px">
                             {{-- <span>KETI </span> --}}
                         </a>
                     </div>
@@ -212,11 +212,11 @@
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a href="#" class="waves-effect {{ (request()->is('account/groups')) ? 'active' : '' }}"><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect "><i class="zmdi zmdi-money"></i></i><span> Accounts </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{'/account/groups'}}">Accounts Book</a></li>
-                                    <li><a href="#">Receipt</a></li>
-                                    <li><a href="#">Payment</a></li>
+                                    <li><a href="{{'/account/groups'}}"><i class="zmdi zmdi-book m-r-10"></i> Accounts Book</a></li>
+                                    <li><a href="#"><i class="fas fa-receipt m-r-10"></i> Receipt</a></li>
+                                    <li><a href="#"><i class="far fa-money-bill-alt m-r-10"></i>Payment</a></li>
                                     <li><a href="#">Debit Note</a></li>
                                     <li><a href="#">Credit Note</a></li>
                                     <li><a href="#">Journal</a></li>
@@ -234,7 +234,7 @@
                             </li>
 
                             <li class="has_sub">
-                                <a href="#" class="waves-effect"><i class="fas fa-warehouse m-r-5"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect f-con"><i class="fas fa-warehouse m-r-5"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="inbox.html">Item Master</a></li>
                                     <li><a href="email-compose.html">Company Master</a></li>

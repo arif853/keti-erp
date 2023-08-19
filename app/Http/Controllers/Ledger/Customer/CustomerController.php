@@ -52,7 +52,6 @@ class CustomerController extends Controller
             $customers->man_title= $request->man_title;
             $customers->save();
 
-        // Customer::create($customerData);
 
         return response()->json(['status' => 200, 'message' => "New Customer Added Successfully!"]);
     }
@@ -60,7 +59,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function tabledata()
     {
         $customers = Customer::get();
         return response()->json(['status' => 200, 'data' => $customers]);
