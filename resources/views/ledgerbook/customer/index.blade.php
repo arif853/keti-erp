@@ -475,8 +475,16 @@
                     "data": "man_phone"
                 },
                 {
-                    "data": "created_at"
+                    "data": null,
+
+                    render: function (data, type, row) {
+                        var times = data.created_at.substring(0, 10);
+                        return times
+                    }
                 },
+                // {
+                //     "data": "time"str.
+                // },
                 {
                     "data": null,
 

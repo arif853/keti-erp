@@ -59,9 +59,10 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function tabledata()
+    public function tabledata(Request $request)
     {
-        $customers = Customer::get();
+        $customers = Customer::select('id','business_name','owner_name','man_name','man_phone','created_at')->get();
+        // if($request==ajax())
         return response()->json(['status' => 200, 'data' => $customers]);
     }
 
