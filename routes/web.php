@@ -53,12 +53,12 @@ Route::get('/sales', [InvoiceController::class, 'index'])->middleware('auth')->n
 
 //Customer
 Route::get('/ledger/customer',[CustomerController::class, 'index'])->middleware('auth')->name('ledger.customer');
-Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->middleware('auth')->name('ledger.customer.store');
-Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->middleware('auth')->name('ledger.customer.edit');
-Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->middleware('auth')->name('ledger.customer.update');
-// Route::get('/ledger/customer/tabledata',[CustomerController::class, 'show'])->name('ledger.customer.tabledata');
-Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->name('ledger.customer.show');
-Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->middleware('auth')->name('ledger.customer.destroy');
+Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->middleware('auth')->name('customer.store');
+Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->middleware('auth')->name('customer.edit');
+Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->middleware('auth')->name('customer.update');
+Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->middleware('auth')->name('customer.show');
+Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->middleware('auth')->name('customer.destroy');
+Route::get('/ledger/customer/customerview/{customer}',[CustomerController::class, 'customerview'])->middleware('auth')->name('customer.customerview');
 
 //Supplier
 Route::get('/ledger/supplier',[SupplierController::class, 'index'])->middleware('auth')->name('ledger.supplier');
