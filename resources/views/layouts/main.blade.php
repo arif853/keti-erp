@@ -193,7 +193,7 @@
 
                                 </ul>
                             </div>
-                            <p class="text-muted m-0">{{ Auth::user()->email }}</p>
+                            <p class="text-muted m-0">{{ Auth::user()->is_superadmin }}</p>
                         </div>
                     </div>
                     <!--- Divider -->

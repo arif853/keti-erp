@@ -28,6 +28,13 @@ class CustomerController extends Controller
         //
     }
 
+    public function customerview($id){
+
+        // $id = Customer::find($id);
+        $data = Customer::where('id',$id)->get();
+        return view('ledgerbook.customer.show',compact('data'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */

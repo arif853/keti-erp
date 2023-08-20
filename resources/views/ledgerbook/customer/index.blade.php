@@ -360,33 +360,6 @@
                                     <th>Manage</th>
                                 </tr>
                             </thead>
-
-
-                            {{-- <tbody id="customer_list">
-
-                                    @foreach ($customers as $data)
-                                        <tr id="cus_data_{{$data->id}}">
-                            <td>{{$data->id}}</td>
-                            <td>{{$data->business_name}}</td>
-                            <td>20000</td>
-                            <td>40000</td>
-                            <td>{{$data->created_at}}</td>
-                            <td>
-                                <button type="submit" id="edit_customer" data-id="{{$data->id}}"
-                                    class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit"
-                                        aria-hidden="true"></i> </button>
-                                <button type="submit" id="delete_customer" data-id="{{$data->id}}"
-                                    class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash"
-                                        aria-hidden="true"></i> </button>
-                                <button type="submit" id="view_customer" data-id="{{$data->id}}"
-                                    class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye"
-                                        aria-hidden="true"></i></button>
-
-                            </td>
-                            </tr>
-                            @endforeach
-
-                            </tbody> --}}
                         </table>
 
                     </div>
@@ -408,8 +381,25 @@
             $('#customer_form').trigger('reset');
             $("#cus_title").html('Add Customer');
             $("#cus-modal-form").modal('show');
-
         });
+
+        // $(document).on('click','#view_customer',function(r){
+        //     r.preventDefault();
+        //     let id = $(this).val();
+        //     console.log(id);
+
+        //     $.ajax({
+        //         url: '/ledger/customer/onlycustomer',
+        //         method: 'GET',
+        //         data: {
+        //             id: id,
+        //         },
+        //         success: function (response) {
+        //             console.log(response.value);
+
+        //         }
+        //     });
+        // });
 
         //Customer editform modal
         $(document).on('click', '#edit_customer', function (e) {
@@ -494,8 +484,8 @@
                             '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
                             '<button id="delete_customer" value="' + row.id +
                             '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
-                            '<button  id="view_customer" value="' + row.id +
-                            '" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></button>';
+                            '<a  id="view_customer" href="{{('/ledger/customer/customerview/')}}'+ row.id +'" value="' + row.id +
+                            '" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>';
 
                     }
                 },
