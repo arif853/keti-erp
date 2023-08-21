@@ -214,10 +214,9 @@
                             <table id="datatable" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Quote No.</th>
+                                        <th>Quote Date</th>
                                         <th>Customer Name</th>
-                                        <th>Reference</th>
-                                        <th>Date</th>
                                         <th>Manage</th>
                                         {{-- <th>Salary</th> --}}
                                     </tr>
@@ -226,10 +225,9 @@
 
                                 <tbody>
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
+                                        <td>QT2023-420</td>
                                         <td>2011/04/25</td>
+                                        <td>System Architect</td>
                                         <td>
                                             <a href="#" class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
                                             <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
