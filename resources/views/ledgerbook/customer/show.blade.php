@@ -36,7 +36,7 @@
                                 <input type="text" class="form-control" id="customar_id"  value="{{$item->id}}" disabled>
                             </div>
                         </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="business_name" class="control-label">Business Name*</label>
                             <input type="text" class="form-control" id="business_name" value="{{$item->business_name}}" placeholder="Business Name"
@@ -64,9 +64,11 @@
                             <input type="text" class="form-control" id="owner_name" value="{{$item->owner_name}}" disabled>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label for="email" class="control-label">Email</label>
-                        <input type="email" class="form-control" value="{{$item->email}}" id="email" disabled>
+                        <a href="mailto:{{$item->email}}"><input type="email" class="form-control" value="{{$item->email}}" id="email" @readonly(true)></a>
+
+
                     </div>
                     <div class="col-md-2">
                         <label for="phone2" class="control-label">Secondary Phone</label>
@@ -111,9 +113,53 @@
                     </div>
                     <div class="col-md-3">
                         <label for="man_title" class="control-label">Title</label>
-                        <input type="text" class="form-control " placeholder="Title" id="man_title"name="{{$item->man_title}}" @disabled(true)>
+                        <input type="text" class="form-control " placeholder="Title" id="man_title" value="{{$item->man_title}}" @disabled(true)>
                     </div>
                     <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ledger Book Table</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <table id="datatable" class="table t table-bordered mytable">
+                            <thead>
+                                <tr>
+                                    <th>Challan No</th>
+                                    <th>Challan Date</th>
+                                    <th>Challan type</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Balance</th>
+                                    <th>Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>INV2023-501</td>
+                                    <td>23-08-2023</td>
+                                    <td>Challan</td>
+                                    <td>100000</td>
+                                    <td>50000</td>
+                                    <td>50000</td>
+                                    <td>
+                                        <button id="edit_customer" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>
+                                        <a  id="view_customer" href="#" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
         </div>

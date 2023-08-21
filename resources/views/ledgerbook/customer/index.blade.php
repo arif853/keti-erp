@@ -340,14 +340,14 @@
 
 {{-- DataTable Start --}}
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Ledger Book Table</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-lg-12">
                         <table id="datatable" class="table table-striped table-bordered mytable">
                             <thead>
                                 <tr>
