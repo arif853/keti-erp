@@ -236,7 +236,7 @@
                             <li class="has_sub">
                                 <a href="#" class="waves-effect f-con"><i class="fas fa-warehouse m-r-5"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="inbox.html">Item Master</a></li>
+                                    <li><a href="{{route('items.index')}}">Item Master</a></li>
                                     <li><a href="email-compose.html">Company Master</a></li>
                                     <li><a href="email-read.html">Catagory Master</a></li>
                                 </ul>

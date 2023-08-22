@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Sales\InvoiceController;
+use App\Http\Controllers\Inventory\ItemsController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
@@ -68,6 +69,10 @@ Route::get('/ledger/supplier/show',[SupplierController::class, 'show'])->middlew
 // Accounts
 Route::get('/account/groups',[AccountGroupController::class, 'index'])->middleware('auth')->name('accounts.index');
 Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->middleware('auth')->name('accounts.group');
+
+
+//Inventory
+Route::get('/inventory/items', [ItemsController::class, 'index'])->middleware('auth')->name('items.index');
 
 
 
