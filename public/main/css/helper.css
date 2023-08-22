@@ -180,3 +180,8 @@
 .m-a-y{
     margin: auto 0;
 }
+.img-output{
+    width: 100px;
+    height: 100px;
+    margin-left: 50px;
+}

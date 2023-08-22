@@ -229,12 +229,11 @@
                                 <ul class="list-unstyled">
                                     <li><a href="{{('/ledger/customer')}}">Customer</a></li>
                                     <li><a href="{{route('ledger.supplier')}}">Supplier</a></li>
-                                    <li><a href="#">Inbox</a></li>
                                 </ul>
                             </li>
 
                             <li class="has_sub">
-                                <a href="#" class="waves-effect f-con"><i class="fas fa-warehouse m-r-5"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect f-con"><i class="zmdi zmdi-balance"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('items.index')}}">Item Master</a></li>
                                     <li><a href="email-compose.html">Company Master</a></li>
@@ -334,6 +333,7 @@
         @stack('order')
         @stack('invoice')
         @stack('accountgroup')
+        @stack('items')
 
 
         <script type="text/javascript">

@@ -16,9 +16,9 @@
     //init
     FormValidator.prototype.init = function() {
         //validator plugin
-        $.validator.setDefaults({
-            submitHandler: function() { alert("submitted!"); }
-        });
+        // $.validator.setDefaults({
+        //     submitHandler: function() { alert("submitted!"); }
+        // });
 
         // validate the comment form when it is submitted
         this.$commentForm.validate();
@@ -99,7 +99,7 @@
 }(window.jQuery),
 
 
-//initializing 
+//initializing
 function($) {
     "use strict";
     $.FormValidator.init()
