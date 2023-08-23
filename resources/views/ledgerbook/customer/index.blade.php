@@ -328,8 +328,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" id="submit"
-                        class="btn btn-primary btn-custom waves-effect waves-light submit">Add Customer</button>
+                    <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light submit">Add Customer</button>
                 </div>
             </form>
         </div>
@@ -383,23 +382,6 @@
             $("#cus-modal-form").modal('show');
         });
 
-        // $(document).on('click','#view_customer',function(r){
-        //     r.preventDefault();
-        //     let id = $(this).val();
-        //     console.log(id);
-
-        //     $.ajax({
-        //         url: '/ledger/customer/onlycustomer',
-        //         method: 'GET',
-        //         data: {
-        //             id: id,
-        //         },
-        //         success: function (response) {
-        //             console.log(response.value);
-
-        //         }
-        //     });
-        // });
 
         //Customer editform modal
         $(document).on('click', '#edit_customer', function (e) {

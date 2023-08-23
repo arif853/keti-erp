@@ -139,7 +139,7 @@
                                         <option value="Angola">Angola</option>
                                         <option value="Anguilla">Anguilla</option>
                                         <option value="Zimbabwe">Zimbabwe</option>
-                                        </select>
+                                    </select>
                                 </div>
 
                             </div>
@@ -263,7 +263,6 @@
                                                 <span class="badge badge-success">paid</span>
                                                 <span class="badge badge-danger">Not delivered</span>
                                             </p>
-
                                         </td>
                                         <td>
                                             <a href="#" class="btn btn-success waves-effect waves-dark"><i class="fa  fa-edit" aria-hidden="true"></i> </a>

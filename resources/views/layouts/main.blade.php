@@ -326,6 +326,10 @@
         <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
         <script src="{{asset('main/assets/digitalclock/digital.js')}}"></script>
 
+        {{-- from validator --}}
+        <script src="{{asset('main/assets/jquery.validate/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('main/assets/jquery.validate/form-validation-init.js')}}"></script>
+
         @stack('dashboard')
         @stack('customers')
         @stack('supplier')
