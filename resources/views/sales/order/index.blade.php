@@ -21,13 +21,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-10 col-sm-10 col-xs-10" >
-                            <button id="order_btn" class="btn btn-success " >New order</button>
-                            <a href="#" class="btn btn-warning">Pending order</a>
-                            <a href="#" class="btn btn-danger">Delete order</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 pull-right">
-                            <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
+                        <div class="col-lg-12 col-sm-12 col-xs-12" >
+                            <div class="d-flex justify-content-between">
+                                <div class="left">
+                                    <button id="order_btn" class="btn btn-success " >New order</button>
+                                    <a href="#" class="btn btn-warning">Pending order</a>
+                                    <a href="#" class="btn btn-danger">Delete order</a>
+                                </div>
+                                <div class="right">
+                                    <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

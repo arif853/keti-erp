@@ -24,7 +24,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <button class="btn btn-success" id="item_modal">Add Item</button>
                         <button class="btn btn-success" id="item_issue">Issue Item</button>
-                        <button class="btn btn-success" id="store">Store</button>
+                        <a class="btn btn-success" id="store" >Store</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-{{-- prodcut add modal --}}
+{{-- product add modal --}}
 <div id="product_modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -164,7 +164,7 @@
     </div>
 </div>
 
-{{-- prodcut issue modal --}}
+{{-- product issue modal --}}
 <div id="product_issue_modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -176,12 +176,16 @@
                 <div class="modal-body" >
 
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-lg-3">
                             <div class="" >
                                 <label for="datepicker" class="control-label">Date</label>
-                                <input type="text" class="form-control" placeholder="yyyy/mm/dd" id="datepicker">
+                                <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker">
                                 {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
                             </div><!-- input-group -->
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="store" class="control-label">Store</label>
+                            <input type="text" class="form-control" placeholder="Store Location" id="store">
                         </div>
                     </div>
                     <br>
@@ -283,6 +287,7 @@
     <script>
         $(document).ready(function(){
 
+            //add item button
             $(document).on('click', '#item_modal', function () {
 
                 document.getElementById('product_form').reset();
@@ -298,6 +303,7 @@
                 };
             });
 
+            //issue product modal button
             $(document).on('click', '#item_issue', function () {
 
                 document.getElementById('product_issue_form').reset();
@@ -306,14 +312,11 @@
 
             });
 
+            //costcalulation
             $('#mrp').on('click',function(){
 
                 let mrps = 0;
                 mrps = costcount();
-                // if(this.value<0){
-                //     this.value = 0;
-                // }else{
-                // }
                 this.value = mrps;
             });
 
@@ -344,6 +347,7 @@
                 }
 
             };
+            //issue item new row add
             const selector = '[data-x-wrapper]';
             let options = {
                 disableNaming: '[data-disable-naming]',
@@ -354,6 +358,19 @@
             };
             $(selector).replicate(options);
 
+            // datepicker
+            $('#datepicker').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                todayBtn: "linked",
+                format: "yyyy-mm-dd",
+                startDate: '-3d',
+                endDate: '1d',
+            });
+
+            $('#store').on('click', function(){
+                location.href = "{{route('store.index')}}"
+            });
         });
 
     </script>

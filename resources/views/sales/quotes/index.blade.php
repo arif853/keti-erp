@@ -21,14 +21,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-10 col-sm-10 col-xs-10" >
-                            <button  class="btn btn-success " id="quote_btn">New Quote</button>
-                            <button  class="btn btn-warning">Modify Quote</button>
-                            <button class="btn btn-danger">Delete Quote</button>
-
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 text-right">
-                            <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
+                        <div class="col-lg-12 col-sm-12 col-xs-12" >
+                            <div class="d-flex justify-content-between">
+                                <div class="left">
+                                    <button  class="btn btn-success " id="quote_btn">New Quote</button>
+                                    <button  class="btn btn-warning">Modify Quote</button>
+                                    <button class="btn btn-danger">Delete Quote</button>
+                                </div>
+                                <div class="right">
+                                    <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,7 +132,7 @@
 
                             </div>
                         </div>
-                        <div class="" data-x-wrapper="products">
+                        <div class="" data-x-wrapper="quote">
                             <div class="m-b-10" data-x-group>
                                 <div class="row">
                                     <div class="col-md-0">
@@ -331,11 +334,6 @@
 
             });
 
-            jQuery('#datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                startDate: '-3d',
-                endDate: '1d',
-            });
 
             //add new row in new div
         // var i = 0;

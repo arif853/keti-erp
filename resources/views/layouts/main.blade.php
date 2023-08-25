@@ -339,6 +339,8 @@
         @stack('invoice')
         @stack('accountgroup')
         @stack('items')
+        @stack('store')
+
 
 
         <script type="text/javascript">

@@ -21,8 +21,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12" >
-                            <a href="{{route('sales.quote')}}" class="btn btn-info btn-custom">Quotes</a>
-                            <a href="{{route('sales.order')}}" class="btn btn-info btn-custom">Order</a>
+                            <button  class="btn btn-info btn-custom" id="quote_btn">Quotes</button>
+                            <button  class="btn btn-info btn-custom" id="order_btn">Order</button>
                             <button id="invoice_btn" class="btn btn-success btn-custom">Invoice</button>
                             <a href="#" class="btn btn-success btn-custom">Bill</a>
                             <a href="#" class="btn btn-info">Return</a>
@@ -373,6 +373,13 @@
                 $("#vehicle2").css('display', 'none');
             }
 
+            });
+
+            $('#quote_btn').on('click', function(){
+                location.href = "{{route('sales.quote')}}"
+            });
+            $('#order_btn').on('click', function(){
+                location.href = "{{route('sales.order')}}"
             });
 
         });

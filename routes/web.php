@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Sales\InvoiceController;
 use App\Http\Controllers\Inventory\ItemsController;
+use App\Http\Controllers\Inventory\StoreController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
@@ -73,6 +74,7 @@ Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->midd
 
 //Inventory
 Route::get('/inventory/items', [ItemsController::class, 'index'])->middleware('auth')->name('items.index');
+Route::get('/inventory/store', [StoreController::class, 'index'])->middleware('auth')->name('store.index');
 
 
 
