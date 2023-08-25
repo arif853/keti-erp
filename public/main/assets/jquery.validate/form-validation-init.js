@@ -11,7 +11,7 @@
     var FormValidator = function() {
         this.$customerform = $("#customer_form"); //this could be any form, for example we are specifying the comment form
         this.$productform = $("#product_form"); //this could be any form, for example we are specifying the comment form
-        this.$signupForm = $("#product_form");
+        this.$issueproduct = $("#product_issue_form");
     };
 
     //init
@@ -24,6 +24,7 @@
         // validate the comment form when it is submitted
         // this.$customerform.validate();
         this.$productform.validate();
+        this.$issueproduct.validate();
 
         // validate signup form on keyup and submit
         this.$customerform.validate({

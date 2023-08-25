@@ -45,8 +45,8 @@
         </div>
     </div>
 </div>
-
-<div id="cus-modal-form" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+{{-- prodcut add modal --}}
+<div id="product_modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,19 +56,23 @@
             <form id="product_form" method="POST">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-lg-2">
                             <label for="status" class="control-label">Status</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="NA">Select Status...</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-lg-2">
                             <label for="unit" class="control-label">Unit</label>
                             <input type="text" class="form-control" placeholder="PCS" id="unit" name="unit">
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-lg-5"></div>
+                        <div class="col-lg-3">
+                            <label for="barcode" class="control-label">Barcode</label>
+                            <input type="text" class="form-control" placeholder="Barcode" id="barcode" name="barcode">
+                        </div>
                     </div>
                     <br>
                     <div class="row">
@@ -126,15 +130,8 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="product_cost" class="control-label">Cost</label>
-
+                            <label for="product_cost" class="control-label">Product Cost</label>
                             <input type="text" class="form-control" id="product_cost" placeholder="৳ Cost" name="product_cost" >
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="mrp" class="control-label">M.R.P</label>
-                            <input type="text" class="form-control" id="mrp" placeholder="৳ MRP" name="mrp" >
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -143,9 +140,85 @@
                             <input type="text" class="form-control" id="vat" placeholder="VAT %" name="vat" >
                         </div>
                     </div>
-                    <div class="col-lg-3"></div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="o_charge" class="control-label">Other Charge</label>
+                            <input type="text" class="form-control" id="o_charge" placeholder="Other Charge" name="o_charge" >
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="mrp" class="control-label">M.R.P(Click me)</label>
+                            <input type="text" class="form-control" id="mrp" placeholder="৳ MRP" name="mrp" readonly>
+                        </div>
+                    </div>
+
                 </div>
 
+                <div class="modal-footer">
+                    <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light submit">Add Item</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- prodcut issue modal --}}
+<div id="product_issue_modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="cus_title"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form id="product_issue_form" method="POST">
+                <div class="modal-body" >
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="" >
+                                <label for="datepicker" class="control-label">Date</label>
+                                <input type="text" class="form-control" placeholder="yyyy/mm/dd" id="datepicker">
+                                {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
+                            </div><!-- input-group -->
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="products" class="control-label">Products</label>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="quantity" class="control-label">Quantity</label>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="add_row" class="control-label">Add row</label>
+                        </div>
+                    </div>
+                    <div class="" data-x-wrapper="products">
+                        <div class="inventory_group m-b-10" data-x-group>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <select class="form-control" name="products" id="products" required>
+                                        <option value="NA">Select Product...</option>
+                                        <option value="1">Product-1</option>
+                                        <option value="0">Product-2</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="number" value="" min="0" class="form-control" id="quantity" name="quantity" placeholder="Quantity" required>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button" class="btn btn-primary" data-add-btn>+</button>
+                                    <button type="button" class="btn btn-danger" data-remove-btn>-</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
                 <div class="modal-footer">
                     <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light submit">Add Item</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -160,6 +233,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Items Table</h3>
+
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -170,6 +244,7 @@
                                     <th>#</th>
                                     <th>Status</th>
                                     <th>Items Name</th>
+                                    <th>Barcode</th>
                                     <th>Cost</th>
                                     <th>MRP</th>
                                     <th>Available</th>
@@ -182,9 +257,11 @@
                                     <td>1</td>
                                     <td>Active</td>
                                     <td>Bata Lether Shoe</td>
+                                    <td>{!! DNS1D::getBarcodeSVG('94345256811', 'EAN13','2','40') !!}
+                                        </td>
                                     <td>৳ 1500</td>
                                     <td>৳ 1600</td>
-                                    <td>200</td>
+                                    <td>0</td>
                                     <td>Pcs</td>
                                     <td>
                                         <a href="#" class="btn btn-success waves-effect waves-dark"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
@@ -205,11 +282,12 @@
 @push("items")
     <script>
         $(document).ready(function(){
+
             $(document).on('click', '#item_modal', function () {
 
                 document.getElementById('product_form').reset();
                 $("#cus_title").html('Add Item');
-                $("#cus-modal-form").modal('show');
+                $("#product_modal").modal('show');
 
                 document.getElementById("product_img").onchange = function(){
                     myFunction()
@@ -219,6 +297,63 @@
                 image.src = URL.createObjectURL(event.target.files[0]);
                 };
             });
+
+            $(document).on('click', '#item_issue', function () {
+
+                document.getElementById('product_issue_form').reset();
+                $("#cus_title").html('Add Item');
+                $("#product_issue_modal").modal('show');
+
+            });
+
+            $('#mrp').on('click',function(){
+
+                let mrps = 0;
+                mrps = costcount();
+                // if(this.value<0){
+                //     this.value = 0;
+                // }else{
+                // }
+                this.value = mrps;
+            });
+
+             function costcount() {
+                var cost = $("#product_cost").val();
+                var vat = $("#vat").val();
+                var o_charge = $("#o_charge").val();
+
+                let num1 = 0;
+                let num2 = 0;
+                let num3 = 0;
+
+                num1 = Number(cost);
+                num2 = Number(vat);
+                num3 = Number(o_charge);
+
+                var mrp = 0;
+                var withvat = 0;
+
+                if(num1 && num2 && num3 || num1 && !num2 && num3 || num1 && num2 && !num3 || num1 && !num2 && !num3) {
+
+                    withvat = num1 * (num2/100);
+                    mrp = num1 + num3 + withvat ;
+
+                    return mrp;
+                }else{
+                    return 0;
+                }
+
+            };
+            const selector = '[data-x-wrapper]';
+            let options = {
+                disableNaming: '[data-disable-naming]',
+                wrapper: selector,
+                group: '[data-x-group]',
+                addBtn: '[data-add-btn]',
+                removeBtn: '[data-remove-btn]'
+            };
+            $(selector).replicate(options);
+
         });
 
     </script>

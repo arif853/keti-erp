@@ -329,6 +329,7 @@
         {{-- from validator --}}
         <script src="{{asset('main/assets/jquery.validate/jquery.validate.min.js')}}"></script>
         <script src="{{asset('main/assets/jquery.validate/form-validation-init.js')}}"></script>
+        <script src="{{asset('main/js/jquery.replicate.js')}}"></script>
 
         @stack('dashboard')
         @stack('customers')

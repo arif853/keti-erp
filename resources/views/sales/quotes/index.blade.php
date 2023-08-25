@@ -92,7 +92,7 @@
                                     <select class="select2" id="selectdata" data-placeholder="Choose a Country...">
                                         <option value="#">Select Customer....</option>
                                         @foreach ($customer as $data)
-                                        <option value="{{$data->id}}">{{$data->business_name}}</option>
+                                        <option value="{{$data->id}}">{{$data->business_name}} <span>----->{{$data->phone}}</span></option>
                                         @endforeach
 
                                       </select>
@@ -103,50 +103,81 @@
                         <div class="row">
                             <div class="col-md-0">
                                 {{-- <label for="product_id" class="control-label">ID</label> --}}
-                                <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0">
+                                {{-- <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0"> --}}
                             </div>
-                            {{-- <input type="hidden" class="form-control" id="product_id"  name="product_id[1][name]"> --}}
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Item</label>
-                                    <select class="form-control" id="selectdata" >
-                                        <option value="#">Select Products...</option>
-                                        <option value="United States">United States</option>
-                                        <option value="United Kingdom">United Kingdom</option>
-                                        <option value="Afghanistan">Afghanistan</option>
-                                        <option value="Aland Islands">Aland Islands</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="American Samoa">American Samoa</option>
-                                        <option value="Andorra">Andorra</option>
-                                        <option value="Angola">Angola</option>
-                                        <option value="Anguilla">Anguilla</option>
-                                        <option value="Zimbabwe">Zimbabwe</option>
-                                        </select>
+
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label for="description" class="control-label">Description</label>
-                                <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label for="quantity" class="control-label">Qty</label>
-                                <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+
                             </div>
                             <div class="col-md-2">
                                 <label for="price" class="control-label">Price</label>
-                                <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <label for="btn" class="control-label">Add Row</label>
-                                <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
-                                </button>
-                                {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
+
                             </div>
                         </div>
-                        <div id="newrow">
-                            <!-- Dynamicinput.js Use here -->
+                        <div class="" data-x-wrapper="products">
+                            <div class="m-b-10" data-x-group>
+                                <div class="row">
+                                    <div class="col-md-0">
+                                        {{-- <label for="product_id" class="control-label">ID</label> --}}
+                                        <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0">
+                                    </div>
+                                    {{-- <input type="hidden" class="form-control" id="product_id"  name="product_id[1][name]"> --}}
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+
+                                            <select class="form-control" id="selectdata" >
+                                                <option value="#">Select Products...</option>
+                                                <option value="United States">United States</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                                <option value="Afghanistan">Afghanistan</option>
+                                                <option value="Aland Islands">Aland Islands</option>
+                                                <option value="Albania">Albania</option>
+                                                <option value="Algeria">Algeria</option>
+                                                <option value="American Samoa">American Samoa</option>
+                                                <option value="Andorra">Andorra</option>
+                                                <option value="Angola">Angola</option>
+                                                <option value="Anguilla">Anguilla</option>
+                                                <option value="Zimbabwe">Zimbabwe</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                                    </div>
+                                    <div class="col-md-1">
+
+                                        <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <button type="button" class="btn btn-primary" data-add-btn>+</button>
+                                        <button type="button" class="btn btn-danger" data-remove-btn>-</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col-md-8"></div>
                             <div class="col-md-4">
@@ -272,19 +303,31 @@
                 $(".qut_title").html('QUOTE');
                 $("#quote_modal").modal('show');
 
+                // qoute number generator
                 function quote_no(N){
-                var random_string = '';
-                var numbers = '1234567890';
+                    var random_string = '';
+                    var numbers = '1234567890';
 
-                for(var i , i = 0; i < N; i++ )
-                {
-                    random_string += numbers.charAt(Math.floor(Math.random() * numbers.length))
+                    for(var i , i = 0; i < N; i++ )
+                    {
+                        random_string += numbers.charAt(Math.floor(Math.random() * numbers.length))
+                    }
+                    return random_string;
                 }
-                return random_string;
-            }
-            var date = new Date();
-            var year = date.getFullYear();
-            document.getElementById('quote_no').value = "QT" + year + "-" + quote_no(3);
+                var date = new Date();
+                var year = date.getFullYear();
+                document.getElementById('quote_no').value = "QT" + year + "-" + quote_no(3);
+
+            //New row generator
+            const selector = '[data-x-wrapper]';
+                let options = {
+                    disableNaming: '[data-disable-naming]',
+                    wrapper: selector,
+                    group: '[data-x-group]',
+                    addBtn: '[data-add-btn]',
+                    removeBtn: '[data-remove-btn]'
+                };
+                $(selector).replicate(options);
 
             });
 
@@ -295,55 +338,55 @@
             });
 
             //add new row in new div
-        var i = 0;
+        // var i = 0;
 
-        $('#add').click(function(){
-            i++;
-            $('#newrow').append(
+        // $('#add').click(function(){
+        //     i++;
+        //     $('#newrow').append(
 
-                `<div class="row">
-                    <input type="hidden" class="form-control" id="product_id"  name="product_id[`+i+`][name]">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class=" form-control" id="selectdata">
-                                <option value="#">Select Products...</option>
-                                <option value="United States">United States</option>
-                                <option value="United Kingdom">United Kingdom</option>
-                                <option value="Afghanistan">Afghanistan</option>
-                                <option value="Aland Islands">Aland Islands</option>
-                                <option value="Albania">Albania</option>
-                                <option value="Algeria">Algeria</option>
-                                <option value="American Samoa">American Samoa</option>
-                                <option value="Andorra">Andorra</option>
-                                <option value="Angola">Angola</option>
-                                <option value="Anguilla">Anguilla</option>
-                                <option value="Zimbabwe">Zimbabwe</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-                    </div>
+        //         `<div class="row">
+        //             <input type="hidden" class="form-control" id="product_id"  name="product_id[`+i+`][name]">
+        //             <div class="col-md-4">
+        //                 <div class="form-group">
+        //                     <select class=" form-control" id="selectdata">
+        //                         <option value="#">Select Products...</option>
+        //                         <option value="United States">United States</option>
+        //                         <option value="United Kingdom">United Kingdom</option>
+        //                         <option value="Afghanistan">Afghanistan</option>
+        //                         <option value="Aland Islands">Aland Islands</option>
+        //                         <option value="Albania">Albania</option>
+        //                         <option value="Algeria">Algeria</option>
+        //                         <option value="American Samoa">American Samoa</option>
+        //                         <option value="Andorra">Andorra</option>
+        //                         <option value="Angola">Angola</option>
+        //                         <option value="Anguilla">Anguilla</option>
+        //                         <option value="Zimbabwe">Zimbabwe</option>
+        //                     </select>
+        //                 </div>
+        //             </div>
+        //             <div class="col-md-3">
+        //                 <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+        //             </div>
+        //             <div class="col-md-2">
+        //                 <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+        //             </div>
 
-                    <div class="col-md-2">
-                        <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                    </div>
-                    <div class="col-md-1">
-                        <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
-                    </div>
-                </div>`
+        //             <div class="col-md-2">
+        //                 <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+        //             </div>
+        //             <div class="col-md-1">
+        //                 <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+        //             </div>
+        //         </div>`
 
-            );
-            //  console.log('Cliked');
-        });
+        //     );
+
+        // });
         //remove Row
-        $(document).on('click','#remove-row', function(){
-            $(this).parents('.row').remove();
-            // console.log('Clicked on remove')
-        });
+        // $(document).on('click','#remove-row', function(){
+        //     $(this).parents('.row').remove();
+
+        // });
 
     });
 
