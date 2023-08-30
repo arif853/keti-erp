@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('quote_items', function (Blueprint $table) {
             $table->id();
-            // $table->string('quotation')->references('quotation_no')->on('quotes');
-             $table->foreignId('quotation')->constrained();
+            $table->string('quotation')->references('quotation_no')->on('quotes');
+            //  $table->foreignId('quotation')->constrained()->onDelete('cascade');
             $table->string('items')->nullable();
             $table->string('description');
             $table->string('quantity');
