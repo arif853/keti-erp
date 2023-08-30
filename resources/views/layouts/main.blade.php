@@ -42,6 +42,7 @@
 
         <link href="{{asset('main/assets/timepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('main/css/jquery-editable-select.css')}}" rel="stylesheet" type="text/css" />
 
 
         {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
@@ -241,8 +242,12 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="calendar.html" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Users </span></a>
+                                <a href="{{('/dashboard')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Company  </span></a>
                             </li>
+                            <li>
+                                <a href="{{('/dashboard')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Users </span></a>
+                            </li>
+
 
                         </ul>
                         <div class="clearfix"></div>
@@ -287,9 +292,9 @@
                <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
+        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
 
         <script src="{{asset('main/assets/font-awesome/js/all.min.js')}}"></script>
         <script src="{{asset('main/assets/font-awesome/js/fontawesome.min.js')}}"></script>
@@ -329,7 +334,10 @@
         {{-- from validator --}}
         <script src="{{asset('main/assets/jquery.validate/jquery.validate.min.js')}}"></script>
         <script src="{{asset('main/assets/jquery.validate/form-validation-init.js')}}"></script>
+        {{-- dynamic input --}}
         <script src="{{asset('main/js/jquery.replicate.js')}}"></script>
+        {{-- select and search --}}
+        <script src="{{asset('main/js/jquery-editable-select.js')}}"></script>
 
         @stack('dashboard')
         @stack('customers')
@@ -346,6 +354,7 @@
         <script type="text/javascript">
 
             initClock();
+
             //CounterUp
             jQuery(document).ready(function() {
                 $('.counter').counterUp({
@@ -354,10 +363,6 @@
                 });
             });
             jQuery(document).ready(function() {
-                    // Date Picker
-
-                // jQuery('#datepicker-inline').datepicker();
-
                  // Select2
                 jQuery(".select2").select2({
                     width: '100%',
@@ -367,7 +372,7 @@
             $(document).ready(function() {
                 $('#datatable').dataTable();
 
-            } )
+            } );
 
             // Morris.Bar({
             //     element: 'morris-bar-example',

@@ -361,22 +361,22 @@
 
             $(".t_st").change(function() {
 
-            if($(this).val() == 2){
-                $("#vehicle").css('display', 'block');
-            }
-            else{
-                $("#vehicle").css('display', 'none');
-            }
-            if ($(this).val() == 1) {
-                $("#vehicle2").css('display', 'block');
-            } else {
-                $("#vehicle2").css('display', 'none');
-            }
+                if($(this).val() == 2){
+                    $("#vehicle").css('display', 'block');
+                }
+                else{
+                    $("#vehicle").css('display', 'none');
+                }
+                if ($(this).val() == 1) {
+                    $("#vehicle2").css('display', 'block');
+                } else {
+                    $("#vehicle2").css('display', 'none');
+                }
 
             });
 
             $('#quote_btn').on('click', function(){
-                location.href = "{{route('sales.quote')}}"
+                location.href = "{{route('quote.index')}}"
             });
             $('#order_btn').on('click', function(){
                 location.href = "{{route('sales.order')}}"

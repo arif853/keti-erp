@@ -347,7 +347,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
-                        <table id="datatable" class="table table-striped table-bordered mytable">
+                        <table id="datatable" class="table table-striped table-bordered cutomer_table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -580,6 +580,8 @@
             })
 
         });
+
+
 
     });
 

@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quotes', function (Blueprint $table) {
-            $table->id();
+
+            $table->string('quotation_no')->unique()->primary();
+            $table->string('reference');
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->string('quote_date');
+            $table->integer('total');
             $table->timestamps();
+
         });
     }
 

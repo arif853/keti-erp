@@ -69,7 +69,6 @@ class CustomerController extends Controller
     public function show(Request $request)
     {
         $customers = Customer::select('id','business_name','owner_name','man_name','man_phone','created_at')->get();
-        // if($request==ajax())
         return response()->json(['status' => 200, 'data' => $customers]);
     }
 

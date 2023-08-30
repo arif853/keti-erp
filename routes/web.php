@@ -46,7 +46,10 @@ Route::get('/sales/salesquotes/invoice', function () {
 Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
 
 // sales
-Route::get('/sales/quote',[QuotesController::class, 'index'])->middleware('auth')->name('sales.quote');
+Route::get('/sales/quote',[QuotesController::class, 'index'])->middleware('auth')->name('quote.index');
+Route::post('/sales/quote/store',[QuotesController::class, 'store'])->middleware('auth')->name('quote.store');
+Route::get('/sales/quote/datatable',[QuotesController::class, 'datatable'])->middleware('auth')->name('quote.data_table');
+
 Route::get('/sales/order',[OrderController::class, 'index'])->middleware('auth')->name('sales.order');
 
 

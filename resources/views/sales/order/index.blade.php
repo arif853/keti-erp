@@ -26,7 +26,7 @@
                                 <div class="left">
                                     <button id="order_btn" class="btn btn-success " >New order</button>
                                     <a href="#" class="btn btn-warning">Pending order</a>
-                                    <a href="#" class="btn btn-danger">Delete order</a>
+                                    {{-- <a href="#" class="btn btn-danger">Delete order</a> --}}
                                 </div>
                                 <div class="right">
                                     <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
@@ -111,16 +111,15 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Item*</label>
-                                    <select class="form-control" id="selectdata"  required>
+                                    <select class="form-control" id="select_product"  required>
                                         <option value="#">Select Product...</option>
                                         <option value="United States">United States</option>
+                                        <option value="United States">Bangladesh</option>
+                                        <option value="United States">Africa</option>
                                     </select>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-3">
-                                <label for="description" class="control-label">Description</label>
-                                <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-                            </div> --}}
+
                             <div class="col-md-2">
                                 <label for="quantity" class="control-label">Qty*</label>
                                 <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
@@ -284,9 +283,11 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <select class=" form-control select2" id="selectdata" data-placeholder="Choose a Country...">
-                                    <option value="#">&nbsp;</option>
+                                <select class="form-control" id="select_product"  required>
+                                    <option value="#">Select Product...</option>
                                     <option value="United States">United States</option>
+                                    <option value="United States">Bangladesh</option>
+                                    <option value="United States">Africa</option>
                                 </select>
                             </div>
                         </div>
@@ -333,6 +334,17 @@
             var date = new Date();
             var year = date.getFullYear();
             document.getElementById('order_no').value = "ORD" + year + "-" + order_no(3);
+            });
+
+            $('#select_product').editableSelect({
+                // enable filter
+                filter: true,
+
+                // default, fade or slide
+                effects: 'default',
+
+                // fast, slow or [0-9]+
+                duration: 'fast',
             });
 
         });

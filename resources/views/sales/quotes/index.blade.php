@@ -25,8 +25,8 @@
                             <div class="d-flex justify-content-between">
                                 <div class="left">
                                     <button  class="btn btn-success " id="quote_btn">New Quote</button>
-                                    <button  class="btn btn-warning">Modify Quote</button>
-                                    <button class="btn btn-danger">Delete Quote</button>
+                                    {{-- <button  class="btn btn-warning">Modify Quote</button>
+                                    <button class="btn btn-danger">Delete Quote</button> --}}
                                 </div>
                                 <div class="right">
                                     <a href="{{route('sales.index')}}" class="btn btn-danger ">Back</a>
@@ -54,6 +54,7 @@
     </div>
     <!-- End Row -->
 
+    {{--Add Quote modal  --}}
     <div id="quote_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl" style="width:60%;">
             <div class="modal-content">
@@ -62,23 +63,24 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('admin.dashboard')}}" method="POST" id="quote_form">
+                    <form id="quote_form">
+                        @csrf
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="" >
                                     <label for="datepicker" class="control-label">Date</label>
-                                    <input type="text" class="form-control" placeholder="yyyy/mm/dd" id="datepicker">
+                                    <input type="text" class="form-control" name="date" placeholder="yyyy-mm-dd" id="datepicker" required>
                                     {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
                                 </div><!-- input-group -->
                             </div>
                             <div class="col-md-6"></div>
                             <div class="col-md-2">
                                 <label for="reference" class="control-label">Reference</label>
-                                <input type="text" class="form-control" placeholder="Reference" id="reference">
+                                <input type="text" class="form-control" placeholder="Reference" id="reference" name="reference" required>
                             </div>
                             <div class="col-md-2">
                                 <label for="quote_no" class="control-label">Quote No.</label>
-                                <input type="text" class="form-control" placeholder="QT123456" id="quote_no" @readonly(true)>
+                                <input type="text" class="form-control" placeholder="QT123456" id="quote_no" name="quote_no" @readonly(true)>
                             </div>
                         </div>
                         <br>
@@ -86,21 +88,26 @@
                             <div class="col-md-0">
                                 <div class="form-group">
                                     {{-- <label for="customar_id" class="control-label">ID</label> --}}
-                                    <input type="hidden" class="form-control" id="customar_id" placeholder="Id" name="customer_id">
+                                    {{-- <input type="hidden" class="form-control" id="quote_id" name="quote_id"> --}}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="selectdata" class="control-label">Customer Name</label>
-                                    <select class="select2" id="selectdata" data-placeholder="Choose a Country...">
-                                        <option value="#">Select Customer....</option>
+                                    <select class="select2 customer" id="selectdata" name="customer" required>
+                                        <option value="0">Select Customer....</option>
                                         @foreach ($customer as $data)
-                                        <option value="{{$data->id}}">{{$data->business_name}} <span>----->{{$data->phone}}</span></option>
+                                        <option value="{{$data->id}}">{{$data->business_name}} </option>
                                         @endforeach
-
                                       </select>
                                 </div>
                             </div>
+                            {{-- <div class="col-lg-3">
+                                <div id="phone" style="display: none">
+                                    <label for="phone" class="control-label">Number:</label>
+                                    <input type="text" class="form-control" id="phone"  name="phone" >
+                                </div>
+                            </div> --}}
                         </div>
                         <hr>
                         <div class="row">
@@ -137,26 +144,18 @@
                                 <div class="row">
                                     <div class="col-md-0">
                                         {{-- <label for="product_id" class="control-label">ID</label> --}}
-                                        <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0">
+                                        {{-- <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0"> --}}
                                     </div>
                                     {{-- <input type="hidden" class="form-control" id="product_id"  name="product_id[1][name]"> --}}
                                     <div class="col-md-4">
                                         <div class="form-group">
-
-                                            <select class="form-control" id="selectdata" >
+                                            <select class="form-control" id="select_product" name="item" required>
                                                 <option value="#">Select Products...</option>
-                                                <option value="United States">United States</option>
-                                                <option value="United Kingdom">United Kingdom</option>
-                                                <option value="Afghanistan">Afghanistan</option>
-                                                <option value="Aland Islands">Aland Islands</option>
-                                                <option value="Albania">Albania</option>
-                                                <option value="Algeria">Algeria</option>
-                                                <option value="American Samoa">American Samoa</option>
-                                                <option value="Andorra">Andorra</option>
-                                                <option value="Angola">Angola</option>
-                                                <option value="Anguilla">Anguilla</option>
-                                                <option value="Zimbabwe">Zimbabwe</option>
-                                                </select>
+                                                <option value="1">United States</option>
+                                                <option value="2">United States</option>
+                                                <option value="3">United States</option>
+                                                <option value="4">United States</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -165,11 +164,11 @@
                                     </div>
                                     <div class="col-md-1">
 
-                                        <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
+                                        <input type="number" class="form-control" id="quantity" onkeyup="calculateTotal()" placeholder="Qty" name="quantity" min="0" value="0">
                                     </div>
                                     <div class="col-md-2">
 
-                                        <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                        <input type="number" class="form-control" id="price" onkeyup="calculateTotal()" placeholder="Price" name="price" min="0" value="0">
                                     </div>
                                     <div class="col-md-2">
 
@@ -180,41 +179,16 @@
                             </div>
                         </div>
 
-
                         <div class="row">
                             <div class="col-md-8"></div>
                             <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="text-right " style="padding-top: 7px;">Subtotal :</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" value="" placeholder="Subtotal" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="text-right " style="padding-top: 10px;">Total Discount :</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" value="" placeholder="Discount" class="form-control sub-mt">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="text-right " style="padding-top: 10px;">VAT :</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" value="" placeholder="Vat" class="form-control sub-mt">
-                                    </div>
-                                </div>
-                                <hr>
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="text-right " style="padding-top: 10px;">Total :</p>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" value="" placeholder="Total" class="form-control sub-mt">
+                                        <input type="text" value="" placeholder="Total" class="form-control sub-mt" name="total" id="total">
                                     </div>
                                 </div>
                             </div>
@@ -252,24 +226,12 @@
                                         <th>Quote Date</th>
                                         <th>Customer Name</th>
                                         <th>Manage</th>
-                                        {{-- <th>Salary</th> --}}
                                     </tr>
                                 </thead>
 
 
                                 <tbody>
-                                    <tr>
-                                        <td>QT2023-420</td>
-                                        <td>2011/04/25</td>
-                                        <td>System Architect</td>
-                                        <td>
-                                            <a href="#" class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
-                                            <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
-                                            <a href="{{('/sales/salesquotes/invoice')}}" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
 
-                                        </td>
-                                        {{-- <td>$320,800</td> --}}
-                                    </tr>
                                 </tbody>
                             </table>
 
@@ -302,6 +264,7 @@
 
             //quotation modal and quotation no
             $(document).on('click','#quote_btn', function(){
+
                 $('#quote_form').trigger('reset');
                 $(".qut_title").html('QUOTE');
                 $("#quote_modal").modal('show');
@@ -333,60 +296,107 @@
                 $(selector).replicate(options);
 
             });
+            //DataTable Data view
+            var table = $('#datatable').DataTable({
+                        ajax: {
+                url: '/sales/quote/datatable',
+                dataSrc: 'data'
 
+            },
+            columns: [
+                {
+                    "data": "quotation_no"
+                },
+                {
+                    "data": "quote_date"
+                },
+                {
+                    "data": "business_name"
+                },
+                // {
+                //     "data": null,
 
-            //add new row in new div
-        // var i = 0;
+                //     render: function (data, type, row) {
+                //         var times = data.created_at.substring(0, 10);
+                //         return times
+                //     }
+                // },
+                {
+                    "data": null,
 
-        // $('#add').click(function(){
-        //     i++;
-        //     $('#newrow').append(
+                    render: function (data, type, row) {
+                        //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
+                        return '<button id="edit_customer" value="' + row.id +
+                            '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
+                            '<button id="delete_customer" value="' + row.id +
+                            '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
+                            '<a  id="view_customer" href="{{('/ledger/customer/customerview/')}}'+ row.id +'" value="' + row.id +
+                            '" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>';
 
-        //         `<div class="row">
-        //             <input type="hidden" class="form-control" id="product_id"  name="product_id[`+i+`][name]">
-        //             <div class="col-md-4">
-        //                 <div class="form-group">
-        //                     <select class=" form-control" id="selectdata">
-        //                         <option value="#">Select Products...</option>
-        //                         <option value="United States">United States</option>
-        //                         <option value="United Kingdom">United Kingdom</option>
-        //                         <option value="Afghanistan">Afghanistan</option>
-        //                         <option value="Aland Islands">Aland Islands</option>
-        //                         <option value="Albania">Albania</option>
-        //                         <option value="Algeria">Algeria</option>
-        //                         <option value="American Samoa">American Samoa</option>
-        //                         <option value="Andorra">Andorra</option>
-        //                         <option value="Angola">Angola</option>
-        //                         <option value="Anguilla">Anguilla</option>
-        //                         <option value="Zimbabwe">Zimbabwe</option>
-        //                     </select>
-        //                 </div>
-        //             </div>
-        //             <div class="col-md-3">
-        //                 <input type="text" class="form-control" id="description" placeholder="Description" name="description">
-        //             </div>
-        //             <div class="col-md-2">
-        //                 <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0">
-        //             </div>
+                    }
+                },
+            ]
+        });
 
-        //             <div class="col-md-2">
-        //                 <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-        //             </div>
-        //             <div class="col-md-1">
-        //                 <button type="button" class="btn btn-danger" id="remove-row"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
-        //             </div>
-        //         </div>`
+          //Add New Quote
+          $("#quote_form").submit(function(e){
+                e.preventDefault();
+                const data = new FormData(this);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                $.ajax({
+                    url: '{{route('quote.store')}}',
+                    method: 'post',
+                    data : data,
+                    cache : false,
+                    processData: false,
+                    contentType: false,
+                    success:function(response){
+                        if(response.status == 200){
+                            $('#quote_modal').modal('hide');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                            table.ajax.reload();
+                        }
+                        else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            })
+                        }
+                    }
+                })
+            });
 
-        //     );
+            // $('#select_product').editableSelect({
+            //     // enable filter
+            //     filter: true,
 
-        // });
-        //remove Row
-        // $(document).on('click','#remove-row', function(){
-        //     $(this).parents('.row').remove();
+            //     // default, fade or slide
+            //     effects: 'default',
 
-        // });
+            //     // fast, slow or [0-9]+
+            //     duration: 'fast',
+            // });
+
 
     });
+    function calculateTotal(){
 
+        var qty = document.getElementById('quantity').value;
+        var price = document.getElementById('price').value;
+
+        sum = qty * price;
+        document.getElementById('total').value = sum;
+    };
     </script>
 @endpush

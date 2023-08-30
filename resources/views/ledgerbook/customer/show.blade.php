@@ -147,7 +147,7 @@
                                 <tr>
                                     <td>INV2023-501</td>
                                     <td>23-08-2023</td>
-                                    <td>Challan</td>
+                                    <td>Invoice</td>
                                     <td>100000</td>
                                     <td>50000</td>
                                     <td>50000</td>
