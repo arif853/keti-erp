@@ -379,7 +379,7 @@
                 location.href = "{{route('quote.index')}}"
             });
             $('#order_btn').on('click', function(){
-                location.href = "{{route('sales.order')}}"
+                location.href = "{{route('order.index')}}"
             });
 
         });

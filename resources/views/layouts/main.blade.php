@@ -229,7 +229,7 @@
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-collection-bookmark"></i><span> Ledger Book </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{('/ledger/customer')}}">Customer</a></li>
-                                    <li><a href="{{route('ledger.supplier')}}">Supplier</a></li>
+                                    <li><a href="{{route('supplier.index')}}">Supplier</a></li>
                                 </ul>
                             </li>
 
