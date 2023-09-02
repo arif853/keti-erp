@@ -47,10 +47,11 @@ Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->
 
 // sales
 Route::controller(QuotesController::class)->middleware('auth')->group(function () {
-    Route::get('/sales/quote',[QuotesController::class, 'index'])->name('quote.index');
-    Route::post('/sales/quote/store',[QuotesController::class, 'store'])->name('quote.store');
-    Route::get('/sales/quote/datatable',[QuotesController::class, 'datatable'])->name('quote.datatable');
-    Route::get('/sales/quote/show/{quotation_no}',[QuotesController::class, 'show'])->name('quote.show');
+    Route::get('/sales/quote','index')->name('quote.index');
+    Route::post('/sales/quote/store','store')->name('quote.store');
+    Route::get('/sales/quote/datatable','datatable')->name('quote.datatable');
+    Route::get('/sales/quote/show/{quotation_no}','show')->name('quote.show');
+    Route::get('/sales/quote/edit','edit')->name('quote.edit');
     // Route::get('/sales/quote/view',[QuotesController::class, 'view'])->middleware('auth')->name('quote.view');
 });
 

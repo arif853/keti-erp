@@ -209,42 +209,197 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    {{-- DataTable Start --}}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Sales Quotes Table</h3>
-                </div>
-                <div class="panel-body">
+
+ {{--Add Quote modal  --}}
+ <div id="quote_edit_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl" style="width:60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title qut_title" id="custom-width-modalLabel"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="quote_edit_form">
+                    @csrf
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <table id="datatable" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Quote No.</th>
-                                        <th>Quote Date</th>
-                                        <th>Customer Name</th>
-                                        <th>Manage</th>
-                                    </tr>
-                                </thead>
+                        <div class="col-md-2">
+                            <div class="" >
+                                <label for="datepicker" class="control-label">Date</label>
+                                <input type="text" class="form-control" name="date" placeholder="yyyy-mm-dd" id="datepicker" required>
+                                {{-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> --}}
+                            </div><!-- input-group -->
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-2">
+                            <label for="reference" class="control-label">Reference</label>
+                            <input type="text" class="form-control" placeholder="Reference" id="reference" name="reference" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="quote_no" class="control-label">Quote No.</label>
+                            <input type="text" class="form-control" placeholder="QT123456" id="quote_no" name="quote_no" @readonly(true)>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-0">
+                            <div class="form-group">
+                                {{-- <label for="customar_id" class="control-label">ID</label> --}}
+                                {{-- <input type="hidden" class="form-control" id="quote_id" name="quote_id"> --}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selectdata" class="control-label">Customer Name</label>
+                                <select class="select2 customer" id="selectdata" name="customer" required>
+                                    <option value="0">Select Customer....</option>
+                                    @foreach ($customer as $data)
+                                    <option value="{{$data->id}}">{{$data->business_name}} </option>
+                                    @endforeach
+                                  </select>
+                            </div>
+                        </div>
+                        {{-- <div class="col-lg-3">
+                            <div id="phone" style="display: none">
+                                <label for="phone" class="control-label">Number:</label>
+                                <input type="text" class="form-control" id="phone"  name="phone" >
+                            </div>
+                        </div> --}}
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-0">
+                            {{-- <label for="product_id" class="control-label">ID</label> --}}
+                            {{-- <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0"> --}}
+                        </div>
 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="selectdata" class="control-label">Item</label>
 
-                                <tbody>
-
-                                </tbody>
-                            </table>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="description" class="control-label">Description</label>
 
                         </div>
+                        <div class="col-md-1">
+                            <label for="quantity" class="control-label">Qty</label>
+
+                        </div>
+                        <div class="col-md-2">
+                            <label for="price" class="control-label">Price</label>
+
+                        </div>
+                        <div class="col-md-2">
+                            <label for="btn" class="control-label">Add Row</label>
+
+                        </div>
+                    </div>
+                    <div class="" data-x-wrapper="quote">
+                        <div class="m-b-10" data-x-group>
+                            <div class="row">
+                                <div class="col-md-0">
+                                    {{-- <label for="product_id" class="control-label">ID</label> --}}
+                                    {{-- <input type="hidden" class="form-control" id="product_id" placeholder="Id" name="product_id[0][name]" value="0"> --}}
+                                </div>
+                                {{-- <input type="hidden" class="form-control" id="product_id"  name="product_id[1][name]"> --}}
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select class="form-control" id="select_product[0]" name="item" required>
+                                            <option value="#">Select Products...</option>
+                                            <option value="1">United States</option>
+                                            <option value="2">United States</option>
+                                            <option value="3">United States</option>
+                                            <option value="4">United States</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                                </div>
+                                <div class="col-md-1">
+
+                                    <input type="number" class="form-control" id="quantity" onkeyup="calculateTotal()" placeholder="Qty" name="quantity" min="0" value="0">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <input type="number" class="form-control" id="price" onkeyup="calculateTotal()" placeholder="Price" name="price" min="0" value="0">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <button type="button" class="btn btn-primary" data-add-btn>+</button>
+                                    <button type="button" class="btn btn-danger" data-remove-btn>-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="text-right " style="padding-top: 10px;">Total :</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="" placeholder="Total" class="form-control sub-mt" name="total" id="total">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit</button>
+                            {{-- <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i>                                </button> --}}
+                            <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit & print</button>
+                            <button type="button" class="btn btn-default btn-custom waves-effect" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    {{-- DataTable Start --}}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Sales Quotes Table</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Quote No.</th>
+                                    <th>Quote Date</th>
+                                    <th>Customer Name</th>
+                                    <th>Manage</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- End Row -->
+    </div>
+</div> <!-- End Row -->
 
 @endsection
 @push('quote')
-
     <script>
         $(document).ready(function(){
 
@@ -302,43 +457,43 @@
                 url: '/sales/quote/datatable',
                 dataSrc: 'data'
 
-            },
-            columns: [
-                {
-                    "data": "quotation_no"
                 },
-                {
-                    "data": "quote_date"
-                },
-                {
-                    "data": "business_name"
-                },
-                // {
-                //     "data": null,
+                columns: [
+                    {
+                        "data": "quotation_no"
+                    },
+                    {
+                        "data": "quote_date"
+                    },
+                    {
+                        "data": "business_name"
+                    },
+                    // {
+                    //     "data": null,
 
-                //     render: function (data, type, row) {
-                //         var times = data.created_at.substring(0, 10);
-                //         return times
-                //     }
-                // },
-                {
-                    "data": null,
+                    //     render: function (data, type, row) {
+                    //         var times = data.created_at.substring(0, 10);
+                    //         return times
+                    //     }
+                    // },
+                    {
+                        "data": null,
 
-                    render: function (data, type, row) {
-                        //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
-                        return '<button id="edit_quote" value="' + row.quotation_no +
-                            '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
-                            '<button id="delete_quote" value="' + row.quotation_no +
-                            '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
-                            '<a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.quotation_no +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>';
-                            //href="{{('/sales/quote/show/')}}'+ row.quotation_no +'"
-                    }
-                },
-            ]
-        });
+                        render: function (data, type, row) {
+                            //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
+                            return '<button id="edit_quote" value="' + row.quotation_no +
+                                '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
+                                '<button id="delete_quote" value="' + row.quotation_no +
+                                '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
+                                '<a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.quotation_no +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>';
+                                //href="{{('/sales/quote/show/')}}'+ row.quotation_no +'"
+                        }
+                    },
+                ]
+            });
 
           //Add New Quote
-          $("#quote_form").submit(function(e){
+            $("#quote_form").submit(function(e){
                 e.preventDefault();
                 const data = new FormData(this);
                 $.ajaxSetup({
@@ -376,26 +531,52 @@
                 })
             });
 
-            // $('#select_product').editableSelect({
-            //     // enable filter
-            //     filter: true,
+            //Quote editform modal
+            $(document).on('click', '#edit_quote', function (e) {
+                e.preventDefault();
+                let id = $(this).val();
+                // console.log(id)
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{route('quote.edit')}}',
+                    method: 'GET',
+                    data: {
+                        id: id,
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        // for(var key in response){
+                        //     // $("#reference").val(response.reference);
+                        //     console.log(response[key].items)
+                        // }
+                        Object.entries(response).forEach((en) => {
+                            const [key, value] = en;
+                            console.log(`${key}: ${value}`);
+                        });
+                        // for (const key in response){
+                        //     if(quotation_no.hasOwnProperty(key)){
+                        //         console.log(`${key} : ${response[key]}`)
+                        //     }
+                        // }
 
-            //     // default, fade or slide
-            //     effects: 'default',
-
-            //     // fast, slow or [0-9]+
-            //     duration: 'fast',
-            // });
+                        $("#quote_edit_modal").modal('show');
+                    }
+                });
+            });
 
 
-    });
-    function calculateTotal(){
+        });
+        function calculateTotal(){
 
-        var qty = document.getElementById('quantity').value;
-        var price = document.getElementById('price').value;
+            var qty = document.getElementById('quantity').value;
+            var price = document.getElementById('price').value;
 
-        sum = qty * price;
-        document.getElementById('total').value = sum;
-    };
+            sum = qty * price;
+            document.getElementById('total').value = sum;
+        };
     </script>
 @endpush
