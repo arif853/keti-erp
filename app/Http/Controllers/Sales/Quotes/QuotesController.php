@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Sales\Quotes;
 
+use Log;
 use App\Models\Quote;
 use App\Models\Customer;
 use App\Models\QuoteItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Log;
+use Illuminate\Database\Query\JoinClause;
 
 class QuotesController extends Controller
 {
@@ -60,22 +61,32 @@ class QuotesController extends Controller
 
     public function datatable()
     {
-        // $quoteData = Quote::select('quotation_no','quote_date','customer_id')->get();
         $quoteData = Quote::join('customers','quotes.customer_id', '=','customers.id')
         ->select('customers.business_name as business_name','quotes.quotation_no','quotes.quote_date','quotes.customer_id')
         ->get();
-        // log::info($quoteData);
-
         return response()->json(['status' => 200, 'data' => $quoteData]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(quote $quote)
+    public function show(Request $request)
     {
-        //
+        $q_no = $request->quotation_no;
+
+        $quotation = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
+                ->join('customers','quotes.customer_id', '=','customers.id')
+                ->select('quotes.*','quote_items.*','customers.business_name','customers.del_address','customers.phone','customers.phone2','customers.email')
+                ->where('quote_items.quotation', '=', $q_no)
+                ->get();
+
+       return view('sales.quotes.invoices',compact('quotation'));
     }
+
+    // public function view(){
+
+    //     return view('sales.quotes.invoice');
+    // }
 
     /**
      * Show the form for editing the specified resource.

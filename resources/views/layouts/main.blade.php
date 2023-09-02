@@ -348,6 +348,7 @@
         @stack('accountgroup')
         @stack('items')
         @stack('store')
+        @stack('quote.voice')
 
 
 

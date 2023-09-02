@@ -96,7 +96,9 @@
             var resizefunc = [];
         </script>
     	<script src="{{asset('main/js/jquery.min.js')}}"></script>
-        <script src="{{asset('main/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('main/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('main/js/wow.min.js')}}"></script>
+        <script src="{{asset('main/assets/fastclick/fastclick.js')}}"></script>
 
         <!-- CUSTOM JS -->
         <script src="{{asset('main/js/jquery.app.js')}}"></script>

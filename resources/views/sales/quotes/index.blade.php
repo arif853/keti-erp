@@ -326,13 +326,12 @@
 
                     render: function (data, type, row) {
                         //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
-                        return '<button id="edit_customer" value="' + row.id +
+                        return '<button id="edit_quote" value="' + row.quotation_no +
                             '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
-                            '<button id="delete_customer" value="' + row.id +
+                            '<button id="delete_quote" value="' + row.quotation_no +
                             '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
-                            '<a  id="view_customer" href="{{('/ledger/customer/customerview/')}}'+ row.id +'" value="' + row.id +
-                            '" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>';
-
+                            '<a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.quotation_no +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>';
+                            //href="{{('/sales/quote/show/')}}'+ row.quotation_no +'"
                     }
                 },
             ]
