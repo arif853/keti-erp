@@ -39,15 +39,29 @@ class QuotesController extends Controller
      */
     public function show(quote $quote)
     {
-        //
+        $q_no = $request->quotation_no;
+
+        $quotation = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
+                ->join('customers','quotes.customer_id', '=','customers.id')
+                ->select('quotes.*','quote_items.*','customers.business_name','customers.del_address','customers.phone','customers.phone2','customers.email')
+                ->where('quote_items.quotation', '=', $q_no)
+                ->get();
+
+       return view('sales.quotes.invoices',compact('quotation'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(quote $quote)
+    public function edit(Request $request)
     {
-        //
+        $q_no = $request->id;
+        $quoteData = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
+                ->join('customers','quotes.customer_id', '=','customers.id')
+                ->select('quotes.*','quote_items.*','customers.business_name')
+                ->where('quote_items.quotation', '=', $q_no)
+                ->get();
+        return response()->json(['status' => 200, 'data' => $quoteData]);
     }
 
     /**

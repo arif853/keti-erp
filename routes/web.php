@@ -44,8 +44,18 @@ Route::get('/sales/salesquotes/invoice', function () {
 Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->name('admin.dashboard');
 
 // sales
-Route::get('/sales/quote',[QuotesController::class, 'index'])->middleware('auth')->name('sales.quote');
-Route::get('/sales/order',[OrderController::class, 'index'])->middleware('auth')->name('sales.order');
+Route::controller(QuotesController::class)->middleware('auth')->group(function () {
+    Route::get('/sales/quote',[QuotesController::class, 'index'])->name('quote.index');
+    Route::post('/sales/quote/store',[QuotesController::class, 'store'])->name('quote.store');
+    Route::get('/sales/quote/datatable',[QuotesController::class, 'datatable'])->name('quote.datatable');
+    Route::get('/sales/quote/show/{quotation_no}',[QuotesController::class, 'show'])->name('quote.show');
+    // Route::get('/sales/quote/view',[QuotesController::class, 'view'])->middleware('auth')->name('quote.view');
+});
+
+Route::controller(OrderController::class)->middleware('auth')->group(function () {
+    Route::get('/sales/order',[OrderController::class, 'index'])->name('order.index');
+
+});
 
 
 //sales invoice
