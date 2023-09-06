@@ -13,6 +13,7 @@
         this.$productform = $("#product_form"); //this could be any form, for example we are specifying the comment form
         this.$issueproduct = $("#product_issue_form");
         this.$storeform = $("#store_form");
+        this.$quoteForm = $("#quote_form");
     };
 
     //init
@@ -27,6 +28,7 @@
         this.$productform.validate();
         this.$issueproduct.validate();
         this.$storeform.validate();
+        this.$quoteForm.validate();
 
         // validate signup form on keyup and submit
         this.$customerform.validate({

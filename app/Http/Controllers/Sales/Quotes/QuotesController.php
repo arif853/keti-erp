@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Sales\Quotes;
 
 use Log;
+use App\Models\items;
 use App\Models\Quote;
 use App\Models\Customer;
 use App\Models\QuoteItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\JoinClause;
 
@@ -19,7 +19,8 @@ class QuotesController extends Controller
     public function index()
     {
         $customer = Customer::all();
-        return view('sales.quotes.index',compact('customer'));
+        $quoteCount = Quote::all();
+        return view('sales.quotes.index',compact('customer','quoteCount'));
     }
 
     /**
@@ -33,9 +34,12 @@ class QuotesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Quote $quote)
     {
+        if($quote->quotation_no != $request->quote_no){
+
             $quotes = new Quote;
+
             $quotes->quotation_no= $request->quote_no;
             $quotes->reference = $request->reference;
             $quotes->customer_id= $request->customer;
@@ -55,8 +59,12 @@ class QuotesController extends Controller
             }
             QuoteItem::insert($quotedata);
 
-
         return response()->json(['status' => 200, 'message' => "New Quote Added Successfully!"]);
+
+        }else{
+            return response()->json(['status' => 400, 'message' => "Quote Existed!"]);
+        }
+
     }
 
     public function datatable()
@@ -95,10 +103,13 @@ class QuotesController extends Controller
         $q_no = $request->id;
         $quoteData = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
                 ->join('customers','quotes.customer_id', '=','customers.id')
-                ->select('quotes.*','quote_items.*','customers.business_name')
+                ->select('quotes.*','quote_items.*','customers.id','customers.business_name')
                 ->where('quote_items.quotation', '=', $q_no)
                 ->get();
-        return response()->json(['status' => 200, 'data' => $quoteData]);
+                // log::info($quoteData);
+        return response()->json(['status' => 200,
+        'data' => $quoteData
+    ]);
     }
 
     /**
@@ -112,8 +123,19 @@ class QuotesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(quote $quote)
+    public function destroy(Request $request, QuoteItem $quoteitem)
     {
-        //
+        $quoteId = $request->id;
+
+        if($quoteitem->quotation == $quoteId){
+            $quotation = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
+                ->where('quote_items.quotation', '=', $quoteId)
+                ->delete();
+        }
+        else{
+            $quotation = Quote::where('quotation_no', '=', $quoteId)
+            ->delete();
+        }
+
     }
 }

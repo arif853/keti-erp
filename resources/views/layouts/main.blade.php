@@ -38,7 +38,7 @@
         <!-- DataTables -->
         <link href="{{asset('main/assets/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
         <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}">
+        {{-- <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}"> --}}
 
         <link href="{{asset('main/assets/timepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
@@ -303,6 +303,7 @@
 
         <!-- Live Search  -->
         <script src="{{asset('main/assets/fastclick/fastclick.js')}}"></script>
+
         <script src="{{asset('main/assets/jquery-detectmobile/detect.js')}}"></script>
 
         {{-- <script src="{{asset('main/js/jquery.nicescroll.js')}}" type="text/javascript"></script> --}}

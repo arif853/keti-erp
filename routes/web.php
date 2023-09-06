@@ -52,6 +52,7 @@ Route::controller(QuotesController::class)->middleware('auth')->group(function (
     Route::get('/sales/quote/datatable','datatable')->name('quote.datatable');
     Route::get('/sales/quote/show/{quotation_no}','show')->name('quote.show');
     Route::get('/sales/quote/edit','edit')->name('quote.edit');
+    Route::delete('/sales/quote/destroy','destroy')->name('quote.destroy');
     // Route::get('/sales/quote/view',[QuotesController::class, 'view'])->middleware('auth')->name('quote.view');
 });
 
