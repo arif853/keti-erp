@@ -131,8 +131,8 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-md-8"></div>
-                        <div class="col-md-4">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
                             <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light">Submit</button>
                             <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i></button>
                             <button type="submit" class="btn btn-primary btn-custom waves-effect waves-light print">Submit & print</button>

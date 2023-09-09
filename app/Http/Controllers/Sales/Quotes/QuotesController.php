@@ -38,6 +38,13 @@ class QuotesController extends Controller
     {
         if($quote->quotation_no != $request->quote_no){
 
+            $quotes = new Quote;
+            $quotes->quotation_no= $request->quote_no;
+            $quotes->reference = $request->reference;
+            $quotes->customer_id= $request->customer;
+            $quotes->quote_date= $request->date;
+            $quotes->total= $request->FTotal;
+            $quotes->save();
 
             $quotedata = [];
             for($x = 0; $x <count($request->quote); $x++){
@@ -49,14 +56,6 @@ class QuotesController extends Controller
                     'price' => $request->quote[$x]['price'],
                 ];
             }
-
-            $quotes = new Quote;
-            $quotes->quotation_no= $request->quote_no;
-            $quotes->reference = $request->reference;
-            $quotes->customer_id= $request->customer;
-            $quotes->quote_date= $request->date;
-            $quotes->total= $request->total;
-            $quotes->save();
 
             QuoteItem::insert($quotedata);
 
