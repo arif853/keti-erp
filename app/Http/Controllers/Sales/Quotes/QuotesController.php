@@ -38,14 +38,6 @@ class QuotesController extends Controller
     {
         if($quote->quotation_no != $request->quote_no){
 
-            $quotes = new Quote;
-
-            $quotes->quotation_no= $request->quote_no;
-            $quotes->reference = $request->reference;
-            $quotes->customer_id= $request->customer;
-            $quotes->quote_date= $request->date;
-            $quotes->total= $request->total;
-            $quotes->save();
 
             $quotedata = [];
             for($x = 0; $x <count($request->quote); $x++){
@@ -57,6 +49,15 @@ class QuotesController extends Controller
                     'price' => $request->quote[$x]['price'],
                 ];
             }
+
+            $quotes = new Quote;
+            $quotes->quotation_no= $request->quote_no;
+            $quotes->reference = $request->reference;
+            $quotes->customer_id= $request->customer;
+            $quotes->quote_date= $request->date;
+            $quotes->total= $request->total;
+            $quotes->save();
+
             QuoteItem::insert($quotedata);
 
         return response()->json(['status' => 200, 'message' => "New Quote Added Successfully!"]);
@@ -103,13 +104,13 @@ class QuotesController extends Controller
         $q_no = $request->id;
         $quoteData = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
                 ->join('customers','quotes.customer_id', '=','customers.id')
-                ->select('quotes.*','quote_items.*','customers.id','customers.business_name')
+                ->select('quotes.*','quote_items.*','customers.id as id','customers.business_name')
                 ->where('quote_items.quotation', '=', $q_no)
                 ->get();
                 // log::info($quoteData);
+                $cid = Quote::select('Customer_id')->where('quotation_no','=',$q_no)->get();
         return response()->json(['status' => 200,
-        'data' => $quoteData
-    ]);
+        'data' => $quoteData]);
     }
 
     /**

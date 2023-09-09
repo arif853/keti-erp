@@ -192,7 +192,6 @@
 {{-- Edit Customer Modal End --}}
 
 {{-- Add Customer Modal Start --}}
-<div id="success_message"></div>
 <div id="cus-modal-form" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-xl">
