@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="col-md-1">
-                                <label for="btn" class="control-label">Add Row</label>
+                                <label for="btn" class="control-label">Add</label>
                                 <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
                                 </button>
                                 {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
