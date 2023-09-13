@@ -57,7 +57,9 @@ Route::controller(QuotesController::class)->middleware('auth')->group(function (
 });
 
 Route::controller(OrderController::class)->middleware('auth')->group(function () {
-    Route::get('/sales/order',[OrderController::class, 'index'])->name('order.index');
+    Route::get('/sales/order', 'index')->name('order.index');
+    Route::post('/sales/order/store','store')->name('order.store');
+    Route::post('/sales/order/datatable','datatable')->name('order.datatable');
 
 });
 

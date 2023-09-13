@@ -46,7 +46,7 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <label for="selectdata" class="control-label">Item*</label>
                         </div>
                         <div class="col-lg-2">
@@ -58,44 +58,46 @@
                         <div class="col-lg-2">
                             <label for="price" class="control-label">Price</label>
                         </div>
-                        <div class="col-lg-1">
-                            <button type="button" class="btn btn-success btn-custom" onclick="BtnAdd()"><i class="fa fa-plus-square" aria-hidden="true"></i>
-                            </button>
-                            {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
+                        <div class="col-lg-2">
+                            <label for="btn" class="control-label">Add Row</label>
                         </div>
                     </div>
-                    <div class="row d-none" id="TRow">
-                        <div class="oder_id">
-                            {{-- <label for="product-id" class="control-label">ID</label> --}}
-                            <input type="hidden" class="form-control" id="product_id" value="0" name="product_id[0][name]" >
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <select class="form-control"   >
-                                    <option value="#">Select Product...</option>
-                                    <option value="United States">United States</option>
-                                    <option value="United States">Bangladesh</option>
-                                    <option value="United States">Africa</option>
-                                </select>
+                    <div class="" data-x-wrapper="quote">
+                        <div class="m-b-10" data-x-group>
+                            <div class="row" >
+                                <div class="oder_id">
+                                    {{-- <label for="product-id" class="control-label">ID</label> --}}
+                                    <input type="hidden" class="form-control" id="product_id" value="0" name="product_id[0][name]" >
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select class="form-control"   >
+                                            <option value="#">Select Product...</option>
+                                            <option value="United States">United States</option>
+                                            <option value="United States">Bangladesh</option>
+                                            <option value="United States">Africa</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0" >
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button" class="btn btn-primary" data-add-btn>+</button>
+                                    <button type="button" class="btn btn-danger" data-remove-btn>-</button>
+                                </div>
+
                             </div>
                         </div>
-
-                        <div class="col-lg-2">
-                            <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
-                        </div>
-                        <div class="col-lg-2">
-                            <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0" >
-                        </div>
-                        <div class="col-lg-2">
-                            <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                        </div>
-                        <div class="col-lg-1">
-                            <button type="button" class="btn btn-danger" onclick="BtnDel(this)"><i class="fa fa-minus-square" aria-hidden="true"></i>
-                            </button>
-                            {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
-                        </div>
-
                     </div>
+
                     <div id="order_row"></div>
                     <div class="row">
                         <div class="col-md-8"></div>
@@ -147,14 +149,49 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script>
 
-    function BtnAdd(){
-        var cRow = $("#TRow").clone().appendTo("#order_row");
-        $(cRow).find("input").val('');
-        $(cRow).removeClass("d-none");
-    }
-    function BtnDel(btnid){
-        $(btnid).parent().parent().remove();
-    }
+<script>
+$(document).ready(function(){
+ //Add New Quote
+    $("#order_form").submit(function(e){
+
+        e.preventDefault();
+        const data = new FormData(this);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/sales/order/store',
+            method: 'post',
+            data : data,
+            cache : false,
+            processData: false,
+            contentType: false,
+            success:function(response){
+                if(response.status == 200){
+                    $('#order_modal').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    table.ajax.reload();
+                }
+            },error(response){
+                if(response.status == 400){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                }
+            }
+        })
+    });
+});
 </script>

@@ -36,6 +36,16 @@ class QuotesController extends Controller
      */
     public function store(Request $request, Quote $quote)
     {
+
+        // $request->validate([
+        //     'quotation_no' => 'bail|required|unique|max:255',
+        //     'reference' => 'required',
+        //     'quote_date' => 'required',
+        //     'items' => 'required',
+        //     'quantity' => 'required',
+        //     'price' => 'required',
+        //     'total' => 'required',
+        // ]);
         if($quote->quotation_no != $request->quote_no){
 
             $quotes = new Quote;
@@ -62,7 +72,7 @@ class QuotesController extends Controller
         return response()->json(['status' => 200, 'message' => "New Quote Added Successfully!"]);
 
         }else{
-            return response()->json(['status' => 400, 'message' => "Quote Existed!"]);
+            return response()->json(['status' => 404, 'message' => "Quote Existed!"]);
         }
 
     }

@@ -1,21 +1,17 @@
-{{-- Edit order modal --}}
-
-<div id="order_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+{{-- Edit Order modal --}}
+<div id="order_edit_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-xl" style="width:60%;">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-center" id="custom-width-modalLabel">ORDER</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form action="{{route('admin.dashboard')}}" method="POST" id="order_form">
-                @csrf
+            <form id="order_edit_form">
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-md-2">
-
                             <label for="datepicker" class="control-label">Date*</label>
                             <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" required >
-
                         </div>
                         <div class="col-md-6"></div>
                         <div class="col-md-2">
@@ -50,43 +46,58 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="oder_id">
-                            {{-- <label for="product-id" class="control-label">ID</label> --}}
-                            <input type="hidden" class="form-control" id="product_id" value="0" name="product_id[0][name]" >
+                        <div class="col-lg-5">
+                            <label for="selectdata" class="control-label">Item*</label>
                         </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="selectdata" class="control-label">Item*</label>
-                                <select class="form-control" id="select_product"  required>
-                                    <option value="#">Select Product...</option>
-                                    <option value="United States">United States</option>
-                                    <option value="United States">Bangladesh</option>
-                                    <option value="United States">Africa</option>
-                                </select>
+                        <div class="col-lg-2">
+                            <label for="quantity" class="control-label">Qty*</label>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="discount" class="control-label">Discount(%)</label>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="price" class="control-label">Price</label>
+                        </div>
+                        <div class="col-lg-1">
+                            <label for="btn" class="control-label">Add Row</label>
+                        </div>
+                    </div>
+                    <div class="" data-x-wrapper="quote">
+                        <div class="m-b-10" data-x-group>
+                            <div class="row" >
+                                <div class="oder_id">
+                                    {{-- <label for="product-id" class="control-label">ID</label> --}}
+                                    <input type="hidden" class="form-control" id="product_id" value="0" name="product_id[0][name]" >
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select class="form-control"   >
+                                            <option value="#">Select Product...</option>
+                                            <option value="United States">United States</option>
+                                            <option value="United States">Bangladesh</option>
+                                            <option value="United States">Africa</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0" >
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="button" class="btn btn-primary" data-add-btn>+</button>
+                                    <button type="button" class="btn btn-danger" data-remove-btn>-</button>
+                                </div>
+
                             </div>
                         </div>
-
-                        <div class="col-md-2">
-                            <label for="quantity" class="control-label">Qty*</label>
-                            <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="discount" class="control-label">Discount(%)</label>
-                            <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0" >
-                        </div>
-                        <div class="col-md-2">
-                            <label for="price" class="control-label">Price</label>
-                            <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
-                        </div>
-
-                        <div class="col-md-1">
-                            <label for="btn" class="control-label">Add Row</label>
-                            <button type="button" class="btn btn-success btn-custom" id="add"><i class="fa fa-plus-square" aria-hidden="true"></i>
-                            </button>
-                            {{-- <button type="button" class="btn btn-danger" id="remove-row">remove </button> --}}
-                        </div>
-
                     </div>
+
                     <div id="order_row"></div>
                     <div class="row">
                         <div class="col-md-8"></div>

@@ -262,6 +262,7 @@
                     }
                 })
             });
+
              //Add New Quote
             $("#quote_form").submit(function(e){
 

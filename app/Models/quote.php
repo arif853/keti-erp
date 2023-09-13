@@ -11,7 +11,16 @@ class Quote extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'date','reference','quote_no','customer','item','description','price','total',];
+    protected $fillable = [ 'quote_date',
+                            'reference',
+                            'quotation_no',
+                            'customer_id',
+                            'item',
+                            'description',
+                            'quantity',
+                            'price',
+                            'total'
+                        ];
 
     /**
      * Get all of the items for the quote

@@ -31,7 +31,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    }
+
+     /**
+     * show datatable a newly created resource in storage.
+     */
+    public function datatable()
+    {
+        $orderData = order::join('customers','orders.customer_id', '=','customers.id')
+        ->select('customers.business_name as business_name','orders.order_no','orders.order_date','orders.customer_id')
+        ->get();
+        return response()->json(['status' => 200, 'data' => $orderData]);
     }
 
     /**
