@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('order_no');
             $table->foreign('order_no')->references('order_no')->on('orders')->onDelete('cascade');
-            $table->string('items')->nullable();
-            $table->string('description');
+            $table->string('items');
+            $table->string('discount');
             $table->string('quantity');
             $table->string('price');
             $table->timestamps();

@@ -27,7 +27,7 @@
                             <div class="d-flex justify-content-between">
                                 <div class="left">
                                     <button id="order_btn" class="btn btn-success " >New order</button>
-                                    <a href="#" class="btn btn-warning">Pending order</a>
+                                    {{-- <a href="#" class="btn btn-warning">Pending order</a> --}}
                                     {{-- <a href="#" class="btn btn-danger">Delete order</a> --}}
                                 </div>
                                 <div class="right">
@@ -69,35 +69,14 @@
                             <table id="datatable" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Order No</th>
+                                        <th>Order Date</th>
                                         <th>Customer Name</th>
-                                        <th>Reference</th>
-                                        <th>Date</th>
                                         <th>Status</th>
                                         <th>Manage</th>
                                         {{-- <th>Salary</th> --}}
                                     </tr>
                                 </thead>
-
-
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>2011/04/25</td>
-                                        <td>
-                                            <p class="m-t-10"> <span class="badge badge-success">active</span></p>
-                                            {{-- <p class="m-t-10"> <span class="label label-success">Completed</span></p> --}}
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-success waves-effect waves-light"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
-                                            <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
-                                            <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
-
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </table>
 
                         </div>
@@ -160,45 +139,102 @@
 
             //DataTable Data view
             var table = $('#datatable').DataTable({
-                        ajax: {
-                url: '/sales/order/datatable',
-                dataSrc: 'data'
-
+                ajax: {
+                    url: '/sales/order/datatable',
+                    dataSrc: 'data'
                 },
                 columns: [
                     {
-                        "data": "quotation_no"
+                        "data": "order_no"
                     },
                     {
-                        "data": "quote_date"
+                        "data": "order_date"
                     },
                     {
-                        "data": "business_name"
+                        "data": "customer"
                     },
-                    // {
-                    //     "data": null,
+                    {
+                        "data": null,
 
-                    //     render: function (data, type, row) {
-                    //         var times = data.created_at.substring(0, 10);
-                    //         return times
-                    //     }
-                    // },
+                        render: function (data, type, row) {
+
+                            if(row.order_no == 'ORD2023-3797')
+                            {
+                                return '<div class="form-check">'+
+                                        '<p class="badge badge-warning">'+
+                                            '<input class="form-check-input position-static " type="checkbox" id="blankCheckbox" value="0" aria-label="...">'+
+                                            '<span> Pending</span>'+
+                                        '</p>'+
+                                        '</div>';
+                            }
+                            else{
+                                return  '<div class="form-check">'+
+                                        '<p class="badge badge-success">'+
+                                            '<input class="form-check-input position-static " type="checkbox" id="blankCheckbox" value="1" checked aria-label="...">'+
+                                            '<span> Completed</span>'+
+                                        '</p>'+
+                                        '</div>';
+                            }
+                    }
+                    },
                     {
                         "data": null,
 
                         render: function (data, type, row) {
                             //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
-                            return '<button id="edit_quote" value="' + row.quotation_no +
+                            return '<button id="edit_quote" value="' + row.order_no +
                                 '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
-                                '<button id="delete_quote" value="' + row.quotation_no +
+                                '<button id="delete_quote" value="' + row.order_no +
                                 '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
-                                '<a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.quotation_no +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>'+
-                                '<a id="print_quote" value="' + row.quotation_no +
+                                '<a  id="view_quote" href="{{('/sales/order/show/')}}'+ row.order_no +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>'+
+                                '<a id="print_quote" value="' + row.order_no +
                                 '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i> </a>';
                                 //href="{{('/sales/quote/show/')}}'+ row.quotation_no +'"
                         }
                     },
                 ]
+            });
+
+            //Add New Quote
+            $("#order_form").submit(function(e){
+
+                e.preventDefault();
+                const data = new FormData(this);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/sales/order/store',
+                    method: 'post',
+                    data : data,
+                    cache : false,
+                    processData: false,
+                    contentType: false,
+                    success:function(response){
+                        if(response.status == 200){
+                            $('#order_modal').modal('hide');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                            table.ajax.reload();
+                        }
+                    },error(response){
+                        if(response.status == 400){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            })
+                        }
+                    }
+                })
             });
 
         });

@@ -37,7 +37,7 @@
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input id="email" class="form-control input-lg " type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2"  />
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             <div class="col-xs-12">
                                 <x-input-label for="password" :value="__('Password')" />
 
-                                <x-text-input id="password" class="form-control input-lg" type="password" name="password"
+                                <x-text-input id="password" class="form-control" type="password" name="password"
                                 required autocomplete="current-password" />
 
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />

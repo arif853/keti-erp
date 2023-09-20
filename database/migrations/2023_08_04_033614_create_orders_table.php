@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             // $table->id();
             $table->string('order_no')->unique()->primary();
-            $table->string('reference');
+            $table->string('reference')->nullable();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->string('order_date');
+            $table->string('subtotal');
+            $table->string('discount')->nullable();
+            $table->string('vat')->nullable();
+            $table->boolean('status')->default(false);
             $table->integer('total');
             $table->timestamps();
         });

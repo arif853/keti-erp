@@ -11,16 +11,26 @@
                     <div class="row" >
                         <div class="col-md-2">
                             <label for="datepicker" class="control-label">Date*</label>
-                            <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" required >
+                            <input type="text" class="form-control" placeholder="yyyy-mm-dd" id="datepicker" name="order_date" required >
+                            <span class="text-danger">
+                                @error('order_date')
+                                    {{$message}}
+                                @enderror
+                            </span>
                         </div>
                         <div class="col-md-6"></div>
                         <div class="col-md-2">
                             <label for="reference" class="control-label">Reference</label>
-                            <input type="text" class="form-control" placeholder="Reference" id="reference">
+                            <input type="text" class="form-control" placeholder="Reference" id="reference" name="reference">
                         </div>
                         <div class="col-md-2">
                             <label for="order_no" class="control-label">Order No.*</label>
-                            <input type="text" class="form-control" placeholder="OR012-345" id="order_no" required readonly>
+                            <input type="text" class="form-control" placeholder="OR012-345" id="order_no" name="order_no" required readonly>
+                            <span class="text-danger">
+                                @error('order_no')
+                                    {{$message}}
+                                @enderror
+                            </span>
                         </div>
                     </div>
                     <br>
@@ -34,13 +44,18 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="selectdata" class="control-label" >Customer Name*</label>
-                                <select class="select2" id="selectdata"  required>
+                                <select class="select2" id="selectdata" name="customer" required>
                                     <option value="#">Select Customer...</option>
                                     @foreach ($customer as $data)
-                                    <option value="{{$data->id}}">{{$data->business_name}}</option>
+                                        <option value="{{$data->id}}">{{$data->business_name}}</option>
 
                                     @endforeach
                                   </select>
+                                  <span class="text-danger">
+                                    @error('customer')
+                                        {{$message}}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -62,33 +77,49 @@
                             <label for="btn" class="control-label">Add Row</label>
                         </div>
                     </div>
-                    <div class="" data-x-wrapper="quote">
+                    <div class="" data-x-wrapper="order">
                         <div class="m-b-10" data-x-group>
                             <div class="row" >
                                 <div class="oder_id">
                                     {{-- <label for="product-id" class="control-label">ID</label> --}}
-                                    <input type="hidden" class="form-control" id="product_id" value="0" name="product_id[0][name]" >
+                                    <input type="hidden" class="form-control" id="product_id"  name="product_id" >
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <select class="form-control"   >
-                                            <option value="#">Select Product...</option>
-                                            <option value="United States">United States</option>
-                                            <option value="United States">Bangladesh</option>
-                                            <option value="United States">Africa</option>
+                                        <select class="form-control" id="items" name="items">
+                                            <option value="0">Select Product...</option>
+                                            <option value="1">United States</option>
+                                            <option value="2">Bangladesh</option>
+                                            <option value="3">Africa</option>
                                         </select>
+                                        <span class="text-danger">
+                                            @error('items')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2">
-                                    <input type="number" class="form-control" id="quantity" placeholder="Qty" name="quantity" min="0" value="0" required>
+                                    <input type="number" class="form-control qty" id="quantity" onchange="Calc(this)" placeholder="Qty" name="quantity" min="0" required>
+                                    <span class="text-danger">
+                                        @error('quantity')
+                                            {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" min="0" value="0" >
+                                    <input type="number" class="form-control discount" id="discount" onchange="Calc(this)"  placeholder="Discount" name="discount" min="0"  >
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="number" class="form-control" id="price" placeholder="Price" name="price" min="0" value="0">
+                                    <input type="number" class="form-control Iprice" id="price" onchange="Calc(this)" placeholder="Price" name="price" min="0"  required>
+                                    <span class="text-danger">
+                                        @error('price')
+                                        {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
+                                <input type="hidden" class="amt" id="amt" name="amt">
                                 <div class="col-lg-2">
                                     <button type="button" class="btn btn-primary" data-add-btn>+</button>
                                     <button type="button" class="btn btn-danger" data-remove-btn>-</button>
@@ -107,7 +138,7 @@
                                     <p class="text-right " style="padding-top: 7px;">Subtotal :</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" value="" placeholder="Subtotal" class="form-control">
+                                    <input type="text"  placeholder="Subtotal" class="form-control" name="subtotal" id="subtotal">
                                 </div>
                             </div>
                             <div class="row">
@@ -115,7 +146,7 @@
                                     <p class="text-right " style="padding-top: 10px;">Total Discount :</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" value="" placeholder="Discount" class="form-control sub-mt">
+                                    <input type="text"  placeholder="Discount" class="form-control sub-mt" name="Tdiscount" id="Tdiscount">
                                 </div>
                             </div>
                             <div class="row">
@@ -123,7 +154,7 @@
                                     <p class="text-right " style="padding-top: 10px;">VAT :</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" value="" placeholder="Vat" class="form-control sub-mt">
+                                    <input type="text"  placeholder="Vat" class="form-control sub-mt" name="vat" value="0" id="vat" onchange="GetTotal()">
                                 </div>
                             </div>
                             <hr>
@@ -132,7 +163,7 @@
                                     <p class="text-right " style="padding-top: 10px;">Total :</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" value="" placeholder="Total" class="form-control sub-mt">
+                                    <input type="text"  placeholder="Total" class="form-control sub-mt" id="Ftotal" name="Ftotal">
                                 </div>
                             </div>
                         </div>
@@ -151,47 +182,61 @@
 </div><!-- /.modal -->
 
 <script>
-$(document).ready(function(){
- //Add New Quote
-    $("#order_form").submit(function(e){
+    function Calc(v){
+        var index = $(v).parent().parent().parent().index();
+        // var index = data-x-group.index();
+        var qty = document.getElementsByClassName('qty')[index].value
+        var price = document.getElementsByClassName('Iprice')[index].value
+        var discount = document.getElementsByClassName('discount')[index].value
 
-        e.preventDefault();
-        const data = new FormData(this);
+        var amt = qty * price ;
+        if(discount>0){
+            var amt = +(amt) - +(amt*discount)/100;
+        }
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/sales/order/store',
-            method: 'post',
-            data : data,
-            cache : false,
-            processData: false,
-            contentType: false,
-            success:function(response){
-                if(response.status == 200){
-                    $('#order_modal').modal('hide');
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: response.message,
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                    table.ajax.reload();
-                }
-            },error(response){
-                if(response.status == 400){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    })
-                }
-            }
-        })
-    });
-});
+        document.getElementsByClassName('amt')[index].value = amt;
+
+        GetSubTotal();
+        GetDiscount();
+    };
+    function GetSubTotal(){
+
+        var sum = 0;
+        var amts = document.getElementsByClassName('amt');
+
+
+        for (let i = 0; i < amts.length; i++) {
+
+            var Getamt = amts[i].value;
+            sum = +(sum) +  +(Getamt);
+        }
+        document.getElementById('subtotal').value = sum;
+        GetTotal()
+    };
+
+    function GetTotal(){
+        var vat = document.getElementById('vat').value;
+        var SubTotal =  document.getElementById('subtotal').value
+
+        if (vat>0){
+            var TotalAmt = +(SubTotal) + +(SubTotal*vat)/100;
+        }
+        else{
+            TotalAmt = SubTotal;
+        }
+        document.getElementById('Ftotal').value = TotalAmt;
+    }
+
+    function GetDiscount(){
+
+        var sum = 0
+        var discount = document.getElementsByClassName('discount')
+        for (let i = 0; i < discount.length; i++) {
+
+        var Getdiscount = discount[i].value;
+        sum = +(sum) +  +(Getdiscount);
+        }
+
+        document.getElementById('Tdiscount').value = sum;
+    }
 </script>
