@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Sales\InvoiceController;
+use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Inventory\ItemsController;
 use App\Http\Controllers\Inventory\StoreController;
+use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
@@ -51,6 +53,7 @@ Route::controller(QuotesController::class)->middleware('auth')->group(function (
     Route::post('/sales/quote/store','store')->name('quote.store');
     Route::get('/sales/quote/datatable','datatable')->name('quote.datatable');
     Route::get('/sales/quote/show/{quotation_no}','show')->name('quote.show');
+    Route::get('/sales/quote/quote_invoice/{quotation_no}','view_pdf')->name('quote.quote_invoice');
     Route::get('/sales/quote/edit','edit')->name('quote.edit');
     Route::delete('/sales/quote/destroy','destroy')->name('quote.destroy');
     // Route::get('/sales/quote/view',[QuotesController::class, 'view'])->middleware('auth')->name('quote.view');
@@ -73,7 +76,7 @@ Route::controller(InvoiceController::class)->middleware('auth')->group(function 
 
 //sales invoice
 Route::controller(PurchaseController::class)->middleware('auth')->group(function () {
-    Route::get('/purchase', [InvoiceController::class, 'index'])->name('sales.index');
+    Route::get('/purchase', 'index')->name('purchase.index');
 
 });
 
@@ -101,6 +104,7 @@ Route::controller(SupplierController::class)->middleware('auth')->group(function
 // Accounts
 Route::controller(AccountGroupController::class)->middleware('auth')->group(function () {
     Route::get('/account/groups',[AccountGroupController::class, 'index'])->name('accounts.index');
+    Route::post('/account/groups/store', 'store')->name('accounts.store');
     Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->name('accounts.group');
 });
 
@@ -111,9 +115,14 @@ Route::controller(ItemsController::class)->middleware('auth')->group(function ()
     Route::get('/inventory/items', [ItemsController::class, 'index'])->name('items.index');
 });
 
+//store
 Route::controller(StoreController::class)->middleware('auth')->group(function () {
     Route::get('/inventory/store', [StoreController::class, 'index'])->name('store.index');
 });
 
+//Company
+Route::controller(CompanyController::class)->middleware('auth')->group(function () {
+    Route::get('/company', 'index')->name('company.index');
+});
 
 require __DIR__.'/auth.php';

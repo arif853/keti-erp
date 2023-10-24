@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,11 +11,9 @@ class Quote extends Model
     use HasFactory;
 
     protected $fillable = [ 'quote_date',
-                            'reference',
                             'quotation_no',
                             'customer_id',
                             'item',
-                            'description',
                             'quantity',
                             'price',
                             'total'
@@ -41,5 +38,4 @@ class Quote extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-
 }

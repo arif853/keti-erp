@@ -4,9 +4,9 @@
 * Module/App: Main Js
 */
 
-
 !function($) {
     "use strict";
+
 
     var Sidemenu = function() {
         this.$body = $("body"),
@@ -372,3 +372,4 @@ var wow = new WOW(
   }
 );
 wow.init();
+

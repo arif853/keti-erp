@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Accounts;
+namespace App\Http\Controllers\Company;
 
-
-use App\Models\AccountGroup;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class AccountGroupController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $groups = AccountGroup::all();
-        return view('accounts.accountgroup.group',compact('groups'));
+        return view('company.index');
     }
 
     /**
@@ -31,30 +28,21 @@ class AccountGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'group_name' => 'required'
-        ],
-        [
-            'group_name.required' => 'Enter a new Group name.'
-        ]
-        );
-
-        return redirect('/account/groups');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(string $id)
     {
-        $groups = AccountGroup::all();
-        return response()->json(['status' => '200', 'data' => $groups]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(string $id)
     {
         //
     }
@@ -62,7 +50,7 @@ class AccountGroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -70,7 +58,7 @@ class AccountGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(string $id)
     {
         //
     }

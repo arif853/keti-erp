@@ -71,6 +71,7 @@
                                     <th>Quote No.</th>
                                     <th>Quote Date</th>
                                     <th>Customer Name</th>
+                                    <th>Barcode</th>
                                     <th>Manage</th>
                                 </tr>
                             </thead>
@@ -197,14 +198,12 @@
                     {
                         "data": "business_name"
                     },
-                    // {
-                    //     "data": null,
-
-                    //     render: function (data, type, row) {
-                    //         var times = data.created_at.substring(0, 10);
-                    //         return times
-                    //     }
-                    // },
+                    {
+                        "data": null,
+                        render: function (data, type, row) {
+                            return  'Barcode ';
+                        }
+                    },
                     {
                         "data": null,
 
@@ -215,7 +214,7 @@
                                 '<button id="delete_quote" value="' + row.quotation_no +
                                 '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
                                 '<a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.quotation_no +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>'+
-                                '<a id="print_quote" value="' + row.quotation_no +
+                                '<a id="print_quote" href="{{('/sales/quote/quote_invoice/')}}'+ row.quotation_no +'" value="' + row.quotation_no +
                                 '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i> </a>';
                                 //href="{{('/sales/quote/show/')}}'+ row.quotation_no +'"
                         }
@@ -223,7 +222,88 @@
                 ]
             });
 
-            //delete quote
+
+            // Handle form submission
+            $("#quote_form").submit(function(e) {
+                e.preventDefault();
+
+                // Serialize the form data
+                const formData = new FormData(this);
+
+                // Set up AJAX headers
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                // console.log(formData);
+                // Send an AJAX request to the server
+                $.ajax({
+                    url: '/sales/quote/store',
+                    method: 'post',
+                    data: formData,
+                    dataType: 'json',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                        // Clear any previous error messages
+                        $(document).find('span.error-text').text('');
+                    },success: function(response) {
+                        if (response.status == 200) {
+                            // Hide the modal and show a success message
+                            $('#quote_modal').modal('hide');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                text: response.message,
+                                title: 'Congatulation!',
+                                showConfirmButton: false,
+                                timer: 4000
+                            });
+                            table.ajax.reload();
+                            // Optionally, you can redirect to another page here
+                            // window.location.href = '/success-page';
+                        }
+                        if(response.status == 2){
+
+                            $.each(response.error, function (field, errors) {
+
+                            // For non-dynamic fields, display errors as before
+                            $('span.' + field + '-error').text(errors[0]);
+                            // console.log(field);
+                            // console.log(errors);
+
+                            // Check if the field is dynamic (e.g., "quote.0.item")
+                            if (field.includes('quote.')) {
+                                // Extract the dynamic field name and index
+                                var fieldParts = field.split('.');
+                                var index = fieldParts[1]; // Get the dynamic field name
+                                var fieldName = fieldParts[2]; // Get the dynamic field index
+                                console.log(fieldName);
+                                console.log(index);
+
+                                // Display the error message for the dynamic field
+                                $('span.' + fieldName + '-error[data-index="' + index + '"]').text(errors[0]);
+                            }
+                            });
+                        }
+
+                    },error: function(response) {
+                        if (response.status == 0) {
+                            // Show an error message for a general error
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Quotation has an error!',
+                            });
+                        }
+
+                    }
+                });
+            });
+
+             //delete quote
             $(document).on('click', '#delete_quote', function (e) {
                 e.preventDefault();
                 var id = $(this).val();
@@ -263,48 +343,6 @@
                 })
             });
 
-             //Add New Quote
-            $("#quote_form").submit(function(e){
-
-                e.preventDefault();
-                const data = new FormData(this);
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: '/sales/quote/store',
-                    method: 'post',
-                    data : data,
-                    cache : false,
-                    processData: false,
-                    contentType: false,
-                    success:function(response){
-                        if(response.status == 200){
-                            $('#quote_modal').modal('hide');
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: response.message,
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                            table.ajax.reload();
-                        }
-                    },error(response){
-                        if(response.status == 400){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong!',
-                            })
-                        }
-                    }
-                })
-            });
-
             $('#editdatepicker').datepicker({
                 autoclose: true,
                 todayHighlight: true,
@@ -314,7 +352,24 @@
                 endDate: '1d',
             });
 
+            // $(document).on('click','#print_quote', function () {
+            //     // Gather data from your form or API, and populate the invoice content
+            //     const invoiceData = {
+            //         // Your data here
+            //     };
 
+            //     const pdf = new jsPDF();
+            //     const invoiceHTML = document.getElementById('invoice');
+
+            //     // Convert the HTML content to a PDF
+            //     pdf.fromHTML(invoiceHTML, 15, 15);
+
+            //     // Print the PDF
+            //     pdf.autoPrint();
+
+            //     // Open the print dialog
+            //     window.print();
+            // });
 
         });
 

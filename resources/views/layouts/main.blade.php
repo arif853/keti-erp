@@ -45,6 +45,7 @@
         <link href="{{asset('main/css/jquery-editable-select.css')}}" rel="stylesheet" type="text/css" />
 
 
+
         {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
 
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
@@ -194,7 +195,7 @@
 
                                 </ul>
                             </div>
-                            <p class="text-muted m-0">{{ Auth::user()->is_superadmin }}</p>
+                            <p class="text-muted m-0">{{ Auth::user()->is_superadmin}}</p>
                         </div>
                     </div>
                     <!--- Divider -->
@@ -208,7 +209,7 @@
                                 <a href="#" class="waves-effect "><i class="zmdi zmdi-swap"></i><span> Transactions </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('sales.index')}}"><i class="fas fa-comments-dollar m-r-10"></i><span>Sales</span></a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-basket m-r-10"></i>Purchases</a></li>
+                                    <li><a href="{{route('purchase.index')}}"><i class="fas fa-shopping-basket m-r-10"></i>Purchases</a></li>
                                     <li><a href="#"><i class="fas fa-cogs m-r-10"></i>Production</a></li>
                                 </ul>
                             </li>
@@ -242,7 +243,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="{{('/dashboard')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Company  </span></a>
+                                <a href="{{('/company')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Company  </span></a>
                             </li>
                             <li>
                                 <a href="{{('/dashboard')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Users </span></a>
@@ -292,6 +293,7 @@
                <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('main/js/jspdf.umd.min.js')}}"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
         <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
@@ -340,6 +342,10 @@
         {{-- select and search --}}
         <script src="{{asset('main/js/jquery-editable-select.js')}}"></script>
 
+
+
+
+
         @stack('dashboard')
         @stack('customers')
         @stack('supplier')
@@ -349,7 +355,6 @@
         @stack('accountgroup')
         @stack('items')
         @stack('store')
-        @stack('quote.voice')
 
 
 

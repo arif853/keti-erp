@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('quotation');
             $table->foreign('quotation')->references('quotation_no')->on('quotes')->onDelete('cascade');
             $table->string('items')->nullable();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('quantity');
             $table->string('price');
             $table->timestamps();
