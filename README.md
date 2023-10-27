@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -74,4 +73,3 @@ This is a on going erp system. We are trying to build it from scratch.
 - Jquery - 1.12.1
 - font-awesome - 5.15.4
 - sweetalert2 v11.7.20
->>>>>>> 97fe5ff34bc843360f90f017a196cfb6eef151f1
