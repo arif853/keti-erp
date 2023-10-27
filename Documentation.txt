@@ -1,0 +1,8 @@
+Keti-Erp System is a web software which work as ERP software. In this system, we have several options like 
+
+1. Dashboard-> overview of system, sales graph, loss and profit graph, monthly revenue.
+2. Transaction->
+	Sales-> generate Quotation, Orders, Sale Invoice, Bill of invoice, sale return.
+	Purchase-> Purchase Quote, Order, Invoice, Bill, Return
+	Production-> Quotation, Order.
+3.Accounts-> Account Group, Recipt, Payments, 

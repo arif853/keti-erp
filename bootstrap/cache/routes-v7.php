@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::DTWcZQa8UUxkPrgg',
+            '_route' => 'generated::LKJ3XpJRMOFcReBa',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KcpMu6U3igDYxvbS',
+            '_route' => 'generated::eGH72z50iAeKIhY6',
           ),
           1 => NULL,
           2 => 
@@ -142,7 +142,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::YgKCJ9t9T9Thmzf5',
+            '_route' => 'generated::NyhabSve3zBocqZd',
           ),
           1 => NULL,
           2 => 
@@ -609,6 +609,45 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/inventory/items/store' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'items.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/inventory/items/datatable' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'items.datatable',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/inventory/store' => 
       array (
         0 => 
@@ -672,7 +711,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::4DsBpr6VQWAVhkYf',
+            '_route' => 'generated::x3CLaxUXdvPrHjbm',
           ),
           1 => NULL,
           2 => 
@@ -708,7 +747,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::6GPJVVIOCgjT5Vvs',
+            '_route' => 'generated::n0LsXbKQ6to8xljg',
           ),
           1 => NULL,
           2 => 
@@ -838,7 +877,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::mAAR7dwkyasop9lt',
+            '_route' => 'generated::ETQnzNlh5iQBNtlc',
           ),
           1 => NULL,
           2 => 
@@ -892,7 +931,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/sales/(?|quote/(?|show/([^/]++)(*:39)|quote_invoice/([^/]++)(*:68))|order/show/([^/]++)(*:95))|/ledger/customer/customerview/([^/]++)(*:141)|/reset\\-password/([^/]++)(*:174)|/verify\\-email/([^/]++)/([^/]++)(*:214))/?$}sDu',
+      0 => '{^(?|/sales/(?|quote/(?|show/([^/]++)(*:39)|quote_invoice/([^/]++)(*:68))|order/show/([^/]++)(*:95))|/ledger/customer/customerview/([^/]++)(*:141)|/inventory/items/show/([^/]++)(*:179)|/reset\\-password/([^/]++)(*:212)|/verify\\-email/([^/]++)/([^/]++)(*:252))/?$}sDu',
     ),
     3 => 
     array (
@@ -988,7 +1027,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      174 => 
+      179 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'items.show',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      212 => 
       array (
         0 => 
         array (
@@ -1011,7 +1073,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      214 => 
+      252 => 
       array (
         0 => 
         array (
@@ -1196,7 +1258,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::DTWcZQa8UUxkPrgg' => 
+    'generated::LKJ3XpJRMOFcReBa' => 
     array (
       'methods' => 
       array (
@@ -1219,7 +1281,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::DTWcZQa8UUxkPrgg',
+        'as' => 'generated::LKJ3XpJRMOFcReBa',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1235,7 +1297,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KcpMu6U3igDYxvbS' => 
+    'generated::eGH72z50iAeKIhY6' => 
     array (
       'methods' => 
       array (
@@ -1257,7 +1319,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::KcpMu6U3igDYxvbS',
+        'as' => 'generated::eGH72z50iAeKIhY6',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1273,7 +1335,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::YgKCJ9t9T9Thmzf5' => 
+    'generated::NyhabSve3zBocqZd' => 
     array (
       'methods' => 
       array (
@@ -1295,7 +1357,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::YgKCJ9t9T9Thmzf5',
+        'as' => 'generated::NyhabSve3zBocqZd',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2330,6 +2392,119 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'items.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'inventory/items/store',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Inventory\\ItemsController@store',
+        'controller' => 'App\\Http\\Controllers\\Inventory\\ItemsController@store',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'items.store',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'items.datatable' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'inventory/items/datatable',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Inventory\\ItemsController@datatable',
+        'controller' => 'App\\Http\\Controllers\\Inventory\\ItemsController@datatable',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'items.datatable',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'items.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'inventory/items/show/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Inventory\\ItemsController@show',
+        'controller' => 'App\\Http\\Controllers\\Inventory\\ItemsController@show',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'items.show',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'store.index' => 
     array (
       'methods' => 
@@ -2444,7 +2619,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::4DsBpr6VQWAVhkYf' => 
+    'generated::x3CLaxUXdvPrHjbm' => 
     array (
       'methods' => 
       array (
@@ -2465,7 +2640,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::4DsBpr6VQWAVhkYf',
+        'as' => 'generated::x3CLaxUXdvPrHjbm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2519,7 +2694,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::6GPJVVIOCgjT5Vvs' => 
+    'generated::n0LsXbKQ6to8xljg' => 
     array (
       'methods' => 
       array (
@@ -2540,7 +2715,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::6GPJVVIOCgjT5Vvs',
+        'as' => 'generated::n0LsXbKQ6to8xljg',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2860,7 +3035,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::mAAR7dwkyasop9lt' => 
+    'generated::ETQnzNlh5iQBNtlc' => 
     array (
       'methods' => 
       array (
@@ -2881,7 +3056,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::mAAR7dwkyasop9lt',
+        'as' => 'generated::ETQnzNlh5iQBNtlc',
       ),
       'fallback' => false,
       'defaults' => 

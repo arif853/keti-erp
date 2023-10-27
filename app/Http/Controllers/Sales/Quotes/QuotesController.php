@@ -94,43 +94,6 @@ class QuotesController extends Controller
                 // Return a success response.
                 return response()->json(['status' => 200, 'message' => 'New Quote Added Successfully!']);
 
-                // $quote = new Quote;
-                // $quote->quote_date= $request->date;
-                // $quote->reference = $request->reference;
-                // $quote->quotation_no= $request->quote_no;
-                // $quote->customer_id= $request->customer;
-                // $quote->total= $request->FTotal;
-                // $quote->save();
-
-                // $values = [
-                //    'quote_date'=> $request->date,
-                //     'reference' => $request->reference,
-                //     'quotation_no'=> $request->quote_no,
-                //     'customer_id'=> $request->customer,
-                //     'total'=> $request->FTotal,
-                // ];
-
-                // $quotedata = [];
-                // for($x = 0; $x <count($request->quote); $x++){
-                //     $quotedata[] = [
-                //         'quotation' => $request->quote_no,
-                //         'items' => $request->quote[$x]['item'],
-                //         'description' => $request->quote[$x]['description'],
-                //         'quantity' => $request->quote[$x]['quantity'],
-                //         'price' => $request->quote[$x]['price'],
-                //     ];
-                // }
-
-                // $quoteitem_query = QuoteItem::insert($quotedata);
-                // $quote_query =  Quote::insert($values);
-
-                // if($quote_query && $quoteitem_query){
-
-                //     return response()->json(['status' => 200, 'message' => "New Quote Added Successfully!"]);
-                // }
-                // else{
-                //     return response()->json(['status' => 0]);
-                //}
             }
         }else{
             return response()->json(['status' => 0, 'message' => "Quote Existed!"]);
@@ -176,7 +139,8 @@ class QuotesController extends Controller
                 ->get();
         $quote_data['qdata'] = $quotation;
         $pdf = Pdf::loadView('sales.quotes.quote_pdf', $quote_data);
-        return $pdf->download('quotation_'.$q_no.'.pdf');
+        // return $pdf->download('quotation_'.$q_no.'.pdf');
+        return $pdf->stream();
     }
 
     // public function view(){

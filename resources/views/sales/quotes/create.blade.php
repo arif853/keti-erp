@@ -64,8 +64,8 @@
 
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <label for="description" class="control-label">Description</label>
+                        <div class="col-md-1">
+                            <label for="Stock" class="control-label">Stock</label>
 
                         </div>
                         <div class="col-md-1">
@@ -101,8 +101,8 @@
                                         <span class="text-danger error-text item-error" data-index={{$key}}></span>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control" name="description" data-field="description" placeholder="Description">
+                                <div class="col-md-1">
+                                    {{-- <input type="text" class="form-control" name="description" data-field="description" placeholder="Description"> --}}
                                     {{-- @if ($errors->has('quote.' . $key . '.description'))
                                         <span class="text-danger error-text">{{ $errors->first('quote.' . $key . '.description') }}</span>
                                     @endif --}}

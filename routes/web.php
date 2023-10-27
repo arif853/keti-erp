@@ -111,8 +111,12 @@ Route::controller(AccountGroupController::class)->middleware('auth')->group(func
 
 //Inventory
 
+// Item or product
 Route::controller(ItemsController::class)->middleware('auth')->group(function () {
-    Route::get('/inventory/items', [ItemsController::class, 'index'])->name('items.index');
+    Route::get('/inventory/items','index')->name('items.index');
+    Route::post('/inventory/items/store','store')->name('items.store');
+    Route::get('/inventory/items/datatable','datatable')->name('items.datatable');
+    Route::get('/inventory/items/show/{id}','show')->name('items.show');
 });
 
 //store

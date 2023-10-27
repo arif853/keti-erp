@@ -7,6 +7,12 @@
     <title>Invoice</title>
     <style>
         /* reset */
+        body {
+            background-color: transparent;
+            background-image: url(D:\Xampp\htdocs\Laravel_app\keti-erp\public\main\images\Asset3.png); /* Replace with the actual path to your image */
+            background-repeat: no-repeat;
+            background-size: cover; /* Adjust the background size as needed */
+        }
 
         * {
             border: 0;
@@ -81,11 +87,8 @@
             padding: 20px 30px ;
             /* background-color: #FFF ; */
         }
-        .page-img{
-            width: 100%;
-            height: 100%;
-            background-image: url(../images/asset3.png) center no-repeat;
-        }
+
+
 
         #content-wrap {
         padding-bottom: 2.5rem;    /* Footer height */
@@ -104,10 +107,10 @@
         }
 
         header h1 {
-            background: #000;
+            background: transparent;
             border-radius: 0.25em;
             color: #FFF;
-            margin: 0 0 1em;
+            margin: 0 0 0em;
             padding: 0.5em 0;
         }
 
