@@ -62,7 +62,7 @@
                     <tbody>
                         @foreach ($quotation as $items )
                             <tr>
-                                <td><span>{{$items->items}}</span></td>
+                                <td><span>{{$items->product_name}}</span></td>
                                 <td><span>{{$items->description}}</span></td>
                                 <td><span>{{$items->quantity}}</span></td>
                                 <td><span data-prefix>৳ </span><span>{{$items->price}}</span></td>

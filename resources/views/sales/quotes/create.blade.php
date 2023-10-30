@@ -88,12 +88,11 @@
                             <div class="row dynamic-input">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <select class="form-control" name="item" data-field="item">
-                                            <option value="#">Select Products...</option>
-                                            <option value="1">Product 1</option>
-                                            <option value="2">Product 2</option>
-                                            <option value="3">Product 3</option>
-                                            <option value="4">Product 4</option>
+                                        <select class="form-control" name="item" data-field="item" id="items">
+                                            <option value="0" @selected(true)>Select Products...</option>
+                                            @foreach ($items as $item)
+                                            <option value="{{$item->id}}">{{$item->product_name}} </option>
+                                            @endforeach
                                         </select>
                                         {{-- @if ($errors->has('quote.' . $key . '.item'))
                                         <span class="text-danger error-text">{{ $errors->first('quote.' . $key . '.item') }}</span>
@@ -106,7 +105,7 @@
                                     {{-- @if ($errors->has('quote.' . $key . '.description'))
                                         <span class="text-danger error-text">{{ $errors->first('quote.' . $key . '.description') }}</span>
                                     @endif --}}
-                                    <span class="text-danger error-text description-error" data-index={{$key}}></span>
+                                    {{-- <span class="text-danger error-text description-error" data-index={{$key}}></span> --}}
                                 </div>
                                 <div class="col-md-1">
                                     <input type="number" class="form-control quantity" name="quantity" data-field="quantity" onchange="Calc(this)" placeholder="Quantity" min="0">
@@ -116,7 +115,7 @@
                                     @endif --}}
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="number" class="form-control pprice" name="price" data-field="price" onchange="Calc(this)" placeholder="Price" min="0">
+                                    <input type="number" class="form-control pprice" name="price" data-field="price"  onchange="Calc(this)" placeholder="Price" min="0">
                                     <input type="hidden" class="amt" name="amt" data-field="amt">
                                     {{-- @if ($errors->has('quote.' . $key . '.price'))
                                         <span class="text-danger error-text">{{ $errors->first('quote.' . $key . '.price') }}</span>
@@ -185,5 +184,6 @@
 
         document.getElementById('FTotal').value = sum;
     }
+
 
 </script>

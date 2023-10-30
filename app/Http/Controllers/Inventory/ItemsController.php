@@ -22,7 +22,11 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        return view('inventory.items.index');
+        // Retrieve your item data from the database
+        $itemData = Item::get();
+
+        // Return the item data and barcode data in the response
+        return view('inventory.items.index',compact('itemData'));
     }
 
     /**
@@ -33,20 +37,6 @@ class ItemsController extends Controller
         //
     }
 
-    public function generateBarcode()
-    {
-        $barcode = new DNS1D();
-        // $barcode->setStorPath('public/barcodes');
-        $barcode->storeAs('public/barcodes'); // Set the storage path for barcode images
-
-        $barcode->getBarcodePNG('123456789', 'C128'); // Generate a Code 128 barcode for the value '123456789'
-        // You can change the barcode type ('C128' in this example) and value as needed
-
-        // Return the generated barcode image or display it as needed
-        return view('inventory.items.index');
-    }
-
-
     /**
      * Store a newly created resource in storage.
      */
@@ -54,22 +44,18 @@ class ItemsController extends Controller
     {
         if($item->product_name != $request->product_name){
 
-            $rules = [
+            $validator = Validator::make($request->all(), [
                 'unit' => 'required',
                 'product_name' => 'required',
-                'product_img' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'product_img' => 'image|mimes:jpeg,png,jpg',
                 'brand' => 'required',
                 'catagory' => 'required',
                 'model' => 'required',
                 'product_cost' => 'required',
-            ];
-
-            // Validate the request
-            $validator = Validator::make($request->all(), $rules);
-            // dd($validator);
+            ]);
 
             // Check if validation fails.
-            if (!$validator->passes()) {
+            if ($validator->failed()) {
                 return response()->json(['status' => 2, 'error' => $validator->errors()->toArray()]);
             }
 
@@ -83,6 +69,8 @@ class ItemsController extends Controller
                     Storage::disk('public')->put('product_image/'.$imageName, File::get($image)); //save image data
                 }
 
+                $this->generateBarcode($request->barcode); // Replace 'barcode_id' with the actual field name you want to use
+
                 $item = new Item;
                 $item->status = $request->status;
                 $item->unit = $request->unit;
@@ -91,35 +79,12 @@ class ItemsController extends Controller
                 $item->barcode_id = $request->barcode;
                 $item->brand_id = $request->brand;
                 $item->catagory_id = $request->catagory;
-                $item->model_id = $request->model;
+                $item->product_model_id = $request->model;
                 $item->product_cost = $request->product_cost;
                 $item->product_vat = $request->vat;
                 $item->product_charge = $request->o_charge;
                 $item->product_mrp = $request->mrp;
                 $item->save(); // Save the Item data.
-
-                //Barcode save
-
-                // $barcode_img = new DNS1D();
-                // $barcode_img->storeAs('public/barcodes'); // Set the storage path for barcode images
-                // $barcode_data = $request->barcode;
-                // $barcode_img->getBarcodeSVG($barcode_data, 'EAN13'); // Generate a Code 128 barcode for the value '123456789'
-
-                // $barcode = new Product_barcode;
-                // $barcode->barcode = $request->barcode;
-                // $barcode->save(); // Save the barcode data.
-
-                // $brand = new Brand;
-                // $brand->brand = $request->brand;
-                // $brand->save(); // Save the brand data.
-
-                // $catagory = new Catagory;
-                // $catagory->catagory = $request->catagory;
-                // $catagory->save(); //save catagory data
-
-                // $model = new Product_Model;
-                // $model->model = $request->model;
-                // $model->save(); //save model data
 
                 // Return a success response.
                 return response()->json(['status' => 200, 'message' => 'New Item Added Successfully!']);
@@ -130,6 +95,41 @@ class ItemsController extends Controller
 
         }
     }
+
+    public function generateBarcode($value){
+
+        $barcode = new DNS1D();
+        $barcodeType = 'EAN13'; // Set the barcode type, e.g., Code 128
+        $barcode->getBarcodePNG($value, $barcodeType);
+        $barcode->setStorPath('public/barcodes');
+
+        // return $barcode_img;
+        // The generated barcode image will be automatically saved in the 'public/barcodes' directory as a PNG file.
+        // You can return the path to the saved barcode image or display it as needed.
+    }
+
+    public function issue_item(Request $request){
+        
+    }
+
+    // public function datatable(){
+
+    //     // Retrieve your item data from the database
+    //     $itemData = Item::get();
+
+    //     // Initialize an array to store barcode data
+    //     $barcodeData = [];
+
+    //     // Loop through your item data and generate a barcode for each item
+    //     foreach ($itemData as $item) {
+    //         $barcode_data = $this->generateBarcode($item->barcode_id); // Replace 'barcode_id' with the actual field name you want to use
+    //         $barcodeData[] = $barcode_data;
+    //     }
+
+    //     // Return the item data and barcode data in the response
+    //     return view('inventory.items.index',compact('itemData','barcodeData'));
+    //     // return response()->json(['status' => 200, 'data' => $itemData, 'barcode' => $barcodeData]);
+    // }
 
     /**
      * Display the specified resource.

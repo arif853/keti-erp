@@ -6,7 +6,7 @@
                 <h3 class="modal-title" id="cus_title"></h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form id="product_form" enctype="multipart/form-data">
+            <form id="product_form" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="row">

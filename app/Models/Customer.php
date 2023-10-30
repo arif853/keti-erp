@@ -17,8 +17,8 @@ class Customer extends Model
      *
      * @return HasOne
      */
-    public function quote(): HasOne
-    {
-        return $this->hasOne(Quote::class, 'customer_id');
-    }
+    // public function quote(): HasOne
+    // {
+    //     return $this->hasOne(Quote::class, 'customer_id');
+    // }
 }

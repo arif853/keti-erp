@@ -9,7 +9,7 @@
         /* reset */
         body {
             background-color: transparent;
-            background-image: url(D:\Xampp\htdocs\Laravel_app\keti-erp\public\main\images\Asset3.png); /* Replace with the actual path to your image */
+            /* background-image: url(D:\Xampp\htdocs\Laravel_app\keti-erp\public\main\images\Asset3.png); Replace with the actual path to your image */
             background-repeat: no-repeat;
             background-size: cover; /* Adjust the background size as needed */
         }
@@ -107,7 +107,7 @@
         }
 
         header h1 {
-            background: transparent;
+            background: #000;
             border-radius: 0.25em;
             color: #FFF;
             margin: 0 0 0em;
@@ -393,7 +393,7 @@
                             <tbody>
                                 @foreach ($qdata as $items )
                                     <tr>
-                                        <td><span>{{$items->items}}</span></td>
+                                        <td><span>{{$items->product}}</span></td>
                                         <td><span>{{$items->description}}</span></td>
                                         <td><span>{{$items->quantity}}</span></td>
                                         <td><span data-prefix>৳ </span><span>{{$items->price}}</span></td>

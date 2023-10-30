@@ -44,8 +44,9 @@
                                 <div class="col-lg-6">
                                     <select class="select2" name="products" id="products" required>
                                         <option value="0">Select Product...</option>
-                                        <option value="1">Product-1</option>
-                                        <option value="2">Product-2</option>
+                                        @foreach ($itemData as $item)
+                                        <option value="{{$item->id}}">{{$item->product_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-4">

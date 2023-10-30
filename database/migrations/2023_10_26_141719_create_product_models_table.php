@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_models', function (Blueprint $table) {
             $table->id();
+            $table->boolean('status')->default(true);
             $table->string('model');
             $table->timestamps();
         });

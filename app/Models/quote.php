@@ -24,18 +24,18 @@ class Quote extends Model
      *
      * @return HasMany
      */
-    public function quoteitem()
-    {
-        return $this->hasMany(QuoteItem::class);
-    }
+    // public function quoteitem()
+    // {
+    //     return $this->hasMany(QuoteItem::class);
+    // }
 
     /**
      * Get the customer that owns the quote
      *
      * @return BelongsTo
      */
-    public function customer(): BelongsTo
-    {
-        return $this->belongsTo(Customer::class);
-    }
+//     public function customer(): BelongsTo
+//     {
+//         return $this->belongsTo(Customer::class);
+//     }
 }

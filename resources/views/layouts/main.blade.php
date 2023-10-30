@@ -29,11 +29,11 @@
         <!-- Waves-effect -->
         <link href="{{asset('main/css/waves-effect.css')}}" rel="stylesheet">
 
+        <link href="{{asset('main/css/sweetalert2.min.css')}}" rel="stylesheet">
         <!-- Custom Files -->
         <link href="{{asset('main/css/helper.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('main/css/style.css')}}" rel="stylesheet" type="text/css" />
         <!-- sweet alerts -->
-        <link href="{{asset('main/css/sweetalert2.min.css')}}" rel="stylesheet">
 
         <!-- DataTables -->
         <link href="{{asset('main/assets/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
@@ -369,9 +369,9 @@
                     time: 1200
                 });
             });
-            jQuery(document).ready(function() {
+            $(document).ready(function() {
                  // Select2
-                jQuery(".select2").select2({
+                $(".select2").select2({
                     width: '100%',
                 });
             });

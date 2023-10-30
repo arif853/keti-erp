@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Sales\Quotes;
 
 use Log;
-use App\Models\items;
+use App\Models\Item;
 use App\Models\Quote;
 use App\Models\Customer;
 use Milon\Barcode\DNS1D;
 use App\Models\QuoteItem;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Validator;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuotesController extends Controller
 {
@@ -23,7 +23,8 @@ class QuotesController extends Controller
     {
         $customer = Customer::all();
         $quoteCount = Quote::all();
-        return view('sales.quotes.index',compact('customer','quoteCount'));
+        $items = Item::select('id','product_name','product_mrp')->get();
+        return view('sales.quotes.index',compact('customer','quoteCount','items'));
     }
 
     /**
@@ -37,11 +38,11 @@ class QuotesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Quote $quote)
+    public function store(Request $request, Quote $quotes)
     {
 
 
-        if($quote->quotation_no != $request->quote_no){
+        if($quotes->quotation_no != $request->quote_no){
 
             $rules = [
                 'date' => 'required',
@@ -59,37 +60,60 @@ class QuotesController extends Controller
                 $rules["quote.$key.price"] = 'required|numeric';
             }
 
+            $customMessages = [
+                'date.required' => 'The date field is required!!',
+                'customer.required' => 'The customer field is required.',
+                'quote_no.required' => 'The quote number field is required.',
+                'quote.required' => 'The quote field is required.',
+                'quote.array' => 'The quote field must be an array.',
+                'quote.*.item.required' => 'The item field is required for all quote items.',
+                'quote.*.item.string' => 'The item field must be a string for all quote items.',
+                'quote.*.quantity.required' => 'Enter Quantity.',
+                'quote.*.quantity.numeric' => 'The Quantity must be number.',
+                'quote.*.price.required' => 'The price field is required for all quote items.',
+                'quote.*.price.numeric' => 'The price field must be numeric for all quote items.',
+            ];
+
+            $validator = Validator::make($request->all(), $rules,$customMessages);
+            $errors = $validator->errors()->messages(); // Get the default error messages
+
+            foreach ($customMessages as $field => $message) {
+                if (array_key_exists($field, $errors)) {
+                    $errors[$field][] = $message;
+                }
+            }
+
             // Validate the request
-            $validator = Validator::make($request->all(), $rules);
             // dd($validator);
 
             // Check if validation fails.
             if (!$validator->passes()) {
-                return response()->json(['status' => 2, 'error' => $validator->errors()->toArray()]);
+                return response()->json(['status' => 2, 'error' => $errors]);
             }
 
             // If validation passes, proceed to insert data into the database.
             // (The database insertion code remains the same as the previous example.)
             else{
 
-                $quote = new Quote;
-                $quote->quote_date = $request->date;
-                $quote->reference = $request->reference;
-                $quote->quotation_no = $request->quote_no;
-                $quote->customer_id = $request->customer;
-                $quote->total = $request->FTotal;
-                $quote->save(); // Save the main quote data.
+                $quotes = new Quote;
+                $quotes->quotation_no = $request->quote_no;
+                $quotes->reference = $request->reference;
+                $quotes->customer_id = $request->customer;
+                $quotes->quote_date = $request->date;
+                $quotes->total = $request->FTotal;
+                $quotes->save(); // Save the main quote data.
+
 
                 // Iterate through the quote items and insert them into the database.
                 foreach ($request->quote as $item) {
                     $quoteItem = new QuoteItem;
                     $quoteItem->quotation = $request->quote_no;
                     $quoteItem->items = $item['item'];
-                    $quoteItem->description = $item['description'];
                     $quoteItem->quantity = $item['quantity'];
                     $quoteItem->price = $item['price'];
                     $quoteItem->save();
                 }
+
 
                 // Return a success response.
                 return response()->json(['status' => 200, 'message' => 'New Quote Added Successfully!']);
@@ -118,8 +142,8 @@ class QuotesController extends Controller
     {
         $q_no = $request->quotation_no;
         $quotation = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
-                ->join('customers','quotes.customer_id', '=','customers.id')
-                ->select('quotes.*','quote_items.*','customers.business_name','customers.del_address','customers.phone','customers.phone2','customers.email')
+                ->join('customers','quotes.customer_id', '=','customers.id')->join('items', 'quote_items.items', '=', 'items.id')
+                ->select('quotes.*','quote_items.*','customers.business_name','customers.del_address','customers.phone','customers.phone2','customers.email','items.product_name')
                 ->where('quote_items.quotation', '=', $q_no)
                 ->get();
 
@@ -133,14 +157,15 @@ class QuotesController extends Controller
     {
         $q_no = $request->quotation_no;
         $quotation = Quote::join('quote_items', 'quotes.quotation_no', '=', 'quote_items.quotation')
-                ->join('customers','quotes.customer_id', '=','customers.id')
-                ->select('quotes.*','quote_items.*','customers.business_name','customers.del_address','customers.phone','customers.phone2','customers.email')
+                ->join('customers','quotes.customer_id', '=','customers.id')->join('items', 'quote_items.items', '=', 'items.id')
+                ->select('quotes.*','quote_items.*','customers.business_name','customers.del_address','customers.phone','customers.phone2','customers.email','items.product_name as product')
                 ->where('quote_items.quotation', '=', $q_no)
                 ->get();
+        // $quoteItem = QuoteItem::join('items','quote_items.items', '=', 'items.id');
         $quote_data['qdata'] = $quotation;
         $pdf = Pdf::loadView('sales.quotes.quote_pdf', $quote_data);
-        // return $pdf->download('quotation_'.$q_no.'.pdf');
-        return $pdf->stream();
+        return $pdf->download('quotation_'.$q_no.'.pdf');
+        // return $pdf->stream();
     }
 
     // public function view(){

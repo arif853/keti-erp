@@ -69,6 +69,7 @@
                                     <th>Status</th>
                                     <th>Items Name</th>
                                     <th>Barcode</th>
+                                    <th>Image</th>
                                     <th>Cost</th>
                                     <th>MRP</th>
                                     <th>Available</th>
@@ -77,23 +78,47 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($itemData as $item)
+
                                 <tr>
-                                    <td>1</td>
-                                    <td>Active</td>
-                                    <td>Bata Lether Shoe</td>
-                                    <td>{!! DNS1D::getBarcodeSVG('94345256811', 'EAN13','2','40') !!}
-                                        </td>
-                                    <td>৳ 1500</td>
-                                    <td>৳ 1600</td>
-                                    <td>0</td>
-                                    <td>Pcs</td>
+                                    <td>{{$item->id}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-success waves-effect waves-dark"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
+                                        @if ($item->status)
+                                        <span class="label label-success">Active</span>
+
+                                        @else
+                                        <span class="label label-danger">Inactive</span>
+
+                                        @endif
+                                    </td>
+                                    <td>{{$item->product_name}}</td>
+                                    <td>
+                                        {!! DNS1D::getBarcodeSVG($item->barcode_id, 'EAN13','2','50') !!}
+                                        {{-- @php
+                                            $productInfo = $item->product_name + $item->brand->brand;
+                                            echo $productInfo;
+                                        @endphp --}}
+                                        {{-- {!! DNS2D::getBarcodeSVG((string)$item->barcode_id, 'QRCODE') !!} --}}
+                                    </td>
+                                    <td>
+                                        {{-- <img src="{{asset('storage/product_image/'.$item->product_image)}}"  width="80" height="80" alt="{{$item->product_image}}" srcset=""> --}}
+                                        {{-- {{$item->brand->brand}} --}}
+                                    </td>
+                                    <td>৳ {{$item->product_cost}}</td>
+                                    <td>৳ {{$item->product_mrp}}</td>
+                                    <td>0</td>
+                                    <td>{{$item->unit}}</td>
+                                    <td>
+                                        {{-- <a href="#" class="btn btn-success waves-effect waves-dark"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
                                         <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
-                                        <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
+                                        <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a> --}}
+                                        <button id="edit_quote" value="#" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>
+                                        <button id="delete_quote" value="" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>
+                                        <a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.id +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
 
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -187,14 +212,77 @@
                 location.href = "{{route('store.index')}}"
             });
 
-            // Handle form submission
+             //DataTable Data view
+            // var table = $('#datatables').DataTable({
+            //             ajax: {
+            //     url: '/inventory/items/datatable',
+            //     dataSrc: 'data',
+            //     },
+            //     columns: [
+            //         {
+            //             "data": "id"
+            //         },
+            //         {
+            //             "data": null,
+            //             render: function (data, type, row) {
+            //                 if(row.status == 1){
+            //                     $status = '<span class="label label-success">Active</span>'
+            //                 }
+            //                 else{
+            //                     $status = '<span class="label label-danger">Inactive</span>'
+            //                 }
+            //                 return  $status;
+            //             }
+            //         },
+            //         {
+            //             "data": "product_name"
+            //         },
+            //         {
+            //             "data": "barcode", // Use "barcode" field here
+            //             render: function (data, type, row) {
+            //                 return data;
+            //             }
+            //         },
+            //         {
+            //             "data": "product_cost"
+            //         },
+            //         {
+            //             "data": "product_mrp"
+            //         },
+            //         {
+            //             "data": null,
+            //             render: function (data, type, row) {
+            //                 return  'Stock';
+            //             }
+            //         },
+            //         {
+            //             "data": "unit"
+            //         },
+            //         {
+            //             "data": null,
 
+            //             render: function (data, type, row) {
+            //                 //  return '<button value="'+row.id+'" class="edit btn btn-primary" id="edit_customer" >edit</button>';
+            //                 return '<button id="edit_quote" value="' + row.id +
+            //                     '" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>' +
+            //                     '<button id="delete_quote" value="' + row.id +
+            //                     '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>' +
+            //                     '<a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.id +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>'+
+            //                     '<a id="print_quote" href="{{('/sales/quote/quote_invoice/')}}'+ row.id +'" value="' + row.id +
+            //                     '" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa fa-print" aria-hidden="true"></i> </a>';
+            //                     //href="{{('/sales/quote/show/')}}'+ row.quotation_no +'"
+            //             }
+            //         },
+            //     ]
+            // });
+
+            // Handle form submission
             $("#product_form").submit(function(e) {
                 e.preventDefault();
 
                 // Serialize the form data
                 const formData = new FormData(this);
-
+                // console.log(formData);
                 // Set up AJAX headers
                 $.ajaxSetup({
                     headers: {
@@ -217,6 +305,7 @@
                         if (response.status == 200) {
                             // Hide the modal and show a success message
                             $('#product_modal').modal('hide');
+                            $('.table').load(location.href+' .table');
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',
@@ -225,13 +314,17 @@
                                 showConfirmButton: false,
                                 timer: 4000
                             });
-                            // table.ajax.reload();
                             // Optionally, you can redirect to another page here
                             // window.location.href = '/success-page';
                         }
 
-
                     },error: function(response) {
+                        if (response.status == 2) {
+                            // Display individual error messages for validation failures
+                            $.each(response.error, function(key, value) {
+                                $('span.' + key + '-error').text(value[0]);
+                            });
+                        }
                         if (response.status == 0) {
                             // Show an error message for a general error
                             Swal.fire({
@@ -240,15 +333,7 @@
                                 text: 'Quotation has an error!',
                             });
                         }
-                        if(response.status == 2){
 
-                        $.each(response.error, function (field, errors) {
-                            console.log(field);
-                            console.log(errors);
-                            $('span.' + field + '-error').text(errors[0]);
-
-                            });
-                        }
 
                     }
                 });

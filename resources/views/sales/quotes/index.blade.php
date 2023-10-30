@@ -289,7 +289,6 @@
                             });
                         }
 
-                    },error: function(response) {
                         if (response.status == 0) {
                             // Show an error message for a general error
                             Swal.fire({
@@ -298,7 +297,6 @@
                                 text: 'Quotation has an error!',
                             });
                         }
-
                     }
                 });
             });
@@ -352,24 +350,21 @@
                 endDate: '1d',
             });
 
-            // $(document).on('click','#print_quote', function () {
-            //     // Gather data from your form or API, and populate the invoice content
-            //     const invoiceData = {
-            //         // Your data here
-            //     };
 
-            //     const pdf = new jsPDF();
-            //     const invoiceHTML = document.getElementById('invoice');
 
-            //     // Convert the HTML content to a PDF
-            //     pdf.fromHTML(invoiceHTML, 15, 15);
+            $('#items').on('change', function () {
+            var selectedValue = $(this).val();
+            var mrp = $('#p_mrp').val();
+            console.log(mrp);
 
-            //     // Print the PDF
-            //     pdf.autoPrint();
-
-            //     // Open the print dialog
-            //     window.print();
-            // });
+            // if (selectedValue === '2') {
+            //     $('#conditionalInput').val('Your Value Here');
+            //     $('#conditionalInput').show();
+            // } else {
+            //     $('#conditionalInput').val('');
+            //     $('#conditionalInput').hide();
+            // }
+        });
 
         });
 
