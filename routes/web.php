@@ -117,6 +117,9 @@ Route::controller(ItemsController::class)->middleware('auth')->group(function ()
     Route::get('/inventory/items','index')->name('items.index');
     Route::post('/inventory/items/issue','issue_item')->name('items.issue');
     Route::post('/inventory/items/store','store')->name('items.store');
+    Route::get('/inventory/items/edit','edit')->name('items.edit');
+    Route::post('/inventory/items/update','update')->name('items.update');
+    Route::get('/inventory/items/destroy','destroy')->name('items.destroy');
     // Route::get('/inventory/items/datatable','datatable')->name('items.datatable');
     Route::get('/inventory/items/show/{id}','show')->name('items.show');
 });

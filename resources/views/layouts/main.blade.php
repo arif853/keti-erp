@@ -356,7 +356,45 @@
         @stack('items')
         @stack('store')
 
+        @if(Session::has('success'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Congratulations!',
+                text: '{{ Session::get('success') }}', // Added single quotes and escaped the message
+                showConfirmButton: false,
+                timer: 4000
+            });
+        </script>
+        @endif
+        @if(Session::has('error'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ Session::get('error') }}', // Added single quotes and escaped the message
+                showConfirmButton: false,
+                timer: 4000
+            });
+        </script>
+        @endif
+        @if(Session::has('warning'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Warning!',
+                text: '{{ Session::get('warning') }}', // Added single quotes and escaped the message
+                showConfirmButton: false,
+                timer: 4000
+            });
+        </script>
+        @endif
 
+
+</script>
 
         <script type="text/javascript">
 

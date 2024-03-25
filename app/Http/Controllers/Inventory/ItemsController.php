@@ -11,6 +11,7 @@ use App\Models\Product_Model;
 use App\Models\Product_barcode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,12 +43,12 @@ class ItemsController extends Controller
      */
     public function store(Request $request, Item $item)
     {
-        if($item->product_name != $request->product_name){
+        // if($item->product_name != $request->product_name){
 
             $validator = Validator::make($request->all(), [
                 'unit' => 'required',
-                'product_name' => 'required',
-                'product_img' => 'image|mimes:jpeg,png,jpg',
+                'product_name' => 'required|exists:items,product_name',
+                'product_img' => 'image|mimes:jpeg,png,jpg|nullable',
                 'brand' => 'required',
                 'catagory' => 'required',
                 'model' => 'required',
@@ -68,6 +69,9 @@ class ItemsController extends Controller
                     // $image->store('public/product_image/'.$imageName);
                     Storage::disk('public')->put('product_image/'.$imageName, File::get($image)); //save image data
                 }
+                else {
+                    $imageName = null;
+                }
 
                 $this->generateBarcode($request->barcode); // Replace 'barcode_id' with the actual field name you want to use
 
@@ -75,7 +79,7 @@ class ItemsController extends Controller
                 $item->status = $request->status;
                 $item->unit = $request->unit;
                 $item->product_name = $request->product_name;
-                $item->product_image = $imageName;
+                $item->product_image = $imageName ;
                 $item->barcode_id = $request->barcode;
                 $item->brand_id = $request->brand;
                 $item->catagory_id = $request->catagory;
@@ -90,10 +94,10 @@ class ItemsController extends Controller
                 return response()->json(['status' => 200, 'message' => 'New Item Added Successfully!']);
 
             }
-        }else{
-            return response()->json(['status' => 0, 'message' => "Product Existed!"]);
+        // }else{
+        //     return response()->json(['status' => 0, 'message' => "Product Existed!"]);
 
-        }
+        // }
     }
 
     public function generateBarcode($value){
@@ -109,7 +113,7 @@ class ItemsController extends Controller
     }
 
     public function issue_item(Request $request){
-        
+
     }
 
     // public function datatable(){
@@ -142,24 +146,81 @@ class ItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $item = Item::find($request->id);
+
+        // dd($item);
+        return view('inventory.items.edit',['item'=>$item]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $item = Item::find($request->id);
+
+        $validator = Validator::make($request->all(), [
+            'unit' => 'required',
+            'product_name' => 'required',
+            'product_img' => 'image|mimes:jpeg,png,jpg|nullable',
+            'brand' => 'required',
+            'catagory' => 'required',
+            'model' => 'required',
+            'product_cost' => 'required',
+        ]);
+
+        // Check if validation fails.
+        if ($validator->failed()) {
+            return response()->json(['status' => 2, 'error' => $validator->errors()->toArray()]);
+        }
+        // If validation passes, proceed to insert data into the database.
+        else{
+
+            if($request->hasFile('product_img')){
+                $image = $request->file('product_img');
+                $imageName = $request->product_name.'_'.time().'.'. $image->getClientOriginalExtension();
+                // $image->store('public/product_image/'.$imageName);
+                Storage::disk('public')->put('product_image/'.$imageName, File::get($image)); //save image data
+            }
+            else {
+                $imageName = $item->product_image ? $item->product_image : null;
+            }
+
+            // $this->generateBarcode($request->barcode); // Replace 'barcode_id' with the actual field name you want to use
+
+            // $item = new Item;
+            $item->status = $request->status;
+            $item->unit = $request->unit;
+            $item->product_name = $request->product_name;
+            $item->product_image = $imageName ;
+            $item->barcode_id = $request->barcode;
+            $item->brand_id = $request->brand;
+            $item->catagory_id = $request->catagory;
+            $item->product_model_id = $request->model;
+            $item->product_cost = $request->product_cost;
+            $item->product_vat = $request->vat;
+            $item->product_charge = $request->o_charge;
+            $item->product_mrp = $request->mrp;
+            $item->save(); // Save the Item data.
+
+            // Return a success response.
+            // Session::flash('success','New Item Updated Successfully!');
+            return redirect()->route('items.index')->with('success','New Item Updated Successfully!');
+
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $item = Item::find($request->id);
+        $item->delete();
+        Storage::delete('product_image/'.$item->product_images);
+        return redirect()->back()->with('success','Item Deleted Successfully!!!');
     }
 }

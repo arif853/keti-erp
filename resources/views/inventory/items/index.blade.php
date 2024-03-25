@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('contents')
-@include('inventory.items.edit')
+{{-- @include('inventory.items.edit') --}}
 @include('inventory.items.create')
 @include('inventory.items.issue')
 
@@ -112,10 +112,10 @@
                                         {{-- <a href="#" class="btn btn-success waves-effect waves-dark"><i class="fa  fa-edit" aria-hidden="true"></i> </a>
                                         <a href="#" class="btn btn-danger waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
                                         <a href="#" class="btn btn-info waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a> --}}
-                                        <button id="edit_quote" value="#" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </button>
-                                        <button id="delete_quote" value="" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </button>
+                                        <a id="edit" href="{{route('items.edit',['id'=>$item->id])}}" class="btn btn-success  waves-effect waves-light "><i class="fa  fa-edit" aria-hidden="true"></i> </a>
+                                        <a id="delete" href="{{route('items.destroy',['id'=>$item->id])}}" onclick="return confirm('Are you sure delete this item?')" class="btn btn-danger mx-10 waves-effect waves-light"><i class="fa  fa-trash" aria-hidden="true"></i> </a>
                                         <a  id="view_quote" href="{{('/sales/quote/show/')}}'+ row.id +'" target="_blank" class="btn btn-info  waves-effect waves-light"><i class="fa  fa-eye" aria-hidden="true"></i></a>
-
+                                        {{-- {{route('items.destroy',['id'=>$item->id])}} --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -130,6 +130,26 @@
 @endsection
 @push("items")
     <script>
+        // function deleteMe(){
+        //         Swal.fire({
+        //             title: "Are you sure?",
+        //             text: "You won't be able to revert this!",
+        //             icon: "warning",
+        //             showCancelButton: true,
+        //             confirmButtonColor: "#3085d6",
+        //             cancelButtonColor: "#d33",
+        //             confirmButtonText: "Yes, delete it!"
+        //             }).then((result) => {
+        //             if (result.isConfirmed) {
+        //                 {{route('items.destroy',['id'=>$item->id])}}
+        //                 Swal.fire({
+        //                 title: "Deleted!",
+        //                 text: "Your file has been deleted.",
+        //                 icon: "success"
+        //                 });
+        //             }
+        //         });
+        //     }
         $(document).ready(function(){
 
             //Show add modal form
@@ -212,7 +232,7 @@
                 location.href = "{{route('store.index')}}"
             });
 
-             //DataTable Data view
+            //DataTable Data view
             // var table = $('#datatables').DataTable({
             //             ajax: {
             //     url: '/inventory/items/datatable',
@@ -291,7 +311,7 @@
                 });
                 // Send an AJAX request to the server
                 $.ajax({
-                    url: '/inventory/items/store',
+                    url: '{{url('/inventory/items/store')}}',
                     method: 'post',
                     data: formData,
                     dataType: 'json',
@@ -330,7 +350,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',
-                                text: 'Quotation has an error!',
+                                text: 'Items has an error!',
                             });
                         }
 
