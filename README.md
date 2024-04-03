@@ -1,75 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# KETI ERP - Your All-in-One Business Solution
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to KETI ERP, your comprehensive Enterprise Resource Planning system designed to streamline your business operations. Built on Laravel with MySQL and enriched with HTML, CSS, and Bootstrap, KETI ERP offers a plethora of functionalities tailored to meet your business needs. Here's an overview of its features:
 
-## About Laravel
+## Order Management:
+- **Quotation System:** Efficiently manage quotations for potential orders.
+- **Order Generation:** Seamlessly create and track orders from initiation to fulfillment.
+- **Invoice Generation:** Generate professional PDF invoices for completed orders.
+- **Order Returns:** Handle order returns smoothly, ensuring customer satisfaction.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Customer Ledger:
+- **New Customer Management:** Easily add and manage customer profiles.
+- **Customer Transactions:** Track customer transactions including orders, bills, and payments.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Product Management:
+- **Product Catalog:** Add new products with detailed attributes such as model, brand, and category.
+- **Inventory Management:** Monitor and maintain product stocks ensuring optimal inventory levels.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Store System:
+- **Inventory Tracking:** Keep track of product movements and stock levels.
+- **Purchase Management:** Streamline purchase processes with supplier management and transaction tracking.
 
-## Learning Laravel
+## Account Management:
+- **Financial Tracking:** Maintain accurate records of financial transactions including debits, credits, and other financial activities.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## User Management System:
+- **User Roles and Permissions:** Manage user access and permissions to ensure data security and integrity.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Ongoing Development:
+KETI ERP is an ongoing project with continuous enhancements and updates. As your business evolves, so does our ERP system. We welcome suggestions and feedback to further improve and customize the system according to your business requirements.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technologies Used:
+- **Laravel Version:** 10.0
+- **Bootstrap:** v4.6.2
+- **JQuery:** 1.12.1
+- **Font Awesome:** 5.15.4
+- **Sweetalert2:** v11.7.20
 
-## Laravel Sponsors
+## About Me:
+I am passionate about creating innovative solutions that simplify complex business processes. With a strong background in software engineering, I thrive on challenges and constantly seek opportunities to learn and grow. Let's connect and collaborate to drive your business forward with KETI ERP!
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+You can find me on:
+- [GitHub](https://github.com/arif853)
+- [www.arifhossen.info](http://www.arifhossen.info)
+- [LinkedIn](https://www.linkedin.com/in/arif-hossen853)
 
-### Premium Partners
+Explore KETI ERP today and witness the transformation in your business operations!
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# keti-erp
-This is a on going erp system. We are trying to build it from scratch.
-
-- Larvel Version - 10.0
-- Bootstrap v4.6.2
-- Jquery - 1.12.1
-- font-awesome - 5.15.4
-- sweetalert2 v11.7.20
+[*Visit KETI ERP on GitHub*](https://github.com/arif853/keti-erp) to learn more and contribute to its development. Let's redefine the way you do business together!
