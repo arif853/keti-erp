@@ -31,7 +31,15 @@ class AccountGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'group_name' => 'required'
+        ],
+        [
+            'group_name.required' => 'Enter a new Group name.'
+        ]
+        );
+
+        return redirect('/account/groups');
     }
 
     /**

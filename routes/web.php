@@ -4,9 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Sales\InvoiceController;
+use App\Http\Controllers\Company\CompanyController;
+use App\Http\Controllers\Inventory\ItemsController;
+use App\Http\Controllers\Inventory\StoreController;
+use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
+use App\Http\Controllers\Inventory\BrandController;
+use App\Http\Controllers\Inventory\IssueItemController;
 use App\Http\Controllers\Ledger\Customer\CustomerController;
 use App\Http\Controllers\Ledger\Supplier\SupplierController;
 
@@ -45,43 +51,104 @@ Route::get('/dashboard',[AdminController::class, 'index'])->middleware('auth')->
 
 // sales
 Route::controller(QuotesController::class)->middleware('auth')->group(function () {
-    Route::get('/sales/quote',[QuotesController::class, 'index'])->name('quote.index');
-    Route::post('/sales/quote/store',[QuotesController::class, 'store'])->name('quote.store');
-    Route::get('/sales/quote/datatable',[QuotesController::class, 'datatable'])->name('quote.datatable');
-    Route::get('/sales/quote/show/{quotation_no}',[QuotesController::class, 'show'])->name('quote.show');
+    Route::get('/sales/quote','index')->name('quote.index');
+    Route::post('/sales/quote/store','store')->name('quote.store');
+    Route::get('/sales/quote/datatable','datatable')->name('quote.datatable');
+    Route::get('/sales/quote/show/{quotation_no}','show')->name('quote.show');
+    Route::get('/sales/quote/quote_invoice/{quotation_no}','view_pdf')->name('quote.quote_invoice');
+    Route::get('/sales/quote/edit','edit')->name('quote.edit');
+    Route::delete('/sales/quote/destroy','destroy')->name('quote.destroy');
     // Route::get('/sales/quote/view',[QuotesController::class, 'view'])->middleware('auth')->name('quote.view');
 });
 
 Route::controller(OrderController::class)->middleware('auth')->group(function () {
-    Route::get('/sales/order',[OrderController::class, 'index'])->name('order.index');
+    Route::get('/sales/order', 'index')->name('order.index');
+    Route::post('/sales/order/store','store')->name('order.store');
+    Route::get('/sales/order/datatable','datatable')->name('order.datatable');
+    Route::get('/sales/order/show/{order}','show')->name('order.show');
 
 });
 
 
 //sales invoice
-Route::get('/sales', [InvoiceController::class, 'index'])->middleware('auth')->name('sales.index');
+Route::controller(InvoiceController::class)->middleware('auth')->group(function () {
+    Route::get('/sales',  'index')->name('sales.index');
+
+});
+
+//sales invoice
+Route::controller(PurchaseController::class)->middleware('auth')->group(function () {
+    Route::get('/purchase', 'index')->name('purchase.index');
+
+});
+
 
 //Customer
-Route::get('/ledger/customer',[CustomerController::class, 'index'])->middleware('auth')->name('ledger.customer');
-Route::post('/ledger/customer/store',[CustomerController::class, 'store'])->middleware('auth')->name('customer.store');
-Route::get('/ledger/customer/edit',[CustomerController::class, 'edit'])->middleware('auth')->name('customer.edit');
-Route::post('/ledger/customer/update',[CustomerController::class, 'update'])->middleware('auth')->name('customer.update');
-Route::get('/ledger/customer/show',[CustomerController::class, 'show'])->middleware('auth')->name('customer.show');
-Route::delete('/ledger/customer/destroy',[CustomerController::class, 'destroy'])->middleware('auth')->name('customer.destroy');
-Route::get('/ledger/customer/customerview/{customer}',[CustomerController::class, 'customerview'])->middleware('auth')->name('customer.customerview');
+Route::controller(CustomerController::class)->middleware('auth')->group(function () {
+    Route::get('/ledger/customer', 'index')->name('ledger.customer');
+    Route::post('/ledger/customer/store', 'store')->name('customer.store');
+    Route::get('/ledger/customer/edit', 'edit')->name('customer.edit');
+    Route::post('/ledger/customer/update', 'update')->name('customer.update');
+    Route::get('/ledger/customer/show', 'show')->name('customer.show');
+    Route::delete('/ledger/customer/destroy', 'destroy')->name('customer.destroy');
+    Route::get('/ledger/customer/customerview/{customer}', 'customerview')->name('customer.customerview');
+
+});
 
 //Supplier
-Route::get('/ledger/supplier',[SupplierController::class, 'index'])->middleware('auth')->name('ledger.supplier');
-Route::get('/ledger/supplier/show',[SupplierController::class, 'show'])->middleware('auth')->name('ledger.supplier.show');
+Route::controller(SupplierController::class)->middleware('auth')->group(function () {
+    Route::get('/ledger/supplier',[SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/ledger/supplier/show',[SupplierController::class, 'show'])->name('supplier.show');
+
+});
 
 
 // Accounts
-Route::get('/account/groups',[AccountGroupController::class, 'index'])->middleware('auth')->name('accounts.index');
-Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->middleware('auth')->name('accounts.group');
+Route::controller(AccountGroupController::class)->middleware('auth')->group(function () {
+    Route::get('/account/groups',[AccountGroupController::class, 'index'])->name('accounts.index');
+    Route::post('/account/groups/store', 'store')->name('accounts.store');
+    Route::get('/account/groups/show',[AccountGroupController::class, 'show'])->name('accounts.group');
+});
 
 
+//Inventory
 
+// Item or product
+Route::controller(ItemsController::class)->middleware('auth')->group(function () {
+    Route::get('/inventory/items','index')->name('items.index');
+    Route::get('/inventory/items/create','create')->name('items.create');
+    Route::post('/inventory/items/issue','issue_item')->name('items.issue');
+    Route::post('/inventory/items/store','store')->name('items.store');
+    Route::get('/inventory/items/edit','edit')->name('items.edit');
+    Route::post('/inventory/items/update','update')->name('items.update');
+    Route::get('/inventory/items/destroy','destroy')->name('items.destroy');
+    // Route::get('/inventory/items/datatable','datatable')->name('items.datatable');
+    Route::get('/inventory/items/show/{id}','show')->name('items.show');
+    // brand route
+    //
 
+});
+// brand route
+Route::controller(BrandController::class)->middleware('auth')->group(function () {
+    Route::post('/inventory/items/brand/store','store')->name('brand.store');
+});
 
+// Route::controller(IssueItemController::class)->middleware('auth')->group(function () {
+//     Route::get('/inventory/issue/items','index')->name('itemsissue.index');
+//     Route::get('/inventory/issue/items','index')->name('itemsissue.index');
+//     Route::post('/inventory/issue/items/store','store')->name('issue.store');
+//     Route::get('/inventory/items/datatable','datatable')->name('items.datatable');
+//     Route::get('/inventory/issue/items/show/{id}','show')->name('issue.show');
+// });
+
+//store
+Route::controller(StoreController::class)->middleware('auth')->group(function () {
+    Route::get('/inventory/store', [StoreController::class, 'index'])->name('store.index');
+});
+
+//Company
+Route::controller(CompanyController::class)->middleware('auth')->group(function () {
+    Route::get('/company', 'index')->name('company.index');
+});
 
 require __DIR__.'/auth.php';

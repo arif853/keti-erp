@@ -51,8 +51,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST" id="account_group_form">
-
+                    <form action="{{url('/account/groups/store')}}" method="POST" id="account_group_form">
+                        @csrf
+                        @method('POST')
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

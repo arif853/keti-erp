@@ -54,6 +54,7 @@ Date: Jun 2015
 
 @import url(http://fonts.googleapis.com/css?family=Nunito:400,300,700);
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap);
 
 
 
@@ -64,7 +65,7 @@ body {
   background: #f5f5f5;
   margin: 0;
   -webkit-text-size-adjust: 100%;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 h1,
 h2,
@@ -158,12 +159,14 @@ a:focus {
 }
 
 .page-title {
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 }
 .breadcrumb {
   background-color: transparent;
   margin-top: 5px;
   margin-bottom: 15px;
+  padding: 0;
+  font-size: 12px;
 }
 .sub-mt{
     margin-top: 8px;
@@ -605,6 +608,12 @@ a:focus {
 }
 
 /* 2.7 Labels */
+.label{
+    border-radius: 10px;
+    padding: 6px;
+    text-align: center;
+    line-height: 3
+}
 .label-primary {
   background-color: #1e88e5;
 }
@@ -1218,7 +1227,7 @@ lesshat-selector {
   position: relative;
   z-index: 1;
   width: 240px;
-  background: #eb8b31;
+  background: #4f3bdb;
 }
 .logo h1 {
   margin: 0px auto;
@@ -1228,7 +1237,7 @@ lesshat-selector {
 .navbar-default {
   border: none;
   margin-bottom: 0px;
-  background-color: #eb8b31;
+  background-color: #4f3bdb;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 0px;
 }
@@ -1410,7 +1419,8 @@ body.fixed-left .side-menu.left {
   vertical-align: middle;
 }
 #sidebar-menu > ul > li > a:hover {
-  background: #f3f3f3;
+  background: #4f3bdb;
+  color: #ffffff;
 }
 #sidebar-menu > ul > li > a > i {
   display: inline-block;
@@ -1453,7 +1463,7 @@ body.fixed-left .side-menu.left {
   color: #75798B;
 }
 #sidebar-menu ul ul a:hover {
-  color: #eb8b31;
+  color: #4f3bdb;
 }
 #sidebar-menu ul ul ul a {
   padding-left: 80px;
@@ -2541,7 +2551,7 @@ body.fixed-left .side-menu.left {
   margin-bottom: 10px;
 }
 tbody {
-  color: #797979;
+  color: #000000;
 }
 th {
   font-size: 15px;
@@ -3445,4 +3455,8 @@ div.dataTables_info {
 }
 .d-block{
     display: block;
+}
+.breadcrumb-item.active
+{
+    color: #4f3bdb;
 }

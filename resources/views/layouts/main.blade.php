@@ -29,19 +29,21 @@
         <!-- Waves-effect -->
         <link href="{{asset('main/css/waves-effect.css')}}" rel="stylesheet">
 
+        <link href="{{asset('main/css/sweetalert2.min.css')}}" rel="stylesheet">
         <!-- Custom Files -->
         <link href="{{asset('main/css/helper.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('main/css/style.css')}}" rel="stylesheet" type="text/css" />
         <!-- sweet alerts -->
-        <link href="{{asset('main/css/sweetalert2.min.css')}}" rel="stylesheet">
 
         <!-- DataTables -->
         <link href="{{asset('main/assets/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
         <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}">
+        {{-- <link rel="stylesheet" href="{{asset('main/assets/morris/morris.css')}}"> --}}
 
         <link href="{{asset('main/assets/timepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" />
         <link href="{{asset('main/assets/select2/select2.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('main/css/jquery-editable-select.css')}}" rel="stylesheet" type="text/css" />
+
 
 
         {{-- <script src="{{asset('main/js/modernizr.min.js')}}"></script> --}}
@@ -193,7 +195,7 @@
 
                                 </ul>
                             </div>
-                            <p class="text-muted m-0">{{ Auth::user()->is_superadmin }}</p>
+                            <p class="text-muted m-0">{{ Auth::user()->is_superadmin}}</p>
                         </div>
                     </div>
                     <!--- Divider -->
@@ -207,7 +209,7 @@
                                 <a href="#" class="waves-effect "><i class="zmdi zmdi-swap"></i><span> Transactions </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('sales.index')}}"><i class="fas fa-comments-dollar m-r-10"></i><span>Sales</span></a></li>
-                                    <li><a href="#"><i class="fas fa-shopping-basket m-r-10"></i>Purchases</a></li>
+                                    <li><a href="{{route('purchase.index')}}"><i class="fas fa-shopping-basket m-r-10"></i>Purchases</a></li>
                                     <li><a href="#"><i class="fas fa-cogs m-r-10"></i>Production</a></li>
                                 </ul>
                             </li>
@@ -228,22 +230,25 @@
                                 <a href="#" class="waves-effect"><i class="zmdi zmdi-collection-bookmark"></i><span> Ledger Book </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{('/ledger/customer')}}">Customer</a></li>
-                                    <li><a href="{{route('ledger.supplier')}}">Supplier</a></li>
-                                    <li><a href="#">Inbox</a></li>
+                                    <li><a href="{{route('supplier.index')}}">Supplier</a></li>
                                 </ul>
                             </li>
 
                             <li class="has_sub">
-                                <a href="#" class="waves-effect f-con"><i class="fas fa-warehouse m-r-5"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
+                                <a href="#" class="waves-effect f-con"><i class="zmdi zmdi-balance"></i><span> Inventory Master </span><span class="pull-right"><i class="zmdi zmdi-plus"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="inbox.html">Item Master</a></li>
+                                    <li><a href="{{route('items.index')}}">Item Master</a></li>
                                     <li><a href="email-compose.html">Company Master</a></li>
                                     <li><a href="email-read.html">Catagory Master</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="calendar.html" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Users </span></a>
+                                <a href="{{('/company')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Company  </span></a>
                             </li>
+                            <li>
+                                <a href="{{('/dashboard')}}" class="waves-effect"><i class="zmdi zmdi-accounts"></i><span> Users </span></a>
+                            </li>
+
 
                         </ul>
                         <div class="clearfix"></div>
@@ -288,9 +293,10 @@
                <!-- jQuery  -->
         <script src="{{asset('main/js/jquery.min.js')}}"></script>
         <script src="{{asset('main/js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('main/js/jspdf.umd.min.js')}}"></script>
         <script src="{{asset('main/js/waves.js')}}"></script>
         <script src="{{asset('main/js/wow.min.js')}}"></script>
+        <script src="{{asset('main/assets/select2/select2.min.js')}}" type="text/javascript"></script>
 
         <script src="{{asset('main/assets/font-awesome/js/all.min.js')}}"></script>
         <script src="{{asset('main/assets/font-awesome/js/fontawesome.min.js')}}"></script>
@@ -299,6 +305,7 @@
 
         <!-- Live Search  -->
         <script src="{{asset('main/assets/fastclick/fastclick.js')}}"></script>
+
         <script src="{{asset('main/assets/jquery-detectmobile/detect.js')}}"></script>
 
         {{-- <script src="{{asset('main/js/jquery.nicescroll.js')}}" type="text/javascript"></script> --}}
@@ -327,6 +334,18 @@
         <script src="{{asset('main/js/sweetalert2.all.min.js')}}"></script>
         <script src="{{asset('main/assets/digitalclock/digital.js')}}"></script>
 
+        {{-- from validator --}}
+        <script src="{{asset('main/assets/jquery.validate/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('main/assets/jquery.validate/form-validation-init.js')}}"></script>
+        {{-- dynamic input --}}
+        <script src="{{asset('main/js/jquery.replicate.js')}}"></script>
+        {{-- select and search --}}
+        <script src="{{asset('main/js/jquery-editable-select.js')}}"></script>
+
+
+
+
+
         @stack('dashboard')
         @stack('customers')
         @stack('supplier')
@@ -334,11 +353,54 @@
         @stack('order')
         @stack('invoice')
         @stack('accountgroup')
+        @stack('items')
+        @stack('store')
+        @stack('script')
 
+        @if(Session::has('success'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Congratulations!',
+                text: '{{ Session::get('success') }}', // Added single quotes and escaped the message
+                showConfirmButton: false,
+                timer: 4000
+            });
+        </script>
+        @endif
+        @if(Session::has('error'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ Session::get('error') }}', // Added single quotes and escaped the message
+                showConfirmButton: false,
+                timer: 4000
+            });
+        </script>
+        @endif
+        @if(Session::has('warning'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Warning!',
+                text: '{{ Session::get('warning') }}', // Added single quotes and escaped the message
+                showConfirmButton: false,
+                timer: 4000
+            });
+        </script>
+        @endif
+
+
+</script>
 
         <script type="text/javascript">
 
             initClock();
+
             //CounterUp
             jQuery(document).ready(function() {
                 $('.counter').counterUp({
@@ -346,13 +408,9 @@
                     time: 1200
                 });
             });
-            jQuery(document).ready(function() {
-                    // Date Picker
-
-                // jQuery('#datepicker-inline').datepicker();
-
+            $(document).ready(function() {
                  // Select2
-                jQuery(".select2").select2({
+                $(".select2").select2({
                     width: '100%',
                 });
             });
@@ -360,7 +418,7 @@
             $(document).ready(function() {
                 $('#datatable').dataTable();
 
-            } )
+            } );
 
             // Morris.Bar({
             //     element: 'morris-bar-example',
