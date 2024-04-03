@@ -11,6 +11,7 @@ use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Sales\Order\OrderController;
 use App\Http\Controllers\Sales\Quotes\QuotesController;
 use App\Http\Controllers\Accounts\AccountGroupController;
+use App\Http\Controllers\Inventory\BrandController;
 use App\Http\Controllers\Inventory\IssueItemController;
 use App\Http\Controllers\Ledger\Customer\CustomerController;
 use App\Http\Controllers\Ledger\Supplier\SupplierController;
@@ -115,6 +116,7 @@ Route::controller(AccountGroupController::class)->middleware('auth')->group(func
 // Item or product
 Route::controller(ItemsController::class)->middleware('auth')->group(function () {
     Route::get('/inventory/items','index')->name('items.index');
+    Route::get('/inventory/items/create','create')->name('items.create');
     Route::post('/inventory/items/issue','issue_item')->name('items.issue');
     Route::post('/inventory/items/store','store')->name('items.store');
     Route::get('/inventory/items/edit','edit')->name('items.edit');
@@ -122,6 +124,13 @@ Route::controller(ItemsController::class)->middleware('auth')->group(function ()
     Route::get('/inventory/items/destroy','destroy')->name('items.destroy');
     // Route::get('/inventory/items/datatable','datatable')->name('items.datatable');
     Route::get('/inventory/items/show/{id}','show')->name('items.show');
+    // brand route
+    //
+
+});
+// brand route
+Route::controller(BrandController::class)->middleware('auth')->group(function () {
+    Route::post('/inventory/items/brand/store','store')->name('brand.store');
 });
 
 // Route::controller(IssueItemController::class)->middleware('auth')->group(function () {

@@ -1,14 +1,14 @@
 @extends('layouts.main')
 @section('contents')
 {{-- @include('inventory.items.edit') --}}
-@include('inventory.items.create')
+{{-- @include('inventory.items.create') --}}
 @include('inventory.items.issue')
 
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="pull-left page-title">Item Page</h2>
+        <h2 class="page-title">Item Page</h2>
         <nav aria-label="breadcrumb ">
-            <ol class="breadcrumb pull-right">
+            <ol class="breadcrumb ">
               <li class="breadcrumb-item"><a href="#">Inventory</a></li>
               <li class="breadcrumb-item active" aria-current="page">Items</li>
             </ol>
@@ -21,11 +21,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Add Items</h3>
+
             </div>
             <div class="panel-body clearfix">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <button class="btn btn-success" id="item_modal">Add Item</button>
+                        <a href="{{route('items.create')}}" class="btn btn-success">Add Item</a>
                         <button class="btn btn-success" id="item_issue">Issue Item</button>
                         <a class="btn btn-success" id="store_btn" >Store</a>
                     </div>

@@ -355,6 +355,7 @@
         @stack('accountgroup')
         @stack('items')
         @stack('store')
+        @stack('script')
 
         @if(Session::has('success'))
         <script>

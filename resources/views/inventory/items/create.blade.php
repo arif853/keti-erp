@@ -1,142 +1,173 @@
-{{-- product add modal --}}
-<div id="product_modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="cus_title"></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+@extends('layouts.main')
+@section('contents')
+@include('inventory.items.brand.create')
+@include('inventory.items.category.create')
+
+<div class="row m-t-15">
+    <div class="col-md-12">
+        <div class="card panel-default">
+            <div class="card-header ">
+                <div class="pull-left">
+                    <h3 class="card-title ">Add Items</h3>
+                    <nav aria-label="breadcrumb ">
+                        <ol class="breadcrumb ">
+                        <li class="breadcrumb-item"><a href="#">Inventory</a></li>
+                        <li class="breadcrumb-item"><a href="#">Items</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        </ol>
+                    </nav>
+                </div>
+                <a href="javascript:history.back()" class="btn btn-danger pull-right"><i class="fas fa-reply"></i> back </a>
             </div>
-            <form id="product_form" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <label for="status" class="control-label">Status</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="NA">Select Status...</option>
-                                <option value="0">Inactive</option>
-                                <option value="1">Active</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="unit" class="control-label">Unit<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="PCS" id="unit" name="unit">
-                            <span class="text-danger error-text unit-error"></span>
-                        </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-3">
-                            <label for="barcode" class="control-label">Barcode</label>
-                            {{-- <img src="data:image/png,' . DNS1D::getBarcodePNG('94345256811', 'EAN13','2','40') . '" alt="barcode"   /> --}}
-                            <input type="text" class="form-control" placeholder="Barcode" id="barcode" name="barcode">
+            <div class="card-body clearfix">
+                <form id="product_form" action="{{route('items.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label for="status" class="control-label">Status</label>
+                                <select name="status" id="status" class="form-control" >
+                                    <option value="NA">Select Status...</option>
+                                    <option value="0">Inactive</option>
+                                    <option value="1" >Active</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2">
+                                <label for="unit" class="control-label">Unit<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="unit" name="unit" placeholder="Add unit pcs or else">
+                                <span class="text-danger error-text unit-error"></span>
+                            </div>
 
                         </div>
-                        <div class="col-lg-3">
-                            <label for="barcode" class="control-label"> </label>
-                            <p>{!! DNS1D::getBarcodeSVG('94345256811', 'EAN13','2','40') !!}</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-0">
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-0">
                                 {{-- <div class="form-group">
                                     <label for="customar_id" class="control-label">ID</label>
                                     <input type="text" class="form-control" id="customer_id" placeholder="Id" readonly>
                                 </div> --}}
                             </div>
-                        <div class="col-lg-5">
-                            <div class="form-group">
-                                <label for="product_name" class="control-label">Product Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="product_name" placeholder="Product Name" name="product_name" >
-                                <span class="text-danger error-text product_name-error"></span>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="product_name" class="control-label">Product Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="product_name" placeholder="Product Name" name="product_name" >
+                                    <span class="text-danger error-text product_name-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="product_img" class="control-label">Product Image</label>
+                                    <input type="file" class="form-control" id="product_img" placeholder="Image" name="product_img" >
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="img-output">
+                                    <img id="output"  width="100" alt=""/>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="product_img" class="control-label">Product Image</label>
-                                <input type="file" class="form-control" id="product_img" placeholder="Image" name="product_img" >
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="img-output">
-                                <img id="output"  width="100" alt=""/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <label for="brand" class="control-label">Brand<span class="text-danger">*</span></label>
-                            <select name="brand" id="brand" class="select2">
-                                <option value="0">Select Brand...</option>
-                                <option value="1">Brand-1</option>
-                                <option value="2">Brand-2</option>
-                            </select>
-                            <span class="text-danger error-text brand-error"></span>
-                        </div>
-                        <div class="col-lg-3">
-                            <label for="catagory" class="control-label">Catagory<span class="text-danger">*</span></label>
-                            <select name="catagory" id="catagory" class="select2">
-                                <option value="0">Select Catagory...</option>
-                                <option value="1">Catagory-1</option>
-                                <option value="2">Catagory-2</option>
-                            </select>
-                            <span class="text-danger error-text catagory-error"></span>
-                        </div>
-                        {{-- <div class="col-lg-3">
-                            <label for="group" class="control-label">Group</label>
-                            <select name="group" id="group" class="select2">
-                                <option value="NA">Select Group...</option>
-                            </select>
-                        </div> --}}
-                        <div class="col-lg-3">
-                            <label for="model" class="control-label">Model</label>
-                            <select name="model" id="model" class="select2">
-                                <option value="0">Select Model...</option>
-                                <option value="1">Model-1</option>
-                                <option value="2">Model-2</option>
-                            </select>
-                            <span class="text-danger error-text model-error"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="product_cost" class="control-label">Product Cost<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="product_cost" placeholder="৳ Cost" name="product_cost" onchange="cost()">
-                        </div>
-                        <span class="text-danger error-text product_cost-error"></span>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="vat" class="control-label">VAT %</label>
-                            <input type="text" class="form-control" id="vat" placeholder="VAT %" name="vat" onchange="cost()">
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="o_charge" class="control-label">Other Charge</label>
-                            <input type="text" class="form-control" id="o_charge" placeholder="Other Charge" name="o_charge" onchange="cost()">
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="mrp" class="control-label">M.R.P(Click me)</label>
-                            <input type="text" class="form-control mrp" id="mrp" placeholder="৳ MRP" name="mrp" readonly>
-                        </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-lg-3">
 
-                </div>
+                                <label for="brand" class="control-label">Brand<span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="brand" id="brand" >
+                                      <option selected>Choose...</option>
+                                     @foreach ($brands as $brand)
+                                        @if ($brand->status == 1)
+                                            <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                        @endif
+                                     @endforeach
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#brandModal">+</button>
+                                    </div>
+                                </div>
+                                <span class="text-danger error-text brand-error"></span>
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="catagory" class="control-label">Catagory<span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="brand" id="brand" >
+                                      <option selected>Choose...</option>
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#categoryModal">+</button>
+                                    </div>
+                                </div>
+                                <span class="text-danger error-text catagory-error"></span>
+                            </div>
+                            {{-- <div class="col-lg-3">
+                                <label for="group" class="control-label">Group</label>
+                                <select name="group" id="group" class="select2">
+                                    <option value="NA">Select Group...</option>
+                                </select>
+                            </div> --}}
+                            <div class="col-lg-3">
+                                <label for="model" class="control-label">Model</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="brand" id="brand" >
+                                      <option selected>Choose...</option>
+                                      <option value="1">One</option>
+                                      <option value="2">Two</option>
+                                      <option value="3">Three</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-info" type="button">+</button>
+                                    </div>
+                                </div>
+                                <span class="text-danger error-text model-error"></span>
+                            </div>
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-2 ">
+                                <label for="barcode" class="control-label"> Product Barcode</label>
+                                <p>{!! DNS1D::getBarcodeSVG($barcode, 'EAN13','2','55') !!}</p>
+                                <input type="hidden" value=" {{$barcode}}" name="barcode" >
 
-                <div class="modal-footer">
-                    <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light submit">Add Item</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="product_cost" class="control-label">Product Cost<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="product_cost" placeholder="৳ Cost" name="product_cost" onchange="cost()">
+                                </div>
+                                <span class="text-danger error-text product_cost-error"></span>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="vat" class="control-label">VAT %</label>
+                                    <input type="text" class="form-control" id="vat" placeholder="VAT %" name="vat" onchange="cost()">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="o_charge" class="control-label">Other Charge</label>
+                                    <input type="text" class="form-control" id="o_charge" placeholder="Other Charge" name="o_charge" onchange="cost()">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="mrp" class="control-label">M.R.P(Click me)</label>
+                                    <input type="text" class="form-control mrp" id="mrp" placeholder="৳ MRP" name="mrp" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submit" class="btn btn-primary btn-custom waves-effect waves-light submit pull-right">Save</button>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<script>
 
+@endsection
+@push('script')
+<script>
     //costcalulation
     function cost(){
 
@@ -173,8 +204,48 @@
 
     };
 
+    $(document).ready(function(){
 
-
-
+        // Handle brand form submission
+        $("#brand_form").submit(function(e) {
+            e.preventDefault();
+            // Serialize the form data
+            const formData = new FormData(this);
+            // console.log(formData);
+            // Set up AJAX headers
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // Send an AJAX request to the server
+            $.ajax({
+                url: '{{url('/inventory/items/brand/store')}}',
+                method: 'post',
+                data: formData,
+                dataType: 'json',
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // console.log(response);
+                    if (response == 200) {
+                        // Hide the modal and show a success message
+                        $('#brandModal').modal('hide');
+                        location.reload();
+                    }
+                },error: function(response) {
+                    console.log(response);
+                    $('#brandModal').modal('hide');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.errors,
+                    });
+                }
+            });
+        });
+    });
 
 </script>
+@endpush

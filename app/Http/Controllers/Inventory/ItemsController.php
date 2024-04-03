@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Inventory;
 
+use DB;
 use App\Models\Item;
 use App\Models\Brand;
 use App\Models\Catagory;
@@ -30,18 +31,46 @@ class ItemsController extends Controller
         return view('inventory.items.index',compact('itemData'));
     }
 
+
+    public function generateBarcode(){
+        do {
+            // Generate a 2-digit random number
+            $randomNumber = str_pad(mt_rand(1, 99999999999), 11, '0', STR_PAD_LEFT);
+
+            // Get the current year
+            // $currentYear = date('y');
+            // $currentMonth = date('m');
+
+            // Concatenate the components to create the final code
+            // $invoiceNo= $currentMonth.$currentYear.$randomNumber;
+
+            // Check if the generated code already exists in the database
+            $codeExists = \DB::table('items')->where('barcode_id', $randomNumber)->exists();
+
+        } while ($codeExists);
+
+        $barcode = new DNS1D();
+        $barcodeType = 'EAN13'; // Set the barcode type, e.g., Code 128
+        $barcode->getBarcodePNG($randomNumber, $barcodeType);
+        $barcode->setStorPath('public/barcodes');
+        return $randomNumber;
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $barcode = $this->generateBarcode();
+        $brands = Brand::all();
+        // dd($barcode);
+        return view('inventory.items.create',compact('barcode','brands'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Item $item)
+    public function store(Request $request)
     {
         // if($item->product_name != $request->product_name){
 
@@ -57,7 +86,7 @@ class ItemsController extends Controller
 
             // Check if validation fails.
             if ($validator->failed()) {
-                return response()->json(['status' => 2, 'error' => $validator->errors()->toArray()]);
+                return redirect()->back('error', $validator->errors()->toArray());
             }
 
             // If validation passes, proceed to insert data into the database.
@@ -91,8 +120,8 @@ class ItemsController extends Controller
                 $item->save(); // Save the Item data.
 
                 // Return a success response.
-                return response()->json(['status' => 200, 'message' => 'New Item Added Successfully!']);
-
+                // return response()->json(['status' => 200, 'message' => 'New Item Added Successfully!']);
+                return redirect()->route('items.index')->with('success','New Item Added Successfully!');
             }
         // }else{
         //     return response()->json(['status' => 0, 'message' => "Product Existed!"]);
@@ -100,17 +129,6 @@ class ItemsController extends Controller
         // }
     }
 
-    public function generateBarcode($value){
-
-        $barcode = new DNS1D();
-        $barcodeType = 'EAN13'; // Set the barcode type, e.g., Code 128
-        $barcode->getBarcodePNG($value, $barcodeType);
-        $barcode->setStorPath('public/barcodes');
-
-        // return $barcode_img;
-        // The generated barcode image will be automatically saved in the 'public/barcodes' directory as a PNG file.
-        // You can return the path to the saved barcode image or display it as needed.
-    }
 
     public function issue_item(Request $request){
 
